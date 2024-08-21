@@ -98,6 +98,10 @@ body {
   background: #dde6ce;
 }
 
+.slick-dots{
+  bottom: -25%;
+}
+
 .slick-dots li.slick-active button:before{
   color: var(--secondary-color);
 }

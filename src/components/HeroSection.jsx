@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SliderItem from "./SliderItem";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const HeroSection = () => {
   const data = [
@@ -24,19 +25,28 @@ const HeroSection = () => {
       id: 1,
       text: "Hot Summer Offer!",
       sub_title: "Try brand new",
-      title: "Delicious Disheswith Koganic",
+      title: "Delicious Disheswith",
       image: "src/assets/images/slider4.png",
     },
   ];
 
+  let sliderRef = useRef(null);
+
+  const next = () => {
+    sliderRef.slickNext();
+  };
+  const previous = () => {
+    sliderRef.slickPrev();
+  };
+
   const settings = {
-    dots: true,
     fade: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    draggable: true,
   };
 
   return (
@@ -44,11 +54,30 @@ const HeroSection = () => {
       <div className="xl:container mx-auto px-8">
         <div className="h-screen flex flex-col justify-center">
           <div className="slider-container">
-            <Slider {...settings}>
+            <Slider
+              ref={(slider) => {
+                sliderRef = slider;
+              }}
+              {...settings}
+            >
               {data.map((item) => (
                 <SliderItem key={item.id} item={item} />
               ))}
             </Slider>
+            <div className="text-center space-x-10">
+              <button
+                className="button bg-black text-white py-2 px-4 rounded"
+                onClick={previous}
+              >
+                <ChevronLeft />
+              </button>
+              <button
+                className="button bg-black text-white py-2 px-4 rounded"
+                onClick={next}
+              >
+                <ChevronRight />
+              </button>
+            </div>
           </div>
         </div>
       </div>
