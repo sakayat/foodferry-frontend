@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <div className="bg-white text-black">
       <div className="xl:container mx-auto px-8">
-        <nav className="py-4 hidden md:flex items-center justify-between">
+        <nav className="py-4 flex items-center justify-between">
           <div className="logo">
             <Link
               to="/"
@@ -19,7 +19,7 @@ const Navbar = () => {
               DotEats
             </Link>
           </div>
-          <ul className="flex items-center gap-10">
+          <ul className="hidden md:flex items-center gap-10">
             <li>
               <Link
                 to="/"

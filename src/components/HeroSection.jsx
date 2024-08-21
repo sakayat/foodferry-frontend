@@ -52,8 +52,8 @@ const HeroSection = () => {
   return (
     <div className="home-banner">
       <div className="xl:container mx-auto px-8">
-        <div className="h-screen flex flex-col justify-center">
-          <div className="slider-container">
+        <div className="md:h-screen flex flex-col justify-center">
+          <div className="slider-container py-5">
             <Slider
               ref={(slider) => {
                 sliderRef = slider;
