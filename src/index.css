@@ -11,6 +11,8 @@ body {
 #root{
   --primary-color: #286140;
   --secondary-color: #F4B42D;
+  --dim-grey: #5a5347;
+  --antique-white: #e5dbc9;
 }
 
 @tailwind base;
@@ -104,4 +106,21 @@ body {
 
 .slick-dots li.slick-active button:before{
   color: var(--secondary-color);
+}
+
+.default-border {
+  color: var(--secondary-color);
+}
+
+.cart-product:hover{
+  background-color: rgba(179,165,141,.33);
+}
+
+.cart-footer{
+  background-color: rgba(90,83,71,.2);
+}
+
+.default-btn{
+  background: var(--primary-color);
+  color: #fff;
 }
