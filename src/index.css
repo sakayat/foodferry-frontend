@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+body {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background: #fbfbfb;
+  overflow-x: hidden
+}
+
+#root{
+  --primary-color: #286140;
+  --secondary-color: #F4B42D;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -66,4 +81,23 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.order-now-btn{
+  padding: 20px 55px;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.home-banner{
+  background: #dde6ce;
+}
+
+.slick-dots li.slick-active button:before{
+  color: var(--secondary-color);
 }
