@@ -105,7 +105,7 @@ body {
 }
 
 .slick-dots li.slick-active button:before{
-  color: var(--secondary-color);
+  color: #000;
 }
 
 .default-border {
@@ -137,3 +137,8 @@ body {
 .slick-list {
   margin: 0 -10px; 
 }
+
+.slick-dots li button:before{
+  font-size: 10px ;
+}
+
