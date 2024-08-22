@@ -1,16 +1,32 @@
-import { ShoppingBag, ShoppingCart } from "lucide-react";
-import React, { useState } from "react";
+import { LogIn, Menu, ShoppingBag, ShoppingCart, X } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import MenuCartItem from "./MenuCartItem";
+import MobileNav from "./MobileNav";
 
 const Navbar = () => {
-  const [cartOpen, setCartOpen] = useState(false);
+  const menuRef = useRef();
 
+  const [cartOpen, setCartOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const closeMenu = (e) => {
+    if (menuRef.current && menuRef.current.contains(e.target)) {
+      setIsMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", closeMenu);
+    return () => {
+      document.removeEventListener("click", closeMenu);
+    };
+  }, [isMenuOpen]);
 
   return (
     <div className="bg-white text-black">
       <div className="xl:container mx-auto px-8">
-        <nav className="py-4 flex items-center justify-between">
+        <nav className="py-4 flex items-center justify-between relative">
           <div className="logo">
             <Link
               to="/"
@@ -19,6 +35,13 @@ const Navbar = () => {
               DotEats
             </Link>
           </div>
+          {/* mobile menu button */}
+          <button
+            className="md:hidden flex"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+          >
+            <Menu />
+          </button>
           <ul className="hidden md:flex items-center gap-10">
             <li>
               <Link
@@ -34,7 +57,7 @@ const Navbar = () => {
             <div className="relative">
               <button
                 className="border border-[#286140] p-2.5 rounded-full"
-                onClick={() => setCartOpen(prev => !prev)}
+                onClick={() => setCartOpen((prev) => !prev)}
               >
                 <ShoppingCart size={18} />
               </button>
@@ -48,7 +71,12 @@ const Navbar = () => {
           </ul>
         </nav>
       </div>
-      {cartOpen && <MenuCartItem setCartOpen={setCartOpen}/>}
+      {/* mobile nav */}
+      {isMenuOpen && (
+        <div className="fixed top-0 left-0 w-full h-screen z-80 bg-black/30"></div>
+      )}
+      {isMenuOpen && <MobileNav setCartOpen={setCartOpen} menuRef={menuRef} />}
+      {cartOpen && <MenuCartItem setCartOpen={setCartOpen} />}
     </div>
   );
 };
