@@ -73,7 +73,7 @@ const FoodCategories = () => {
                     src={`${import.meta.env.VITE_API_BASE_URL}/${
                       category.image
                     }`}
-                    className="h-44 md:h-32 w-full"
+                    className="h-36 w-full"
                     alt=""
                   />
                 </div>

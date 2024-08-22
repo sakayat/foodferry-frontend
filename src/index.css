@@ -142,3 +142,7 @@ body {
   font-size: 10px ;
 }
 
+span.swiper-pagination-bullet {
+  margin: 0 12px !important;
+}
+
