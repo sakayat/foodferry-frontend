@@ -2,6 +2,7 @@ import React from 'react'
 import HeroSection from './HeroSection'
 import FoodCategories from './FoodCategories'
 import FeaturedItems from './FeaturedItems'
+import GreatMeals from './GreatMeals'
 
 const Homepage = () => {
   return (
@@ -9,6 +10,7 @@ const Homepage = () => {
         <HeroSection/>
         <FoodCategories />
         <FeaturedItems />
+        <GreatMeals />
     </div>
   )
 }
