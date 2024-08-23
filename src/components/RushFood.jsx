@@ -1,11 +1,10 @@
 import React from "react";
 import SectionTitle from "./SectionTitle";
-import SliderContent from "./SliderContent";
-import { useQuery } from "@tanstack/react-query";
 import { fetchFoodItems } from "../lib/fetchData";
+import { useQuery } from "@tanstack/react-query";
+import SliderContent from "./SliderContent";
 
-const GreatPriceFood = () => {
-  
+const RushFood = () => {
   const { data } = useQuery({
     queryKey: ["foods"],
     queryFn: fetchFoodItems,
@@ -14,11 +13,11 @@ const GreatPriceFood = () => {
   return (
     <div className="pt-14">
       <div className="xl:container mx-auto px-8">
-        <SectionTitle title={"Great meals, great prices"} sliderId="great-meals"/>
-        <SliderContent data={data} tag_name="great meals" sliderId="great-meals"/>
+        <SectionTitle title={"In a rush?"} sliderId="rush" />
+        <SliderContent data={data} tag_name="rush" sliderId="rush" />
       </div>
     </div>
   );
 };
 
-export default GreatPriceFood;
+export default RushFood;

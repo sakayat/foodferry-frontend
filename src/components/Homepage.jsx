@@ -3,6 +3,7 @@ import HeroSection from './HeroSection'
 import FoodCategories from './FoodCategories'
 import FeaturedItems from './FeaturedItems'
 import GreatPriceFood from './GreatPriceFood'
+import RushFood from './RushFood'
 
 const Homepage = () => {
   return (
@@ -11,6 +12,7 @@ const Homepage = () => {
         <FoodCategories />
         <FeaturedItems />
         <GreatPriceFood />
+        <RushFood />
     </div>
   )
 }
