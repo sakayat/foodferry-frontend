@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "swiper/css";
-import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import "swiper/css/navigation";
+import { Navigation, Mousewheel, Keyboard } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useQuery } from "@tanstack/react-query";
 import { currencyFormat } from "../lib/utils";
 import { Link } from "react-router-dom";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const FeaturedItems = () => {
   const fetchFoodItems = async () => {
@@ -18,31 +19,57 @@ const FeaturedItems = () => {
     return data;
   };
 
-  const { data, loading, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ["foods"],
     queryFn: fetchFoodItems,
   });
 
-  console.log(data);
-  
+  const swiperRef = useRef();
 
   return (
-    <div className="pt-14">
+    <div className="pt-14 relative">
       <div className="xl:container m-auto px-8">
-        <div className="py-5 flex justify-between items-center">
-          <h1 className="text-4xl font-semibold">Quick and affordable </h1>
-          <button className=" default-btn py-2 px-6 rounded">See all</button>
+        <div className="py-5 flex justify-between items-center relative">
+          <h1 className="text-2xl md:text-4xl font-semibold">
+            Quick and affordable{" "}
+          </h1>
+          <div className="buttons flex items-center gap-5">
+            <Link to={"/"} className="font-bold">
+              See all
+            </Link>
+            <div className="slider-button">
+              <button
+                className="swiper-button-prev"
+                onClick={() => swiperRef.current?.slidePrev()}
+              >
+           
+              </button>
+              <button
+                className="swiper-button-next"
+                onClick={() => swiperRef.current?.slideNext()}
+              >
+               
+              </button>
+            </div>
+          </div>
         </div>
+
         <Swiper
+          modules={[Navigation, Mousewheel, Keyboard]}
           spaceBetween={30}
           allowTouchMove={true}
+          cssMode={true}
+          onBeforeInit={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          navigation={{
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          }}
+          mousewheel={true}
+          keyboard={true}
           pagination={{
             clickable: true,
-          }}
-          modules={[Pagination]}
-          style={{
-            "--swiper-navigation-color": "#000",
-            "--swiper-pagination-color": "#000",
           }}
           breakpoints={{
             1280: {

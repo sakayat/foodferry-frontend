@@ -53,7 +53,7 @@ const FoodCategories = () => {
     return data;
   };
 
-  const { data, loading, error } = useQuery({
+  const { data} = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });

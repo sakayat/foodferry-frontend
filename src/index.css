@@ -125,6 +125,8 @@ body {
   color: #fff;
 }
 
+
+
 .category-info{
   background: #dde6ce;
 }
@@ -138,11 +140,27 @@ body {
   margin: 0 -10px; 
 }
 
-.slick-dots li button:before{
-  font-size: 10px ;
+.swiper-button-next,
+.swiper-button-prev{
+  top: unset !important;
+  left: unset !important;
+  right: unset !important;
+  bottom: unset !important;
+  position: unset !important;
+  margin-top: unset !important;
 }
 
-span.swiper-pagination-bullet {
-  margin: 0 12px !important;
+.swiper-button-prev:after, .swiper-button-next:after{
+  font-size: 20px !important;
+  margin-top: unset !important;
+  color: #000 ;
+  font-weight: 600;
 }
 
+.slider-button{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 5px;
+  
+}
