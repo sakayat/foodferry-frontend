@@ -14,8 +14,8 @@ const FeaturedItems = () => {
   return (
     <div className="pt-14 relative">
       <div className="xl:container m-auto px-8">
-        <SectionTitle title={"Quick and affordable"} />
-        <SliderContent data={data} tag_name="affordable" />
+        <SectionTitle title={"Quick and affordable"} sliderId="affordable"/>
+        <SliderContent data={data} tag_name="affordable" sliderId="affordable"/>
       </div>
     </div>
   );

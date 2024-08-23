@@ -8,7 +8,7 @@ import { currencyFormat } from "../lib/utils";
 import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const SliderContent = ({ data, tag_name }) => {
+const SliderContent = ({ data, tag_name, sliderId }) => {
   const swiperRef = useRef();
 
   return (
@@ -21,8 +21,8 @@ const SliderContent = ({ data, tag_name }) => {
         swiperRef.current = swiper;
       }}
       navigation={{
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: `.button-next-${sliderId}`,
+        prevEl: `.button-prev-${sliderId}`,
       }}
       mousewheel={true}
       keyboard={true}
