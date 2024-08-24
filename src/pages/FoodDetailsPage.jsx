@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchFoodDetails } from "../lib/fetchData";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import { ChevronRight, Minus, Plus } from "lucide-react";
@@ -13,10 +11,19 @@ const FoodDetailsPage = () => {
 
   const { slug } = useParams();
 
-  const { data } = useQuery({
-    queryKey: ["food"],
-    queryFn: () => fetchFoodDetails(slug),
-  });
+  const [data, setData] = useState()
+
+  useEffect(() => {
+    fetchFoodDetails()
+  }, [])
+
+  const fetchFoodDetails = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-details/${slug}/`
+    );
+    const data = await res.json();
+    setData(data)
+  };
 
   const [quantity, setQuantity] = useState(1);
 

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
 const FoodCategories = () => {
+
+  const [data, setData] = useState([])
+
   const settings = {
     dots: true,
     infinite: false,
@@ -45,18 +47,17 @@ const FoodCategories = () => {
     ],
   };
 
+  useEffect(() => {
+    fetchCategories()
+  }, [])
+
   const fetchCategories = async () => {
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-categories/`
     );
     const data = await res.json();
-    return data;
+    setData(data)
   };
-
-  const { data} = useQuery({
-    queryKey: ["categories"],
-    queryFn: fetchCategories,
-  });
 
   return (
     <div className="pt-10">
