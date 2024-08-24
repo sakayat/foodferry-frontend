@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import { ArrowBigRight, ChevronRight, Minus, Plus } from "lucide-react";
 
-const FoodDetails = () => {
+const FoodDetailsPage = () => {
   const { slug } = useParams();
 
   const { data } = useQuery({
@@ -95,4 +95,4 @@ const FoodDetails = () => {
   );
 };
 
-export default FoodDetails;
+export default FoodDetailsPage;
