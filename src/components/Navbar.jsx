@@ -24,7 +24,7 @@ const Navbar = () => {
   }, [isMenuOpen]);
 
   return (
-    <div className="bg-white text-black">
+    <div className="bg-white text-black border-b">
       <div className="xl:container mx-auto px-8">
         <nav className="py-4 flex items-center justify-between relative">
           <div className="logo">
