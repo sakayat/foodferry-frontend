@@ -41,9 +41,11 @@ const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
             <X size={18} />
           </button>
         </div>
-        {data?.items?.map((item) => (
-          <CartInfo key={item.id} item={item} />
-        ))}
+        <div className="items border border-black rounded overflow-y-auto space-y-2 min-h-[calc(100dvh-15rem)]">
+          {data?.items?.map((item) => (
+            <CartInfo key={item.id} item={item} />
+          ))}
+        </div>
         <div className="cart-footer border rounded py-3 px-4 space-y-5">
           <div className="cart-order-summary text-center space-x-4">
             <span>Subtotal:</span>
