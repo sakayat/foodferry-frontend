@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LogIn, X } from "lucide-react";
 
-const MobileNav = ({ setCartOpen, menuRef }) => {
+const MobileNav = ({ setIsCartOpen, menuRef }) => {
   return (
     <div className="absolute left-0 bg-white w-96 z-20 min-h-[calc(100dvh-5rem)] border-t">
       <ul className="flex flex-col px-3">
@@ -21,7 +21,7 @@ const MobileNav = ({ setCartOpen, menuRef }) => {
           </Link>
         </li>
         <div className="flex justify-between items-center py-3 border-b">
-          <button className="" onClick={() => setCartOpen((prev) => !prev)}>
+          <button className="" onClick={() => setIsCartOpen((prev) => !prev)}>
             Cart
           </button>
           <span className="bg-[#286140] text-white w-6 h-6 flex justify-center rounded-full">

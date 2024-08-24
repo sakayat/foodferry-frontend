@@ -13,3 +13,16 @@ export const fetchFoodDetails = async (slug) => {
   const data = await res.json();
   return data;
 };
+
+
+export const fetchCartList = async () => {
+  const res = await fetch(
+    `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-details/${slug}/`
+  );
+  const data = await res.json();
+  return data;
+};
+
+
+
+

@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import img1 from "../assets/images/slider.jpg";
 import { useQuery } from "@tanstack/react-query";
 import { fetchFoodDetails } from "../lib/fetchData";
 import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
-import { ArrowBigRight, ChevronRight, Minus, Plus } from "lucide-react";
+import { ChevronRight, Minus, Plus } from "lucide-react";
+import { useCartStore } from "../lib/store/zustandStore";
 
 const FoodDetailsPage = () => {
+  const token = localStorage.getItem("authToken");
+
+  console.log(token);
+
+  const { isCartOpen, setIsCartOpen } = useCartStore();
+
   const { slug } = useParams();
 
   const { data } = useQuery({
@@ -26,6 +32,12 @@ const FoodDetailsPage = () => {
   const handleChangeMinusValue = () => {
     setQuantity((prev) => prev - 1);
     setDisableButton(quantity <= 1);
+  };
+
+  const handleAddToCart = async (e) => {
+    e.preventDefault();
+    setIsCartOpen(!isCartOpen);
+    console.log(quantity);
   };
 
   return (
@@ -62,32 +74,34 @@ const FoodDetailsPage = () => {
             <p className="text-xl leading-6 lowercase">{data?.description}</p>
             <span className="font-bold">{currencyFormat(data?.price)} USD</span>
             <span>Quantity</span>
-            <div className="flex justify-center gap-2 border border-black p-2 w-28">
-              <button
-                className={`w-6 text-2xl ${
-                  disableButton ? "text-gray-600" : ""
-                }`}
-                onClick={() => handleChangeMinusValue()}
-                disabled={disableButton}
-              >
-                <Minus size={18} />
+            <form action="" className="space-y-5" onSubmit={handleAddToCart}>
+              <div className="flex justify-center gap-2 border border-black p-2 w-28">
+                <div
+                  className={`w-6 text-2xl cursor-pointer ${
+                    disableButton ? "text-gray-600" : ""
+                  }`}
+                  onClick={() => handleChangeMinusValue()}
+                  disabled={disableButton}
+                >
+                  <Minus size={18} />
+                </div>
+                <input
+                  type="number"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  className="outline-none font-bold text-center w-6 [appearance:number] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                />
+                <div
+                  className="w-6 text-2xl cursor-pointer"
+                  onClick={() => handleChangePlusValue()}
+                >
+                  <Plus size={18} />
+                </div>
+              </div>
+              <button className="px-6 default-btn border h-12 w-full uppercase">
+                Add to cart
               </button>
-              <input
-                type="number"
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
-                className="outline-none font-bold text-center w-6 [appearance:number] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-              />
-              <button
-                className="w-6 text-2xl"
-                onClick={() => handleChangePlusValue()}
-              >
-                <Plus size={18} />
-              </button>
-            </div>
-            <button className="px-6 default-btn border h-12 w-full uppercase">
-              Add to cart
-            </button>
+            </form>
           </div>
         </div>
       </div>

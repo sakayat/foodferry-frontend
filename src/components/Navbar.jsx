@@ -3,12 +3,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import MenuCartItem from "./MenuCartItem";
 import MobileNav from "./MobileNav";
+import { useCartStore } from "../lib/store/zustandStore.jsx";
 
 const Navbar = () => {
   const menuRef = useRef();
 
-  const [cartOpen, setCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { isCartOpen, setIsCartOpen } = useCartStore();
 
   const closeMenu = (e) => {
     if (menuRef.current && menuRef.current.contains(e.target)) {
@@ -57,7 +59,7 @@ const Navbar = () => {
             <div className="relative">
               <button
                 className="border border-[#286140] p-2.5 rounded-full"
-                onClick={() => setCartOpen((prev) => !prev)}
+                onClick={() => setIsCartOpen(!isCartOpen)}
               >
                 <ShoppingCart size={18} />
               </button>
@@ -75,8 +77,12 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="fixed top-0 left-0 w-full h-screen z-80 bg-black/30"></div>
       )}
-      {isMenuOpen && <MobileNav setCartOpen={setCartOpen} menuRef={menuRef} />}
-      {cartOpen && <MenuCartItem setCartOpen={setCartOpen} />}
+      {isMenuOpen && (
+        <MobileNav setIsCartOpen={setIsCartOpen} menuRef={menuRef} />
+      )}
+      {isCartOpen && (
+        <MenuCartItem setIsCartOpen={setIsCartOpen} isCartOpen={isCartOpen} />
+      )}
     </div>
   );
 };

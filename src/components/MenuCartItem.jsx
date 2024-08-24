@@ -1,14 +1,14 @@
 import React from 'react'
 import { Trash2, X } from "lucide-react";
 
-const MenuCartItem = ({setCartOpen}) => {
+const MenuCartItem = ({setIsCartOpen, isCartOpen}) => {
   return (
     <div className="cart-container absolute top-0 
     right-0 w-[35rem]  bg-white p-4 z-10">
         <div className="space-y-5 min-h-[calc(100dvh-15rem)] flex flex-col justify-between">
         <div className="border border-black rounded py-2 relative flex items-center justify-center">
           <span className="font-semibold">Your Cart</span>
-          <button className=" absolute right-0 px-4" onClick={() => setCartOpen(prev => !prev)}>
+          <button className=" absolute right-0 px-4" onClick={() => setIsCartOpen(!isCartOpen)}>
             <X size={18} />
           </button>
         </div>
