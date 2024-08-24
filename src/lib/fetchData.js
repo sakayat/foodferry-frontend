@@ -16,17 +16,20 @@ export const fetchFoodDetails = async (slug) => {
   return data;
 };
 
-export const fetchCartList = async () => {
+export const addToCart = async ({ slug, quantity }) => {
   const res = await fetch(
-    `${import.meta.env.VITE_API_BASE_URL}/api/cart/list/`,
+    `${import.meta.env.VITE_API_BASE_URL}/api/cart/add-to-cart/${slug}/`,
     {
-      method: "get",
+      method: "post",
       headers: {
         "Content-type": "application/json",
         Authorization: `Token ${token}`,
       },
+      body: JSON.stringify({ quantity }),
     }
   );
   const data = await res.json();
   return data;
 };
+
+

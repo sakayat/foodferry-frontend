@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Trash2, X } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { fetchCartList } from "../lib/fetchData";
 import CartInfo from "./CartInfo";
 
 const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
-  const { data } = useQuery({
-    queryKey: ["cart_item"],
-    queryFn: fetchCartList,
-  });
+  const token = localStorage.getItem("authToken");
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchCartList();
+  }, []);
+
+  const fetchCartList = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/cart/list/`,
+      {
+        method: "get",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    setData(data);
+  };
 
   return (
     <div
@@ -25,7 +41,7 @@ const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
             <X size={18} />
           </button>
         </div>
-        {data?.items.map((item) => (
+        {data?.items?.map((item) => (
           <CartInfo key={item.id} item={item} />
         ))}
         <div className="cart-footer border rounded py-3 px-4 space-y-5">
@@ -36,7 +52,6 @@ const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
           <button className="py-2.5 rounded flex justify-center w-full default-btn">
             View Cart
           </button>
-          
         </div>
       </div>
     </div>
