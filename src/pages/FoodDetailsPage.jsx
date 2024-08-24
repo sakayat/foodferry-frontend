@@ -7,9 +7,8 @@ import { ChevronRight, Minus, Plus } from "lucide-react";
 import { useCartStore } from "../lib/store/zustandStore";
 
 const FoodDetailsPage = () => {
-  const token = localStorage.getItem("authToken");
 
-  console.log(token);
+  const token = localStorage.getItem("authToken");
 
   const { isCartOpen, setIsCartOpen } = useCartStore();
 
