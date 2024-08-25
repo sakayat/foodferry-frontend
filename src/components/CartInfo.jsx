@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Minus, Plus, Trash } from "lucide-react";
+import QuantityButton from "./QuantityButton";
 
 const CartInfo = ({ item, fetchCartList }) => {
   const token = localStorage.getItem("authToken");
@@ -20,7 +21,7 @@ const CartInfo = ({ item, fetchCartList }) => {
     );
     const data = await res.json();
     setNewData(data);
-    fetchCartList()
+    fetchCartList();
   };
 
   const handleChangeQuantity = (quantity) => {
@@ -49,31 +50,15 @@ const CartInfo = ({ item, fetchCartList }) => {
           className="w-14 h-14 rounded"
         />
         <span>{newData.food_item_name}</span>
-        
       </div>
       <div className="flex items-center justify-between gap-5">
-      <span>{newData.total_price}</span>
-        <div className="flex items-center justify-between gap-2 border border-black p-2 w-36">
-          <div
-            className="text-2xl cursor-pointer"
-            onClick={handleChangeMinusValue}
-          >
-            <Minus size={18} />
-          </div>
-          
-          <input
-            type="number"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            className="outline-none font-bold text-center w-6 [appearance:number] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-          />
-          <div
-            className="text-2xl cursor-pointer"
-            onClick={handleChangePlusValue}
-          >
-            <Plus size={18} />
-          </div>
-        </div>
+        <span>{newData.total_price}</span>
+        <QuantityButton
+          handleChangePlusValue={handleChangePlusValue}
+          handleChangeMinusValue={handleChangeMinusValue}
+          quantity={quantity}
+          setQuantity={setQuantity}
+        />
         <button className="bg-[#286140] text-white p-2.5 rounded-full">
           <Trash size={18} />
         </button>

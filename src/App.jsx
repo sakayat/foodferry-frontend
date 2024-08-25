@@ -3,6 +3,7 @@ import Homepage from "./components/Homepage";
 import Navbar from "./components/Navbar";
 import SignInPage from "./pages/SignInPage";
 import FoodDetailsPage from "./pages/FoodDetailsPage";
+import ViewCart from "./pages/ViewCart";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="food/:slug/" element={<FoodDetailsPage />} />
         <Route path="sign-in/" element={<SignInPage />} />
+        <Route path="/view-cart" element={<ViewCart />}/>
       </Routes>
     </>
   );
