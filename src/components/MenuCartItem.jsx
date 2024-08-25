@@ -1,31 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Trash2, X } from "lucide-react";
 import CartInfo from "./CartInfo";
+import { useCartItemStore } from "../lib/store/zustandStore";
 
 const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
 
-  const token = localStorage.getItem("authToken");
-
-  const [data, setData] = useState([]);
+  const { cartItems, fetchCartList } = useCartItemStore();
 
   useEffect(() => {
     fetchCartList();
-  }, [data]);
+  }, []);
 
-  const fetchCartList = async () => {
-    const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/cart/list/`,
-      {
-        method: "get",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      }
-    );
-    const data = await res.json();
-    setData(data);
-  };
 
   
 
@@ -45,18 +30,14 @@ const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
           </button>
         </div>
         <div className="items border border-black/40 rounded overflow-y-auto space-y-2 min-h-[calc(100dvh-15rem)]">
-          {data?.items?.map((item) => (
-            <CartInfo
-              key={item.id}
-              item={item}
-              setData={setData}
-            />
+          {cartItems?.items?.map((item) => (
+            <CartInfo key={item.id} item={item} fetchCartList={fetchCartList} />
           ))}
         </div>
         <div className="cart-footer border rounded py-3 px-4 space-y-5">
           <div className="cart-order-summary text-center space-x-4">
             <span>Subtotal:</span>
-            <span className="font-semibold">{data.total_price} USD</span>
+            <span className="font-semibold">{cartItems.total_price} USD</span>
           </div>
           <button className="py-2.5 flex justify-center w-full default-btn">
             View Cart

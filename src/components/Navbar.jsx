@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import MenuCartItem from "./MenuCartItem";
 import MobileNav from "./MobileNav";
-import { useCartStore } from "../lib/store/zustandStore.jsx";
+import { useCartItemStore, useCartStore } from "../lib/store/zustandStore.jsx";
 
 const Navbar = () => {
   const menuRef = useRef();
@@ -18,7 +18,10 @@ const Navbar = () => {
     }
   };
 
+  const { cartItems, fetchCartList } = useCartItemStore();
+
   useEffect(() => {
+    fetchCartList();
     document.addEventListener("click", closeMenu);
     return () => {
       document.removeEventListener("click", closeMenu);
@@ -64,7 +67,7 @@ const Navbar = () => {
                 <ShoppingCart size={18} />
               </button>
               <span className="absolute top-0 bg-[#286140] font-bold w-6 h-6 flex justify-center left-8 rounded-full text-white">
-                3
+                {cartItems?.total_quantity}
               </span>
             </div>
             <li>

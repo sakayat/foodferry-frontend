@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Minus, Plus, Trash } from "lucide-react";
 
-const CartInfo = ({ item }) => {
+const CartInfo = ({ item, fetchCartList }) => {
   const token = localStorage.getItem("authToken");
   const [newData, setNewData] = useState(item);
   const [quantity, setQuantity] = useState(item.quantity);
@@ -20,6 +20,7 @@ const CartInfo = ({ item }) => {
     );
     const data = await res.json();
     setNewData(data);
+    fetchCartList()
   };
 
   const handleChangeQuantity = (quantity) => {
