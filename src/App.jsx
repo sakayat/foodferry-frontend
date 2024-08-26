@@ -9,8 +9,10 @@ import OrderHistoryPage from "./pages/OrderHistoryPage";
 import ProfilePage from "./pages/ProfilePage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
 import SignUpPage from "./pages/SignupPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const token = localStorage.getItem("authToken");
   return (
     <>
       <Navbar />
@@ -19,12 +21,46 @@ function App() {
         <Route path="food/:slug/" element={<FoodDetailsPage />} />
         <Route path="sign-up/" element={<SignUpPage />} />
         <Route path="sign-in/" element={<SignInPage />} />
-        
-        <Route path="profile/" element={<ProfilePage />}/>
-        <Route path="update-profile/" element={<UpdateProfilePage />}/>
-        <Route path="view-cart/" element={<ViewCartPage />}/>
-        <Route path="checkout/" element={<CheckoutPage />}/>
-        <Route path="order-history/" element={<OrderHistoryPage />}/>
+        <Route
+          path="profile/"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="update-profile/"
+          element={
+            <ProtectedRoute>
+              <UpdateProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="view-cart/"
+          element={
+            <ProtectedRoute>
+              <ViewCartPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="checkout/"
+          element={
+            <ProtectedRoute>
+              <CheckoutPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="order-history/"
+          element={
+            <ProtectedRoute>
+              <OrderHistoryPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );
