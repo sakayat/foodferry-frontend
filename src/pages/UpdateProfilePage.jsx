@@ -89,7 +89,7 @@ const UpdateProfilePage = () => {
                 Phone Number
               </label>
               <input
-                type="text"
+                inputMode="numeric"
                 className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
                 placeholder="phone number"
                 value={phoneNumber}

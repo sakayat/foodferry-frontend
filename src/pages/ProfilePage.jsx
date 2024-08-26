@@ -1,14 +1,33 @@
-import { ChevronRight, User2Icon } from "lucide-react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useProfileStore } from "../lib/store/zustandStore";
 import BreadCrumbs from "../components/BreadCrumbs";
 
 const ProfilePage = () => {
+  const token = localStorage.getItem("authToken");
+
+  const [profileInfo, setProfileInfo] = useState("");
+
   useEffect(() => {
     fetchProfileInfo();
   }, []);
-  const { profileInfo, fetchProfileInfo } = useProfileStore();  
+
+  const fetchProfileInfo = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
+      {
+        method: "get",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    console.log(data);
+
+    setProfileInfo(data);
+  };
 
   return (
     <div className="py-5">
@@ -24,16 +43,28 @@ const ProfilePage = () => {
               <div>
                 <span className="uppercase font-bold">Full Name</span>
                 <div>
-                  {profileInfo.first_name} {profileInfo.last_name}
+                  {profileInfo?.first_name || profileInfo?.last_name ? (
+                    <span>
+                      {profileInfo?.first_name} {profileInfo?.last_name}
+                    </span>
+                  ) : (
+                    <span className="text-sm">Not provided</span>
+                  )}
                 </div>
               </div>
               <div>
                 <span className="uppercase font-bold">Email</span>
-                <div className="">{profileInfo.email}</div>
+                <div className="">{profileInfo?.email}</div>
               </div>
               <div>
                 <span className="uppercase font-bold">Phone</span>
-                <div className="">{profileInfo.phone_number}</div>
+                <div className="">
+                  {profileInfo?.phone_number ? (
+                    <span>{profileInfo?.phone_number}</span>
+                  ) : (
+                    <span className="text-sm">Not provided</span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
