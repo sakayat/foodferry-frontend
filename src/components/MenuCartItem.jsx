@@ -11,6 +11,7 @@ const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
     fetchCartList();
   }, []);
 
+
   return (
     <div
       className="cart-container absolute top-0

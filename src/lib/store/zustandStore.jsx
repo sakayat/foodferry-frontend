@@ -42,3 +42,21 @@ export const useProfileStore = create((set) => ({
     set({ profileInfo: data });
   },
 }));
+
+export const useOrderStore = create((set) => ({
+  orderList: [],
+  fetchOrderList: async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/order-list/`,
+      {
+        method: "get",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    set({ orderList: data });
+  },
+}));
