@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Minus, Plus, Trash } from "lucide-react";
 import QuantityButton from "./QuantityButton";
+import { currencyFormat } from "../lib/utils";
 
 const CartInfo = ({ item, fetchCartList }) => {
   const token = localStorage.getItem("authToken");
@@ -52,7 +53,7 @@ const CartInfo = ({ item, fetchCartList }) => {
         <span>{newData.food_item_name}</span>
       </div>
       <div className="flex items-center justify-between gap-5">
-        <span>{newData.total_price}</span>
+        <span>{currencyFormat(newData.total_price)}</span>
         <QuantityButton
           handleChangePlusValue={handleChangePlusValue}
           handleChangeMinusValue={handleChangeMinusValue}

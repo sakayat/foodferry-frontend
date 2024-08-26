@@ -3,6 +3,7 @@ import { Trash2, X } from "lucide-react";
 import CartInfo from "./CartInfo";
 import { useCartItemStore } from "../lib/store/zustandStore";
 import { Link } from "react-router-dom";
+import { currencyFormat } from "../lib/utils";
 
 const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
   const { cartItems, fetchCartList } = useCartItemStore();
@@ -27,7 +28,7 @@ const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
             <X size={18} />
           </button>
         </div>
-        <div className="items border border-black/40 rounded space-y-2 overflow-y-auto">
+        <div className="items border h-[calc(100vh-2rem)] border-black/40 rounded space-y-2 overflow-y-auto">
           {cartItems?.items?.map((item) => (
             <CartInfo key={item.id} item={item} fetchCartList={fetchCartList} />
           ))}
@@ -35,7 +36,7 @@ const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
         <div className="cart-footer border rounded py-3 px-4 space-y-5">
           <div className="cart-order-summary text-center space-x-4">
             <span>Subtotal:</span>
-            <span className="font-semibold">{cartItems.total_price} USD</span>
+            <span className="font-semibold">{currencyFormat(cartItems.total_price)} USD</span>
           </div>
           <Link
             to="view-cart/"
