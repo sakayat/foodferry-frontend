@@ -64,7 +64,7 @@ const CheckoutFrom = () => {
   };
 
   return (
-    <form className="space-y-3 col-span-7" onSubmit={handleOnSubmit}>
+    <form className="space-y-3 col-span-12 md:col-span-7" onSubmit={handleOnSubmit}>
       <div className="form-control space-y-2">
         <label htmlFor="" className="text-xl">
           Email

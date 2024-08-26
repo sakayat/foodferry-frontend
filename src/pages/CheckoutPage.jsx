@@ -37,7 +37,7 @@ const CheckoutPage = () => {
         <div className="py-5">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <CheckoutFrom />
-            <div className="order-info order-first md:order-last col-span-5">
+            <div className="order-info order-first md:order-last col-span-12 md:col-span-5">
               <h3 className="text-2xl pb-3">Your order from</h3>
               <div className="space-y-3 border-t py-3">
                 {cartItems?.items?.map((item) => (
