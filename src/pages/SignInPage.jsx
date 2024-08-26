@@ -50,7 +50,6 @@ const SignInPage = () => {
               <h1 className="text-3xl text-center">Sign In</h1>
             </div>
             <form
-              action=""
               className="flex flex-col gap-5 w-full"
               onSubmit={handleSubmit}
             >

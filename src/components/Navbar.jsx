@@ -6,6 +6,8 @@ import MobileNav from "./MobileNav";
 import { useCartItemStore, useCartStore } from "../lib/store/zustandStore.jsx";
 
 const Navbar = () => {
+  const token = localStorage.getItem("authToken");
+
   const menuRef = useRef();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,7 +58,7 @@ const Navbar = () => {
                 <span className="bg-[#286140] text-white p-2.5 rounded-full">
                   <ShoppingBag size={18} />
                 </span>
-                <span className="font-bold px-4">Store</span>
+                <span className="font-bold px-4">Restaurant</span>
               </Link>
             </li>
             <div className="relative">
@@ -70,9 +72,15 @@ const Navbar = () => {
                 {cartItems?.total_quantity}
               </span>
             </div>
-            <li>
-              <Link to="/sign-in">Sign In</Link>
-            </li>
+            {token ? (
+              <li>
+                <Link to="profile/">Profile</Link>
+              </li>
+            ) : (
+              <li>
+                <Link to="sign-in/">Sign In</Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>
