@@ -85,6 +85,11 @@ body {
   }
 }
 
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
 .order-now-btn{
   padding: 20px 55px;
   background: var(--primary-color);

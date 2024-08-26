@@ -8,6 +8,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import OrderHistoryPage from "./pages/OrderHistoryPage";
 import ProfilePage from "./pages/ProfilePage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
+import SignUpPage from "./pages/SignupPage";
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="food/:slug/" element={<FoodDetailsPage />} />
+        <Route path="sign-up/" element={<SignUpPage />} />
         <Route path="sign-in/" element={<SignInPage />} />
+        
         <Route path="profile/" element={<ProfilePage />}/>
         <Route path="update-profile/" element={<UpdateProfilePage />}/>
         <Route path="view-cart/" element={<ViewCartPage />}/>
