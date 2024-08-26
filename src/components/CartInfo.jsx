@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Minus, Plus, Trash } from "lucide-react";
+import { Minus, Plus, Trash, X } from "lucide-react";
 import QuantityButton from "./QuantityButton";
 import { currencyFormat } from "../lib/utils";
 
@@ -40,6 +40,17 @@ const CartInfo = ({ item, fetchCartList }) => {
     }
   };
 
+  const handleDeleteItem = async (id) => {
+    await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/cart/delete/${id}/`, {
+      method: "delete",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    });
+    fetchCartList();
+  };
+
   return (
     <div className="cart-product space-y-5 w-full py-2 px-4">
       <div className="flex items-center gap-5">
@@ -60,8 +71,8 @@ const CartInfo = ({ item, fetchCartList }) => {
           quantity={quantity}
           setQuantity={setQuantity}
         />
-        <button className="bg-[#286140] text-white p-2.5 rounded-full">
-          <Trash size={18} />
+        <button onClick={() => handleDeleteItem(newData.id)}>
+          <X size={18} />
         </button>
       </div>
     </div>

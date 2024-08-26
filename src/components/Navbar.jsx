@@ -1,12 +1,13 @@
 import { LogIn, Menu, ShoppingBag, ShoppingCart, X } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuCartItem from "./MenuCartItem";
 import MobileNav from "./MobileNav";
 import { useCartItemStore, useCartStore } from "../lib/store/zustandStore.jsx";
 
 const Navbar = () => {
   const token = localStorage.getItem("authToken");
+  const navigate = useNavigate();
 
   const menuRef = useRef();
 
@@ -29,6 +30,24 @@ const Navbar = () => {
       document.removeEventListener("click", closeMenu);
     };
   }, [isMenuOpen]);
+
+  const handleLogout = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/accounts/logout/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+
+    if (res.ok) {
+      localStorage.removeItem("authToken");
+      return navigate("sign-in/");
+    }
+  };
 
   return (
     <div className="bg-white text-black border-b">
@@ -69,13 +88,18 @@ const Navbar = () => {
                 <ShoppingCart size={18} />
               </button>
               <span className="absolute top-0 bg-[#286140] font-bold w-6 h-6 flex justify-center left-8 rounded-full text-white">
-                {cartItems?.total_quantity}
+                {cartItems?.total_quantity || 0}
               </span>
             </div>
             {token ? (
-              <li>
-                <Link to="profile/">Profile</Link>
-              </li>
+              <>
+                <li>
+                  <Link to="profile/">Profile</Link>
+                </li>
+                <li>
+                  <button onClick={() => handleLogout()}>LogOut</button>
+                </li>
+              </>
             ) : (
               <li>
                 <Link to="sign-in/">Sign In</Link>
@@ -89,7 +113,7 @@ const Navbar = () => {
         <div className="fixed top-0 left-0 w-full h-screen z-80 bg-black/30"></div>
       )}
       {isMenuOpen && (
-        <MobileNav setIsCartOpen={setIsCartOpen} menuRef={menuRef} />
+        <MobileNav setIsMenuOpen={setIsMenuOpen} menuRef={menuRef} />
       )}
       {isCartOpen && (
         <MenuCartItem setIsCartOpen={setIsCartOpen} isCartOpen={isCartOpen} />

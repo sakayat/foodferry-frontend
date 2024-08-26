@@ -43,7 +43,7 @@ const SignInPage = () => {
 
   return (
     <div className="login__page">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto px-8">
         <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center">
           <div className="flex flex-col w-full">
             <div className="py-5">

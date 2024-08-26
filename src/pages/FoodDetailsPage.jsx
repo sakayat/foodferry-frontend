@@ -42,7 +42,7 @@ const FoodDetailsPage = () => {
   const handleAddToCart = async (e) => {
     e.preventDefault();
 
-    await fetch(
+    const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/cart/add-to-cart/${slug}/`,
       {
         method: "post",
@@ -53,6 +53,7 @@ const FoodDetailsPage = () => {
         body: JSON.stringify({ quantity }),
       }
     );
+    
     setIsCartOpen(!isCartOpen);
   };
 

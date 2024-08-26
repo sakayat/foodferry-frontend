@@ -8,7 +8,7 @@ const ProfilePage = () => {
   useEffect(() => {
     fetchProfileInfo();
   }, []);
-  const { profileInfo, fetchProfileInfo } = useProfileStore();
+  const { profileInfo, fetchProfileInfo } = useProfileStore();  
 
   return (
     <div className="py-5">
