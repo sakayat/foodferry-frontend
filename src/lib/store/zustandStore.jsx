@@ -24,3 +24,21 @@ export const useCartItemStore = create((set) => ({
     set({ cartItems: data });
   },
 }));
+
+export const useProfileStore = create((set) => ({
+  profileInfo: {},
+  fetchProfileInfo: async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
+      {
+        method: "get",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    set({ profileInfo: data });
+  },
+}));

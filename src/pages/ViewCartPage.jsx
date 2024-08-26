@@ -2,11 +2,10 @@ import { ChevronRight } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCartItemStore } from "../lib/store/zustandStore";
-import QuantityButton from "../components/QuantityButton";
 import ViewCartItem from "../components/ViewCartItem";
 import { currencyFormat } from "../lib/utils";
 
-const ViewCart = () => {
+const ViewCartPage = () => {
   useEffect(() => {
     fetchCartList();
   }, []);
@@ -62,7 +61,7 @@ const ViewCart = () => {
               {currencyFormat(cartItems.total_price)}
             </span>
           </div>
-          <Link className="default-btn py-3 px-6 w-full md:w-96 text-center">
+          <Link to="/checkout" className="default-btn py-3 px-6 w-full md:w-96 text-center">
             Check Out
           </Link>
         </div>
@@ -71,4 +70,4 @@ const ViewCart = () => {
   );
 };
 
-export default ViewCart;
+export default ViewCartPage;
