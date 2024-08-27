@@ -13,9 +13,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AddFoodItemPage from "./pages/AddFoodItemPage";
 import RestaurantDashboardLayout from "./components/RestaurantDashboardLayout";
 import RestaurantDashboardHome from "./pages/RestaurantDashboardHome";
+import UnauthorizedPage from "./pages/UnauthorizedPage";
 
-function App() {
-  const token = localStorage.getItem("authToken");
+function App() {  
   return (
     <>
       <Navbar />
@@ -24,6 +24,7 @@ function App() {
         <Route path="food/:slug/" element={<FoodDetailsPage />} />
         <Route path="sign-up/" element={<SignUpPage />} />
         <Route path="sign-in/" element={<SignInPage />} />
+        <Route path="unauthorized/" element={<UnauthorizedPage />}/>
         <Route
           path="profile/"
           element={
@@ -67,7 +68,7 @@ function App() {
         <Route
           path="restaurant/dashboard/"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute requiredRole={"restaurant_owner"}>
               <RestaurantDashboardLayout />
             </ProtectedRoute>
           }
