@@ -1,13 +1,13 @@
 import { create } from "zustand";
-const token = localStorage.getItem("authToken");
 
 export const useCartStore = create((set) => ({
   isCartOpen: false,
   setIsCartOpen: (value) => set({ isCartOpen: value }),
 }));
 
+
 export const useCartItemStore = create((set, get) => ({
-  token: localStorage.getItem("authToken") || token,
+  token: localStorage.getItem("authToken"),
   cartItems: [],
   fetchCartList: async () => {
     const { token } = get();
@@ -24,10 +24,11 @@ export const useCartItemStore = create((set, get) => ({
     const data = await res.json();
     set({ cartItems: data });
   },
+  clearCart: () => set({cartItems: []})
 }));
 
 export const useProfileStore = create((set, get) => ({
-  token: localStorage.getItem("authToken") || token,
+  token: localStorage.getItem("authToken"),
   profileInfo: {},
   fetchProfileInfo: async () => {
     const { token } = get();
@@ -47,7 +48,7 @@ export const useProfileStore = create((set, get) => ({
 }));
 
 export const useOrderStore = create((set, get) => ({
-  token: localStorage.getItem("authToken") || token,
+  token: localStorage.getItem("authToken"),
   orderList: [],
   fetchOrderList: async () => {
     const { token } = get();
@@ -65,3 +66,4 @@ export const useOrderStore = create((set, get) => ({
     set({ orderList: data });
   },
 }));
+

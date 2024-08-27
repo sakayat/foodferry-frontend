@@ -21,7 +21,7 @@ const Navbar = () => {
     }
   };
 
-  const { cartItems, fetchCartList } = useCartItemStore();
+  const { cartItems, clearCart, fetchCartList } = useCartItemStore();  
 
   useEffect(() => {
     fetchCartList();
@@ -45,6 +45,7 @@ const Navbar = () => {
 
     if (res.ok) {
       localStorage.removeItem("authToken");
+      clearCart()
       return navigate("sign-in/");
     }
   };

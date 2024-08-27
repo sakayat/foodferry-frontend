@@ -34,6 +34,7 @@ const SignInPage = () => {
     if (res.ok) {
       localStorage.setItem("authToken", data.token);
       navigate("/");
+      window.location.reload()
     }
   };
 
