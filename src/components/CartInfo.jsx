@@ -64,11 +64,11 @@ const CartInfo = ({ item, fetchCartList }) => {
         <span>{newData.food_item_name}</span>
       </div>
       <div className="flex items-center justify-between gap-5">
-        <span>{currencyFormat(newData.total_price)}</span>
+        <span>{currencyFormat(item.total_price)}</span>
         <QuantityButton
           handleChangePlusValue={handleChangePlusValue}
           handleChangeMinusValue={handleChangeMinusValue}
-          quantity={quantity}
+          quantity={item.quantity}
           setQuantity={setQuantity}
         />
         <button onClick={() => handleDeleteItem(newData.id)}>

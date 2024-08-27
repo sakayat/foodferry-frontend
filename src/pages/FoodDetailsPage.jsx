@@ -11,38 +11,42 @@ const FoodDetailsPage = () => {
 
   const { slug } = useParams();
 
-  const [data, setData] = useState()
+  const [foodItem, setFoodItem] = useState();
 
   useEffect(() => {
-    fetchFoodDetails()
-  }, [])
+    fetchFoodDetails();
+  }, []);
 
   const fetchFoodDetails = async () => {
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-details/${slug}/`
+      `${
+        import.meta.env.VITE_API_BASE_URL
+      }/api/restaurant/food-details/${slug}/`
     );
     const data = await res.json();
-    setData(data)
+    setFoodItem(data);
   };
 
   const [quantity, setQuantity] = useState(1);
 
-  const [disableButton, setDisableButton] = useState(false);
+  const handleChangeQuantity = (quantity) => {
+    setQuantity(quantity);
+  };
 
   const handleChangePlusValue = () => {
-    setQuantity((prev) => prev + 1);
-    setDisableButton(quantity < 0);
+    handleChangeQuantity(quantity + 1);
   };
 
   const handleChangeMinusValue = () => {
-    setQuantity((prev) => prev - 1);
-    setDisableButton(quantity <= 1);
+    if (quantity > 1) {
+      handleChangeQuantity(quantity - 1);
+    }
   };
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(
+    await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/cart/add-to-cart/${slug}/`,
       {
         method: "post",
@@ -53,7 +57,6 @@ const FoodDetailsPage = () => {
         body: JSON.stringify({ quantity }),
       }
     );
-    
     setIsCartOpen(!isCartOpen);
   };
 
@@ -71,51 +74,56 @@ const FoodDetailsPage = () => {
               <ChevronRight size={15} />
             </li>
             <li>
-              <Link to="">{data?.name}</Link>
+              <Link to="">{foodItem?.name}</Link>
             </li>
           </ul>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="image">
             <img
-              src={`${import.meta.env.VITE_API_BASE_URL}/${data?.image}`}
+              src={`${import.meta.env.VITE_API_BASE_URL}/${foodItem?.image}`}
               alt=""
               className="w-full h-full"
             />
           </div>
           <div className="flex flex-col gap-5">
-            <span className="font-semibold">{data?.category_name}</span>
+            <span className="font-semibold">{foodItem?.category_name}</span>
             <h2 className="text-4xl font-bold uppercase tracking-widest">
-              {data?.name}
+              {foodItem?.name}
             </h2>
-            <p className="text-xl leading-6 lowercase">{data?.description}</p>
-            <span className="font-bold">{currencyFormat(data?.price)} USD</span>
+            <p className="text-xl leading-6 lowercase">{foodItem?.description}</p>
+            <span className="font-bold">{currencyFormat(foodItem?.price)} USD</span>
             <span>Quantity</span>
             <form action="" className="space-y-5" onSubmit={handleAddToCart}>
-              <div className="flex justify-center gap-2 border border-black p-2 w-28">
+              <div className="flex items-center justify-between gap-2 border border-black p-2 w-24 md:w-36">
                 <div
-                  className={`w-6 text-2xl cursor-pointer ${
-                    disableButton ? "text-gray-600" : ""
-                  }`}
-                  onClick={() => handleChangeMinusValue()}
-                  disabled={disableButton}
+                  className="text-2xl cursor-pointer"
+                  onClick={handleChangeMinusValue}
                 >
-                  <Minus size={18} />
+                  <div
+                    className="w-6 text-2xl cursor-pointer"
+                    onClick={() => handleChangeMinusValue()}
+                  >
+                    <Minus size={18} />
+                  </div>
                 </div>
                 <input
                   type="number"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="outline-none font-bold text-center w-6 [appearance:number] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="outline-none font-bold text-center w-8"
                 />
                 <div
-                  className="w-6 text-2xl cursor-pointer"
-                  onClick={() => handleChangePlusValue()}
+                  className="text-2xl cursor-pointer"
+                  onClick={handleChangePlusValue}
                 >
                   <Plus size={18} />
                 </div>
               </div>
-              <button className="px-6 default-btn border h-12 w-full uppercase">
+              <button
+                className="px-6 default-btn border h-12 w-full uppercase"
+                type="submit"
+              >
                 Add to cart
               </button>
             </form>

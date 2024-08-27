@@ -19,6 +19,8 @@ const CheckoutFrom = () => {
 
   const [errors, setErrors] = useState(null);
 
+  console.log(errors);
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,7 +29,7 @@ const CheckoutFrom = () => {
       !profileInfo.last_name ||
       !profileInfo.phone_number
     ) {
-      setErrors({
+     return setErrors({
         profileError: "first name, last name and phone number is required",
       });
     }
@@ -51,6 +53,8 @@ const CheckoutFrom = () => {
 
     const data = await res.json();
 
+    console.log(res);
+
     setErrors({ error: data.error });
 
     if (
@@ -59,12 +63,15 @@ const CheckoutFrom = () => {
       profileInfo.last_name
     ) {
       fetchCartList();
-      return navigate("/");
+      return navigate("/order-history");
     }
   };
 
   return (
-    <form className="space-y-3 col-span-12 md:col-span-7" onSubmit={handleOnSubmit}>
+    <form
+      className="space-y-3 col-span-12 md:col-span-7"
+      onSubmit={handleOnSubmit}
+    >
       <div className="form-control space-y-2">
         <label htmlFor="" className="text-xl">
           Email
@@ -146,7 +153,7 @@ const CheckoutFrom = () => {
           {errors.error || errors.profileError}
         </p>
       )}
-      {errors?.profileError && <Link to="/">Update your profile</Link>}
+      {errors?.profileError && <Link to="/profile">Update your profile</Link>}
       <button className="default-btn py-3 px-6 w-full">Place order</button>
     </form>
   );

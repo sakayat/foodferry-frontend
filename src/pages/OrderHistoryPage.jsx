@@ -11,6 +11,9 @@ const OrderHistoryPage = () => {
 
   const { orderList, fetchOrderList } = useOrderStore();
 
+  console.log(orderList);
+  
+
   const [foodItem, setFoodItem] = useState();
 
   console.log(foodItem);
@@ -58,6 +61,9 @@ const OrderHistoryPage = () => {
                     Quantity
                   </th>
                   <th scope="col" className="px-6 py-3">
+                    Status
+                  </th>
+                  <th scope="col" className="px-6 py-3">
                     Action
                   </th>
                 </tr>
@@ -75,6 +81,7 @@ const OrderHistoryPage = () => {
                       {currencyFormat(item.subtotal)}
                     </td>
                     <td className="px-6 py-4">{item.quantity}</td>
+                    <td className="px-6 py-4">{item.status}</td>
                     <td className="px-6 py-4">
                       <button
                         className="default-btn py-2 px-4"
