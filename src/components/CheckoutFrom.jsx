@@ -15,7 +15,7 @@ const CheckoutFrom = () => {
     fetchProfileInfo();
   }, []);
 
-  const { profileInfo, fetchProfileInfo } = useProfileStore();
+  const { user, fetchProfileInfo } = useProfileStore();
 
   const [errors, setErrors] = useState(null);
 
@@ -24,12 +24,8 @@ const CheckoutFrom = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !profileInfo.first_name ||
-      !profileInfo.last_name ||
-      !profileInfo.phone_number
-    ) {
-     return setErrors({
+    if (!user.first_name || !user.last_name || !user.phone_number) {
+      return setErrors({
         profileError: "first name, last name and phone number is required",
       });
     }
@@ -53,15 +49,9 @@ const CheckoutFrom = () => {
 
     const data = await res.json();
 
-    console.log(res);
-
     setErrors({ error: data.error });
 
-    if (
-      profileInfo.first_name &&
-      profileInfo.phone_number &&
-      profileInfo.last_name
-    ) {
+    if (user.first_name && user.phone_number && user.last_name) {
       fetchCartList();
       return navigate("/order-history");
     }
@@ -79,7 +69,7 @@ const CheckoutFrom = () => {
         <input
           type="email"
           className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
-          placeholder={profileInfo.email}
+          placeholder={user.email}
           disabled
         />
       </div>
@@ -90,7 +80,7 @@ const CheckoutFrom = () => {
         <input
           type="email"
           className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
-          placeholder={profileInfo.phone_number}
+          placeholder={user.phone_number}
           disabled
         />
       </div>
@@ -102,7 +92,7 @@ const CheckoutFrom = () => {
           <input
             type="text"
             className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
-            placeholder={profileInfo.first_name}
+            placeholder={user.first_name}
             disabled
           />
         </div>
@@ -113,7 +103,7 @@ const CheckoutFrom = () => {
           <input
             type="text"
             className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
-            placeholder={profileInfo.last_name}
+            placeholder={user.last_name}
             disabled
           />
         </div>
