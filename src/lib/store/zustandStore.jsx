@@ -29,7 +29,7 @@ export const useCartItemStore = create((set, get) => ({
 
 export const useProfileStore = create((set, get) => ({
   token: localStorage.getItem("authToken"),
-  profileInfo: {},
+  user: {},
   fetchProfileInfo: async () => {
     const { token } = get();
     const res = await fetch(
@@ -43,7 +43,7 @@ export const useProfileStore = create((set, get) => ({
       }
     );
     const data = await res.json();
-    set({ profileInfo: data });
+    set({ user: data });
   },
 }));
 

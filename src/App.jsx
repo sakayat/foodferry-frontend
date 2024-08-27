@@ -10,6 +10,9 @@ import ProfilePage from "./pages/ProfilePage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
 import SignUpPage from "./pages/SignupPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AddFoodItemPage from "./pages/AddFoodItemPage";
+import RestaurantDashboardLayout from "./components/RestaurantDashboardLayout";
+import RestaurantDashboardHome from "./pages/RestaurantDashboardHome";
 
 function App() {
   const token = localStorage.getItem("authToken");
@@ -61,6 +64,17 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="restaurant/dashboard/"
+          element={
+            <ProtectedRoute>
+              <RestaurantDashboardLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="" element={<RestaurantDashboardHome />} />
+          <Route path="add-food-item/" element={<AddFoodItemPage />} />
+        </Route>
       </Routes>
     </>
   );

@@ -7,7 +7,7 @@ const UpdateProfilePage = () => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
 
-  const { profileInfo, fetchProfileInfo } = useProfileStore();
+  const { user, fetchProfileInfo } = useProfileStore();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -18,12 +18,12 @@ const UpdateProfilePage = () => {
   }, []);
 
   useEffect(() => {
-    if (profileInfo) {
-      setFirstName(profileInfo.first_name || "");
-      setLastName(profileInfo.last_name || "");
-      setPhoneNumber(profileInfo.phone_number || "");
+    if (user) {
+      setFirstName(user.first_name || "");
+      setLastName(user.last_name || "");
+      setPhoneNumber(user.phone_number || "");
     }
-  }, [profileInfo]);
+  }, [user]);
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();

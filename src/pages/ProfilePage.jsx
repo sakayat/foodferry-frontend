@@ -1,33 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useProfileStore } from "../lib/store/zustandStore";
 import BreadCrumbs from "../components/BreadCrumbs";
+import { useProfileStore } from "../lib/store/zustandStore";
 
 const ProfilePage = () => {
   const token = localStorage.getItem("authToken");
 
-  const [profileInfo, setProfileInfo] = useState("");
+  const {user, fetchProfileInfo} = useProfileStore()
 
   useEffect(() => {
     fetchProfileInfo();
   }, []);
-
-  const fetchProfileInfo = async () => {
-    const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
-      {
-        method: "get",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      }
-    );
-    const data = await res.json();
-    console.log(data);
-
-    setProfileInfo(data);
-  };
 
   return (
     <div className="py-5">
@@ -35,6 +18,13 @@ const ProfilePage = () => {
         <BreadCrumbs link_name={"Profile"} />
         <div className="py-5">
           <h2 className="text-3xl">Profile Info</h2>
+          {user?.role === "restaurant_owner" && (
+            <button className="py-2">
+              <Link to="/restaurant/dashboard/">
+                Go to Restaurant Dashboard
+              </Link>
+            </button>
+          )}
         </div>
         <div className="max-w-2xl profile space-y-5">
           <img src="/src/assets/images/profile.png" alt="" className="w-28" />
@@ -43,9 +33,9 @@ const ProfilePage = () => {
               <div>
                 <span className="uppercase font-bold">Full Name</span>
                 <div>
-                  {profileInfo?.first_name || profileInfo?.last_name ? (
+                  {user?.first_name || user?.last_name ? (
                     <span>
-                      {profileInfo?.first_name} {profileInfo?.last_name}
+                      {user?.first_name} {user?.last_name}
                     </span>
                   ) : (
                     <span className="text-sm">Not provided</span>
@@ -54,13 +44,13 @@ const ProfilePage = () => {
               </div>
               <div>
                 <span className="uppercase font-bold">Email</span>
-                <div className="">{profileInfo?.email}</div>
+                <div className="">{user?.email}</div>
               </div>
               <div>
                 <span className="uppercase font-bold">Phone</span>
                 <div className="">
-                  {profileInfo?.phone_number ? (
-                    <span>{profileInfo?.phone_number}</span>
+                  {user?.phone_number ? (
+                    <span>{user?.phone_number}</span>
                   ) : (
                     <span className="text-sm">Not provided</span>
                   )}
