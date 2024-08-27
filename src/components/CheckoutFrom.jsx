@@ -11,11 +11,7 @@ const CheckoutFrom = () => {
 
   const { fetchCartList } = useCartItemStore();
 
-  useEffect(() => {
-    fetchProfileInfo();
-  }, []);
-
-  const { user, fetchProfileInfo } = useProfileStore();
+  const { user } = useProfileStore();
 
   const [errors, setErrors] = useState(null);
 

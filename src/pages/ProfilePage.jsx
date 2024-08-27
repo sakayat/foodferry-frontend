@@ -4,13 +4,8 @@ import BreadCrumbs from "../components/BreadCrumbs";
 import { useProfileStore } from "../lib/store/zustandStore";
 
 const ProfilePage = () => {
-  const token = localStorage.getItem("authToken");
 
-  const {user, fetchProfileInfo} = useProfileStore()
-
-  useEffect(() => {
-    fetchProfileInfo();
-  }, []);
+  const { user } = useProfileStore();
 
   return (
     <div className="py-5">

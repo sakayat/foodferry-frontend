@@ -6,11 +6,8 @@ import { currencyFormat } from "../lib/utils";
 import CheckoutFrom from "../components/CheckoutFrom";
 
 const CheckoutPage = () => {
-  useEffect(() => {
-    fetchCartList();
-  }, []);
 
-  const { cartItems, fetchCartList } = useCartItemStore();
+  const { cartItems } = useCartItemStore();
 
 
   return (

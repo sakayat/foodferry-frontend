@@ -1,10 +1,11 @@
 import { create } from "zustand";
 
+const token = localStorage.getItem("authToken");
+
 export const useCartStore = create((set) => ({
   isCartOpen: false,
   setIsCartOpen: (value) => set({ isCartOpen: value }),
 }));
-
 
 export const useCartItemStore = create((set, get) => ({
   token: localStorage.getItem("authToken"),
@@ -24,14 +25,11 @@ export const useCartItemStore = create((set, get) => ({
     const data = await res.json();
     set({ cartItems: data });
   },
-  clearCart: () => set({cartItems: []})
+  clearCart: () => set({ cartItems: [] }),
 }));
 
-export const useProfileStore = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
-  user: {},
-  fetchProfileInfo: async () => {
-    const { token } = get();
+export const useProfileStore = create((set) => {
+  const fetchProfileInfo = async () => {
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
       {
@@ -44,8 +42,13 @@ export const useProfileStore = create((set, get) => ({
     );
     const data = await res.json();
     set({ user: data });
-  },
-}));
+  };
+  fetchProfileInfo();
+
+  return {
+    user: {},
+  };
+});
 
 export const useOrderStore = create((set, get) => ({
   token: localStorage.getItem("authToken"),
@@ -66,4 +69,3 @@ export const useOrderStore = create((set, get) => ({
     set({ orderList: data });
   },
 }));
-
