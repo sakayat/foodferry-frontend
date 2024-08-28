@@ -7,8 +7,6 @@ const Sidebar = ({ activeItem, setActiveItem }) => {
   const menuItems = [
     { name: "Dashboard", icon: Home, link: "/restaurant/dashboard/" },
     { name: "Add Food Item", icon: PlusCircle, link: "add-food-item/" },
-    { name: "Update Food", icon: Edit },
-    { name: "Add Food Category", icon: PlusCircle },
     { name: "Update Restaurant Info", icon: Info },
     { name: "All Food Items", icon: List, link: "food-items/" },
   ];
@@ -21,19 +19,19 @@ const Sidebar = ({ activeItem, setActiveItem }) => {
       <ul className="flex flex-col gap-5 text-sm">
         {menuItems.map((item, i) => (
           <li key={i}>
-            <button
-              className={`w-full rounded p-3 ${
+            <Link to={item.link}
+              className={`w-full rounded p-3 block ${
                 activeItem === item.name
                   ? "bg-[#286140] text-white"
                   : "hover-bg-gray-200"
               }`}
               onClick={() => setActiveItem(item.name)}
             >
-              <Link to={item.link} className="flex items-center gap-3">
+              <div className="flex items-center gap-3">
                 <item.icon className="space-x-4 w-5 h-5" />
                 {item.name}
-              </Link>
-            </button>
+              </div>
+            </Link>
           </li>
         ))}
       </ul>

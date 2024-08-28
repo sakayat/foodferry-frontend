@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFoodCategories, useFoodTags } from "../lib/store/zustandStore";
 import { useNavigate } from "react-router-dom";
 
-const AddFoodItemPage = () => {
+const UpdateRestaurantFood = () => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
 
@@ -59,7 +59,7 @@ const AddFoodItemPage = () => {
   return (
     <div className="max-w-6xl mx-auto px-8 py-5">
       <div className="py-5">
-        <h2 className="text-3xl">Add Food Item</h2>
+        <h2 className="text-3xl">Update Food Item</h2>
       </div>
       <form className="space-y-5" onSubmit={handleSubmit}>
         <div className="form-control space-y-2">
@@ -162,4 +162,4 @@ const AddFoodItemPage = () => {
   );
 };
 
-export default AddFoodItemPage;
+export default UpdateRestaurantFood;
