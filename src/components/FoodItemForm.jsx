@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRestaurantInfo } from "../lib/store/zustandStore";
 
 const FoodItemForm = ({ categories, foodTags, id }) => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
+  const { ownerInfo } = useRestaurantInfo();
 
   const [foodName, setFoodName] = useState("");
   const [description, setDescription] = useState("");
@@ -30,6 +32,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
       setPrice(foodItem.price || "");
       setCategory(foodItem.category || "");
       setFoodTag(foodItem.tags || "");
+      setIsAvailable(foodItem.is_available || "")
     }
   }, [foodItem]);
 
