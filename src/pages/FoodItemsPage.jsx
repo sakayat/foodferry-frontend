@@ -13,6 +13,9 @@ const FoodItemsPage = () => {
     fetchRestaurantFoodItem();
   }, []);
 
+  console.log(restaurantFoods);
+  
+
   const handleEdit = () => {};
 
   const handleDelete = async (id) => {
@@ -53,6 +56,9 @@ const FoodItemsPage = () => {
                   Available
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  Tag
+                </th>
+                <th scope="col" className="px-6 py-3">
                   Actions
                 </th>
               </tr>
@@ -79,13 +85,13 @@ const FoodItemsPage = () => {
                       {item.is_available ? "Yes" : "No"}
                     </span>
                   </td>
-
+                  <td className="px-6 py-4">{item.food_tag}</td>
                   <td className="px-6 py-4 space-x-3">
                     <button
                       onClick={() => handleEdit(item.id)}
                       className="mr-2 text-blue-600 hover:text-blue-800"
                     >
-                      <Link to={`/restaurant/dashboard/update-food-item/${item.slug}/`}>
+                      <Link to={`/restaurant/dashboard/update-food-item/${item.id}/`}>
                         <Edit size={18} />
                       </Link>
                     </button>

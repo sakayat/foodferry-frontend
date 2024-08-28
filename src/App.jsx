@@ -77,7 +77,7 @@ function App() {
         >
           <Route path="" element={<RestaurantDashboardHome />} />
           <Route path="add-food-item/" element={<AddFoodItemPage />} />
-          <Route path="update-food-item/:slug/" element={<UpdateRestaurantFood />} />
+          <Route path="update-food-item/:id/" element={<UpdateRestaurantFood />} />
           <Route path="food-items/" element={<FoodItemsPage />}/>
         </Route>
       </Routes>

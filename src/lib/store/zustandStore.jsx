@@ -12,6 +12,9 @@ export const useCartItemStore = create((set, get) => ({
   cartItems: [],
   fetchCartList: async () => {
     const { token } = get();
+    if(!token){
+      return
+    }
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/cart/list/`,
       {
@@ -91,8 +94,11 @@ export const useRestaurantInfo = create((set) => {
   };
 });
 
-export const useFoodCategories = create((set) => {
-  const fetchFoodCategories = async () => {
+export const useFoodCategories = create((set, get) => ({
+  token: localStorage.getItem("authToken"),
+  categories: [],
+  fetchFoodCategories: async () => {
+    const { token } = get();
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-categories/`,
       {
@@ -104,16 +110,14 @@ export const useFoodCategories = create((set) => {
       }
     );
     const data = await res.json();
-    set({ foodCategories: data });
-  };
-  fetchFoodCategories();
-  return {
-    foodCategories: {},
-  };
-});
+    set({ categories: data });
+  },
+}));
 
-export const useFoodTags = create((set) => {
-  const fetchFoodTags = async () => {
+export const useFoodTags = create((set) => ({
+  token: localStorage.getItem("authToken"),
+  foodTags: [],
+  fetchFoodTags: async () => {
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-tags/`,
       {
@@ -126,12 +130,8 @@ export const useFoodTags = create((set) => {
     );
     const data = await res.json();
     set({ foodTags: data });
-  };
-  fetchFoodTags();
-  return {
-    foodTags: {},
-  };
-});
+  },
+}));
 
 export const useRestaurantFoodItem = create((set, get) => ({
   token: localStorage.getItem("authToken"),
