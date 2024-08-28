@@ -4,8 +4,9 @@ import BreadCrumbs from "../components/BreadCrumbs";
 import { useProfileStore } from "../lib/store/zustandStore";
 
 const ProfilePage = () => {
-
   const { user } = useProfileStore();
+
+  console.log(user);
 
   return (
     <div className="py-5">
@@ -13,11 +14,15 @@ const ProfilePage = () => {
         <BreadCrumbs link_name={"Profile"} />
         <div className="py-5">
           <h2 className="text-3xl">Profile Info</h2>
-          {user?.role === "restaurant_owner" && (
+          {user?.role === "restaurant_owner" ? (
             <button className="py-2">
               <Link to="/restaurant/dashboard/">
                 Go to Restaurant Dashboard
               </Link>
+            </button>
+          ) : (
+            <button className="py-2">
+              <Link to="/admin/dashboard/">Go to Admin Dashboard</Link>
             </button>
           )}
         </div>

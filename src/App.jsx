@@ -17,8 +17,10 @@ import UnauthorizedPage from "./pages/UnauthorizedPage";
 import FoodItemsPage from "./pages/FoodItemsPage";
 import UpdateRestaurantFood from "./pages/UpdateRestaurantFood";
 import UpdateRestaurantInfo from "./pages/UpdateRestaurantInfo";
+import AdminDashboardLayout from "./components/AdminDashboardLayout";
+import AdminDashboardHome from "./pages/AdminDashboardHome";
 
-function App() {  
+function App() {
   return (
     <>
       <Navbar />
@@ -27,7 +29,7 @@ function App() {
         <Route path="food/:slug/" element={<FoodDetailsPage />} />
         <Route path="sign-up/" element={<SignUpPage />} />
         <Route path="sign-in/" element={<SignInPage />} />
-        <Route path="unauthorized/" element={<UnauthorizedPage />}/>
+        <Route path="unauthorized/" element={<UnauthorizedPage />} />
         <Route
           path="profile/"
           element={
@@ -78,9 +80,26 @@ function App() {
         >
           <Route path="" element={<RestaurantDashboardHome />} />
           <Route path="add-food-item/" element={<AddFoodItemPage />} />
-          <Route path="update-food-item/:id/" element={<UpdateRestaurantFood />} />
-          <Route path="update-restaurant-info/" element={<UpdateRestaurantInfo />} />
-          <Route path="food-items/" element={<FoodItemsPage />}/>
+          <Route
+            path="update-food-item/:id/"
+            element={<UpdateRestaurantFood />}
+          />
+          <Route
+            path="update-restaurant-info/"
+            element={<UpdateRestaurantInfo />}
+          />
+          <Route path="food-items/" element={<FoodItemsPage />} />
+        </Route>
+
+        <Route
+          path="admin/dashboard/"
+          element={
+            <ProtectedRoute>
+              <AdminDashboardLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="" element={<AdminDashboardHome />}/>
         </Route>
       </Routes>
     </>
