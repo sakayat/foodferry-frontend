@@ -90,3 +90,45 @@ export const useRestaurantInfo = create((set) => {
     ownerInfo: {},
   };
 });
+
+export const useFoodCategories = create((set) => {
+  const fetchFoodCategories = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-categories/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    set({ foodCategories: data });
+  };
+  fetchFoodCategories();
+  return {
+    foodCategories: {},
+  };
+});
+
+export const useFoodTags = create((set) => {
+  const fetchFoodTags = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-tags/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    set({ foodTags: data });
+  };
+  fetchFoodTags();
+  return {
+    foodTags: {},
+  };
+});

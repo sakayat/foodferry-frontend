@@ -14,6 +14,7 @@ import AddFoodItemPage from "./pages/AddFoodItemPage";
 import RestaurantDashboardLayout from "./components/RestaurantDashboardLayout";
 import RestaurantDashboardHome from "./pages/RestaurantDashboardHome";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
+import FoodItemsPage from "./pages/FoodItemsPage";
 
 function App() {  
   return (
@@ -75,6 +76,7 @@ function App() {
         >
           <Route path="" element={<RestaurantDashboardHome />} />
           <Route path="add-food-item/" element={<AddFoodItemPage />} />
+          <Route path="food-items/" element={<FoodItemsPage />}/>
         </Route>
       </Routes>
     </>
