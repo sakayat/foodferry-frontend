@@ -204,3 +204,21 @@ export const useFoodCategoriesStore = create((set, get) => ({
     set({ categories: data });
   },
 }));
+
+
+export const useFoodTagStore = create((set, get) => ({
+  token: localStorage.getItem("authToken"),
+  tags: [],
+  fetchTags: async () => {
+    const { token } = get();
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/restaurant/tag-list/`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    });
+    const data = await res.json();
+    set({ tags: data });
+  },
+}));

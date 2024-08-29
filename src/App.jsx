@@ -26,6 +26,7 @@ import RestaurantListPage from "./pages/RestaurantListPage";
 import AddCategoryPage from "./pages/AddCategoryPage";
 import CategoryListPage from "./pages/CategoryListPage";
 import AddFoodTagPage from "./pages/AddFoodTagPage";
+import FoodTagListPage from "./pages/FoodTagListPage";
 
 function App() {
   return (
@@ -117,6 +118,7 @@ function App() {
           <Route path="food-category/" element={<AddCategoryPage />} />
           <Route path="category-list/" element={<CategoryListPage />} />
           <Route path="food-tag/" element={<AddFoodTagPage />} />
+          <Route path="tag-list/" element={<FoodTagListPage />} />
         </Route>
       </Routes>
     </>
