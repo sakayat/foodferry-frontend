@@ -21,6 +21,7 @@ import AdminDashboardLayout from "./components/AdminDashboardLayout";
 import AdminDashboardHome from "./pages/AdminDashboardHome";
 import UsersPage from "./pages/UsersPage";
 import UpdateUserRolePage from "./pages/UpdateUserRolePage";
+import CreateRestaurantPage from "./pages/CreateRestaurantPage";
 
 function App() {
   return (
@@ -107,6 +108,7 @@ function App() {
             path="users/update-role/:id/"
             element={<UpdateUserRolePage />}
           />
+          <Route path="create-restaurant/" element={<CreateRestaurantPage />}/>
         </Route>
       </Routes>
     </>
