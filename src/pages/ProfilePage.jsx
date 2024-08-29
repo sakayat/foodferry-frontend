@@ -1,10 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BreadCrumbs from "../components/BreadCrumbs";
-import { useProfileStore } from "../lib/store/zustandStore";
 
 const ProfilePage = () => {
-  const { user } = useProfileStore();
+  const token = localStorage.getItem("authToken");
+
+  useEffect(() => {
+    fetchProfileInfo();
+  }, []);
+
+  const [user, setUser] = useState({});
+
+  const fetchProfileInfo = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    setUser(data);
+  };
 
   return (
     <div className="py-5">

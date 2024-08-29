@@ -7,15 +7,11 @@ const UpdateProfilePage = () => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
 
-  const { user, fetchProfileInfo } = useProfileStore();
+  const { user } = useProfileStore();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
-  useEffect(() => {
-    fetchProfileInfo();
-  }, []);
 
   useEffect(() => {
     if (user) {

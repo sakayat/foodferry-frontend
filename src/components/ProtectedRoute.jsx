@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useProfileStore } from "../lib/store/zustandStore";
 
@@ -6,7 +6,9 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   const token = localStorage.getItem("authToken");
   const { user } = useProfileStore();
 
-  console.log(user);
+  useEffect(() => {
+
+  }, [token])
 
   if (!token) {
     return <Navigate to="/sign-in/" />;
