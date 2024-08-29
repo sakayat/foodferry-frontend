@@ -8,11 +8,11 @@ const AdminDashboardSidebar = ({ activeItem, setActiveItem }) => {
     { name: "Dashboard", icon: Home, link: "/admin/dashboard/" },
     { name: "All User", icon: User2, link: "users/" },
     { name: "Add Food Category", icon: PlusCircle, link: "food-category/" },
-    { name: "Add Food Tag", icon: PlusCircle, link: "add-food-tag" },
+    { name: "Add Food Tag", icon: PlusCircle, link: "food-tag/" },
     { name: "Create Restaurant", icon: Pen, link: "create-restaurant/" },
     { name: "Restaurant List", icon: List, link: "restaurant-list/" },
     { name: "Category List", icon: List, link: "category-list/" },
-    { name: "Tag List", icon: List, link: "ta-list/" },
+    { name: "Tag List", icon: List, link: "tag-list/" },
   ];
 
   const { ownerInfo } = useRestaurantInfo();
