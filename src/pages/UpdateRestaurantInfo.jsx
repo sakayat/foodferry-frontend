@@ -47,7 +47,6 @@ const UpdateRestaurantInfo = () => {
         body: formData,
       }
     );
-    const data = await res.json()
 
     if (res.ok) {
       return navigate("/restaurant/dashboard/");
