@@ -6,8 +6,6 @@ import { useProfileStore } from "../lib/store/zustandStore";
 const ProfilePage = () => {
   const { user } = useProfileStore();
 
-  console.log(user);
-
   return (
     <div className="py-5">
       <div className="xl:container mx-auto px-8">

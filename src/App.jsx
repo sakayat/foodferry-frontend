@@ -19,6 +19,8 @@ import UpdateRestaurantFood from "./pages/UpdateRestaurantFood";
 import UpdateRestaurantInfo from "./pages/UpdateRestaurantInfo";
 import AdminDashboardLayout from "./components/AdminDashboardLayout";
 import AdminDashboardHome from "./pages/AdminDashboardHome";
+import UsersPage from "./pages/UsersPage";
+import UpdateUserRolePage from "./pages/UpdateUserRolePage";
 
 function App() {
   return (
@@ -99,7 +101,12 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route path="" element={<AdminDashboardHome />}/>
+          <Route path="" element={<AdminDashboardHome />} />
+          <Route path="users/" element={<UsersPage />} />
+          <Route
+            path="users/update-role/:id/"
+            element={<UpdateUserRolePage />}
+          />
         </Route>
       </Routes>
     </>

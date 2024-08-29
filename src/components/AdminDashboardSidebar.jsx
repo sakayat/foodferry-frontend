@@ -1,14 +1,16 @@
-import {  Home, Info, List, PlusCircle } from "lucide-react";
+import { Home, Info, List, PlusCircle, User2 } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useRestaurantInfo } from "../lib/store/zustandStore";
 
-const Sidebar = ({ activeItem, setActiveItem }) => {
+const AdminDashboardSidebar = ({ activeItem, setActiveItem }) => {
+
   const menuItems = [
-    { name: "Dashboard", icon: Home, link: "/restaurant/dashboard/" },
-    { name: "Add Food Item", icon: PlusCircle, link: "add-food-item/" },
-    { name: "Update Restaurant Info", icon: Info },
-    { name: "All Food Items", icon: List, link: "food-items/" },
+    { name: "Dashboard", icon: Home, link: "/admin/dashboard/" },
+    { name: "All User", icon: User2, link: "users/" },
+    { name: "Add Food Category", icon: PlusCircle, link: "add-food-item/" },
+    { name: "Add Food Tag", icon: Info },
+    { name: "All Restaurant", icon: List, link: "food-items/" },
   ];
 
   const { ownerInfo } = useRestaurantInfo();
@@ -19,7 +21,8 @@ const Sidebar = ({ activeItem, setActiveItem }) => {
       <ul className="flex flex-col gap-5 text-sm">
         {menuItems.map((item, i) => (
           <li key={i}>
-            <Link to={item.link}
+            <Link
+              to={item.link}
               className={`w-full rounded p-3 block ${
                 activeItem === item.name
                   ? "bg-[#286140] text-white"
@@ -39,4 +42,4 @@ const Sidebar = ({ activeItem, setActiveItem }) => {
   );
 };
 
-export default Sidebar;
+export default AdminDashboardSidebar;
