@@ -45,7 +45,7 @@ const CreateRestaurantPage = () => {
       }
     );
     if (res.ok) {
-      return navigate("/restaurant/dashboard/restaurants");
+      return navigate("/restaurant/dashboard/restaurant-list/");
     }
     const data = await res.json();
     setError(data);
