@@ -32,13 +32,14 @@ const ProfilePage = () => {
         <BreadCrumbs link_name={"Profile"} />
         <div className="py-5">
           <h2 className="text-3xl">Profile Info</h2>
-          {user?.role === "restaurant_owner" ? (
+          {user?.role === "restaurant_owner" && (
             <button className="py-2">
               <Link to="/restaurant/dashboard/">
                 Go to Restaurant Dashboard
               </Link>
             </button>
-          ) : (
+          )}
+          {user?.role === "admin" && (
             <button className="py-2">
               <Link to="/admin/dashboard/">Go to Admin Dashboard</Link>
             </button>
