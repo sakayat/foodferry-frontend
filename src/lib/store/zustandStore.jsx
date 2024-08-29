@@ -169,3 +169,21 @@ export const useUsersStore = create((set, get) => ({
     set({ users: data });
   },
 }));
+
+
+export const useRestaurantListStore = create((set, get) => ({
+  token: localStorage.getItem("authToken"),
+  restaurants: [],
+  fetchRestaurants: async () => {
+    const { token } = get();
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/restaurant/list/`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    });
+    const data = await res.json();
+    set({ restaurants: data });
+  },
+}));

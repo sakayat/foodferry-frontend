@@ -1,16 +1,16 @@
-import { Home, Info, List, PlusCircle, User2 } from "lucide-react";
+import { Home, Info, List, Pen, PlusCircle, User2 } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useRestaurantInfo } from "../lib/store/zustandStore";
 
 const AdminDashboardSidebar = ({ activeItem, setActiveItem }) => {
-
   const menuItems = [
     { name: "Dashboard", icon: Home, link: "/admin/dashboard/" },
     { name: "All User", icon: User2, link: "users/" },
     { name: "Add Food Category", icon: PlusCircle, link: "add-food-item/" },
-    { name: "Add Food Tag", icon: Info },
-    { name: "All Restaurant", icon: List, link: "food-items/" },
+    { name: "Add Food Tag", icon: PlusCircle, link: "add-food-tag" },
+    { name: "Create Restaurant", icon: Pen, link: "create-restaurant/" },
+    { name: "Restaurant List", icon: List, link: "restaurant-list/" },
   ];
 
   const { ownerInfo } = useRestaurantInfo();
