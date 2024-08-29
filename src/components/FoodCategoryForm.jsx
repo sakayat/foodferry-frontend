@@ -22,9 +22,6 @@ const FoodCategoryForm = () => {
     formData.append("slug", categoryName.toLowerCase().split(" ").join("-"));
     formData.append("image", categoryImage);
 
-    console.log(categoryName);
-    
-
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-category/`,
       {
@@ -35,9 +32,7 @@ const FoodCategoryForm = () => {
         body: formData,
       }
     );
-    const data = await res.json();
-    console.log(data);
-
+    const data = await res.json()
     setError(data);
   };
 
@@ -59,7 +54,6 @@ const FoodCategoryForm = () => {
             placeholder="Category name"
           />
         </div>
-
         <div className="form-control space-y-2">
           <label htmlFor="" className="text-md font-semibold">
             Category Image
