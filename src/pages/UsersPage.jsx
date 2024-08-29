@@ -1,27 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Edit, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useUsersStore } from "../lib/store/zustandStore";
 
 const UsersPage = () => {
-  const token = localStorage.getItem("authToken");
-
-  const [users, setUsers] = useState([]);
+  const { users, fetchUsers } = useUsersStore();
 
   useEffect(() => {
     fetchUsers();
   }, []);
-
-  const fetchUsers = async (e) => {
-    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/users/`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    });
-    const data = await res.json();
-    setUsers(data);
-  };
 
   return (
     <div className="max-w-6xl mx-auto px-8 py-5">
