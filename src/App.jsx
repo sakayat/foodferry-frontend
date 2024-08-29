@@ -23,6 +23,7 @@ import UsersPage from "./pages/UsersPage";
 import UpdateUserRolePage from "./pages/UpdateUserRolePage";
 import CreateRestaurantPage from "./pages/CreateRestaurantPage";
 import RestaurantListPage from "./pages/RestaurantListPage";
+import AddCategoryPage from "./pages/AddCategoryPage";
 
 function App() {
   return (
@@ -111,6 +112,7 @@ function App() {
           />
           <Route path="create-restaurant/" element={<CreateRestaurantPage />} />
           <Route path="restaurant-list/" element={<RestaurantListPage />} />
+          <Route path="food-category/" element={<AddCategoryPage />} />
         </Route>
       </Routes>
     </>

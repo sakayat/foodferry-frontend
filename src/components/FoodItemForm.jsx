@@ -5,7 +5,6 @@ import { useRestaurantInfo } from "../lib/store/zustandStore";
 const FoodItemForm = ({ categories, foodTags, id }) => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
-  const { ownerInfo } = useRestaurantInfo();
 
   const [foodName, setFoodName] = useState("");
   const [description, setDescription] = useState("");
@@ -160,7 +159,6 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
             type="file"
             accept="image/*"
             className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
-            placeholder="food price"
             onChange={handleImageUpload}
           />
         </div>

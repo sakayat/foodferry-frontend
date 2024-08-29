@@ -8,9 +8,6 @@ const AddFoodItemPage = () => {
 
   const { foodTags, fetchFoodTags } = useFoodTags();
 
-  console.log(foodTags);
-  
-
   useEffect(() => {
     fetchFoodCategories();
     fetchFoodTags();

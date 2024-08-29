@@ -187,3 +187,20 @@ export const useRestaurantListStore = create((set, get) => ({
     set({ restaurants: data });
   },
 }));
+
+export const useFoodCategoriesStore = create((set, get) => ({
+  token: localStorage.getItem("authToken"),
+  categories: [],
+  fetchCategories: async () => {
+    const { token } = get();
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-categories/`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    });
+    const data = await res.json();
+    set({ categories: data });
+  },
+}));
