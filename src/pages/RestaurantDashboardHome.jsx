@@ -36,11 +36,6 @@ const RestaurantDashboardHome = () => {
           </p>
         </div>
       </div>
-      <div className="flex justify-end">
-        <Link to="update-restaurant-info/" className="py-3 px-6 ">
-          <button className="default-btn py-3 px-6">Update Info</button>
-        </Link>
-      </div>
     </div>
   );
 };

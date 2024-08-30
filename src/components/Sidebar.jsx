@@ -7,7 +7,7 @@ const Sidebar = ({ activeItem, setActiveItem }) => {
   const menuItems = [
     { name: "Dashboard", icon: Home, link: "/restaurant/dashboard/" },
     { name: "Add Food Item", icon: PlusCircle, link: "add-food-item/" },
-    { name: "Update Restaurant Info", icon: Info },
+    { name: "Update Restaurant Info", icon: Info, link: "update-restaurant-info/" },
     { name: "All Food Items", icon: List, link: "food-items/" },
   ];
 
