@@ -84,7 +84,7 @@ const FoodDetailsPage = () => {
             <img
               src={`${import.meta.env.VITE_API_BASE_URL}/${foodItem?.image}`}
               alt=""
-              className="w-full h-full"
+              className="w-full h-full rounded-xl"
             />
           </div>
           <div className="flex flex-col gap-5">

@@ -14,7 +14,7 @@ const PopularFoodItem = () => {
     <div className="pt-14 relative">
       <div className="xl:container m-auto px-8">
         <SectionTitle
-          title={"Most popular local restaurants"}
+          title={"Most popular"}
           sliderId="popular"
           tag="popular"
         />

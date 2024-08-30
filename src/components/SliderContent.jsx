@@ -58,7 +58,7 @@ const SliderContent = ({ data, tag_name, sliderId }) => {
               <img
                 src={`${import.meta.env.VITE_API_BASE_URL}/${food.image}`}
                 alt={food.name}
-                className="h-48 w-full object-cover transform group-hover:scale-110 transition duration-500 ease-in-out rounded-xl"
+                className="h-44 w-full object-cover transform group-hover:scale-110 transition duration-500 ease-in-out rounded-xl"
               />
               <h4 className="font-bold">{food.name}</h4>
               <span className="price">{currencyFormat(food.price)}</span>

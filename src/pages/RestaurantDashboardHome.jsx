@@ -1,24 +1,27 @@
 import { MapPin, Phone } from "lucide-react";
 import { useRestaurantInfo } from "../lib/store/zustandStore";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const RestaurantDashboardHome = () => {
-  const { ownerInfo } = useRestaurantInfo();
+
+  useEffect(() => {
+    fetchRestaurantInfo();
+  }, []);
+
+  const { ownerInfo, fetchRestaurantInfo } = useRestaurantInfo();
 
   return (
     <div className="py-5 px-8 bg-[#dde6ce] shadow">
-      <div className="relative">
+      <div className="relative flex items-center gap-5">
         <img
           src={`${import.meta.env.VITE_API_BASE_URL}/${ownerInfo.cover_image}`}
           alt=""
-          className="h-64 w-full rounded"
+          className="h-48 w-48 rounded-xl"
         />
-
-        <div className="bg-black/40 absolute top-0 w-full h-full">
-          <h1 className="text-8xl font-bold uppercase text-white">
-            {ownerInfo.name}
-          </h1>
-        </div>
+        <h1 className="text-8xl font-bold uppercase text-black">
+          {ownerInfo.name}
+        </h1>
       </div>
       <div className="max-w-3xl space-y-3 py-5">
         <h2 className="text-3xl">Restaurant Information</h2>

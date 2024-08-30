@@ -11,7 +11,13 @@ const UpdateRestaurantInfo = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [coverImage, setCoverImage] = useState("");
 
-  const { ownerInfo } = useRestaurantInfo();
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    fetchRestaurantInfo();
+  }, []);
+
+  const { ownerInfo, fetchRestaurantInfo } = useRestaurantInfo();
 
   useEffect(() => {
     if (ownerInfo) {
@@ -30,12 +36,12 @@ const UpdateRestaurantInfo = () => {
   const handleUpdateInfo = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData()
+    const formData = new FormData();
 
-    formData.append("name", name)
-    formData.append("address", address)
-    formData.append("phone_number", phoneNumber)
-    formData.append("cover_image", coverImage)
+    formData.append("name", name);
+    formData.append("address", address);
+    formData.append("phone_number", phoneNumber);
+    formData.append("cover_image", coverImage);
 
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/update/`,
@@ -47,6 +53,10 @@ const UpdateRestaurantInfo = () => {
         body: formData,
       }
     );
+
+    const data = await res.json();
+
+    setError(data);
 
     if (res.ok) {
       return navigate("/restaurant/dashboard/");
@@ -108,6 +118,14 @@ const UpdateRestaurantInfo = () => {
             onChange={handleImageUpload}
           />
         </div>
+        {error && (
+          <p className="text-rose-500 py-3">
+            {error.name ||
+              error.address ||
+              error.phone_number ||
+              error.cover_image}
+          </p>
+        )}
         <button className="default-btn py-3.5 w-full">Submit</button>
       </form>
     </div>

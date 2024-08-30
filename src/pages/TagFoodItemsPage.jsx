@@ -21,7 +21,7 @@ const TagFoodItemsPage = ({ tag }) => {
               <img
                 src={`${import.meta.env.VITE_API_BASE_URL}/${food.image}`}
                 alt=""
-                className="h-32 w-full object-cover"
+                className="h-44 w-full object-cover rounded-xl"
               />
               <h4 className="font-bold capitalize">{food.name}</h4>
               <span className="price">{currencyFormat(food.price)}</span>
