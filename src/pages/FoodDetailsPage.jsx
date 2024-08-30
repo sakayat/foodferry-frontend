@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import { ChevronRight, Minus, Plus } from "lucide-react";
 import { useCartStore } from "../lib/store/zustandStore";
+import Feedback from "../components/Feedback";
 
 const FoodDetailsPage = () => {
   const token = localStorage.getItem("authToken");
@@ -92,7 +93,7 @@ const FoodDetailsPage = () => {
               {foodItem?.name}
             </h2>
             <p className="text-xl leading-6 lowercase">{foodItem?.description}</p>
-            <span className="font-bold">{currencyFormat(foodItem?.price)} USD</span>
+            <span className="font-bold">{currencyFormat(foodItem?.price)}</span>
             <span>Quantity</span>
             <form action="" className="space-y-5" onSubmit={handleAddToCart}>
               <div className="flex items-center justify-between gap-2 border border-black p-2 w-24 md:w-36">
@@ -129,6 +130,7 @@ const FoodDetailsPage = () => {
             </form>
           </div>
         </div>
+        <Feedback slug={slug}/>
       </div>
     </div>
   );

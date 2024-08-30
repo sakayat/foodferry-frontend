@@ -48,14 +48,14 @@ const SliderContent = ({ data, tag_name, sliderId }) => {
       }}
     >
       {data
-        ?.filter((item) => item.tags.find((tag) => tag.name == tag_name))
+        ?.filter((item) => item.food_tag == tag_name)
         ?.map((food) => (
           <SwiperSlide key={food.id}>
-            <Link to={`food/${food.slug}`} className="space-y-2 h-64">
+            <Link to={`food/${food.slug}`} className="space-y-2 h-64 group">
               <img
                 src={`${import.meta.env.VITE_API_BASE_URL}/${food.image}`}
                 alt={food.name}
-                className="rounded h-40 w-full"
+                className="h-48 w-full object-cover transform group-hover:scale-110 transition duration-500 ease-in-out"
               />
               <h4 className="font-bold">{food.name}</h4>
               <span className="price">{currencyFormat(food.price)}</span>

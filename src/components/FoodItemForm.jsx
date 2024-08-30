@@ -62,6 +62,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
     const formData = new FormData();
 
     formData.append("name", foodName);
+    formData.append("slug", foodName.toLowerCase().split(" ").join("-"))
     formData.append("description", description);
     formData.append("price", price);
     formData.append("image", foodImage);

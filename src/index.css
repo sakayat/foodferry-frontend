@@ -154,7 +154,9 @@ input[type="password"]::-ms-clear {
   background: #dde6ce;
 }
 
-
+.slick-dots li button:before{
+  font-size: 10px;
+}
 .slick-slide {
   padding: 0 10px; 
 }
@@ -187,3 +189,4 @@ input[type="password"]::-ms-clear {
   align-items: center;
   gap: 1rem;
 }
+

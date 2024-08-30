@@ -65,7 +65,7 @@ const FoodCategories = () => {
         <div className="py-3">
           <h1 className="text-4xl font-semibold">Food categories</h1>
         </div>
-        <div className="">
+        <div className="h-52">
           <Slider {...settings}>
             {data?.map((category) => (
               <Link to={category.slug} className="categories" key={category.id}>

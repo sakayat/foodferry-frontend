@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useFoodCategories, useFoodTags } from "../lib/store/zustandStore";
+import { useFoodCategories, useFoodTagStore } from "../lib/store/zustandStore";
 import FoodItemForm from "../components/FoodItemForm";
 
 const AddFoodItemPage = () => {
-  const { categories, fetchFoodCategories } = useFoodCategories();
-
-  const { foodTags, fetchFoodTags } = useFoodTags();
-
   useEffect(() => {
     fetchFoodCategories();
-    fetchFoodTags();
+    fetchTags();
   }, []);
+
+  const { categories, fetchFoodCategories } = useFoodCategories();
+
+  const { tags, fetchTags } = useFoodTagStore();
+
 
   return (
     <div className="max-w-6xl mx-auto px-8 py-5">
-      
-      <FoodItemForm categories={categories} foodTags={foodTags} />
+      <FoodItemForm categories={categories} foodTags={tags} />
     </div>
   );
 };
