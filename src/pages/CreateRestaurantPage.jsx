@@ -48,6 +48,9 @@ const CreateRestaurantPage = () => {
       return navigate("/admin/dashboard/restaurant-list/");
     }
     const data = await res.json();
+
+    console.log(data);
+
     setError(data);
   };
 
@@ -129,7 +132,8 @@ const CreateRestaurantPage = () => {
               error.address ||
               error.phone_number ||
               error.is_approved ||
-              error.owner}
+              error.owner ||
+              error.slug}
           </p>
         )}
         <button type="submit" className="default-btn py-3.5 w-full">

@@ -8,7 +8,7 @@ const RestaurantDashboardLayout = () => {
   
   return (
     <div className="dashboard">
-      <div className="flex">
+      <div className="grid grid-cols-1 gap-5 lg:flex lg:gap-0 ">
         <Sidebar activeItem={activeItem} setActiveItem={setActiveItem} />
         <main className="w-full">
           <Outlet />

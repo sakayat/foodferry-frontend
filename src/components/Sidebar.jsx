@@ -14,7 +14,7 @@ const Sidebar = ({ activeItem, setActiveItem }) => {
   const { ownerInfo } = useRestaurantInfo();
 
   return (
-    <div className="w-96 bg-gray-100 h-screen p-4">
+    <div className="w-full lg:w-96 bg-gray-100 lg:h-screen p-4">
       <h2 className="text-2xl font-bold mb-4">{ownerInfo.name}</h2>
       <ul className="flex flex-col gap-5 text-sm">
         {menuItems.map((item, i) => (

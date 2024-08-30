@@ -13,13 +13,13 @@ const RestaurantDashboardHome = () => {
 
   return (
     <div className="py-5 px-8 bg-[#dde6ce] shadow">
-      <div className="relative flex items-center gap-5">
+      <div className="relative flex flex-col gap-5">
         <img
           src={`${import.meta.env.VITE_API_BASE_URL}/${ownerInfo.cover_image}`}
           alt=""
-          className="h-48 w-48 rounded-xl"
+          className="lg:h-48 w-24 lg:w-48 rounded-xl"
         />
-        <h1 className="text-8xl font-bold uppercase text-black">
+        <h1 className="text-3xl md:text-6xl lg:text-8xl font-bold  uppercase text-black">
           {ownerInfo.name}
         </h1>
       </div>
