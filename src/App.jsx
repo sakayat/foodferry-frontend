@@ -28,6 +28,7 @@ import CategoryListPage from "./pages/CategoryListPage";
 import AddFoodTagPage from "./pages/AddFoodTagPage";
 import FoodTagListPage from "./pages/FoodTagListPage";
 import FoodItem from "./components/FoodItem";
+import CategoryFoodPage from "./pages/CategoryFoodPage";
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
         <Route path="sign-in/" element={<SignInPage />} />
         <Route path="unauthorized/" element={<UnauthorizedPage />} />
         <Route path="/:tag/" element={<FoodItem />} />
-        
+        <Route path="category/:slug/" element={<CategoryFoodPage />} />
         <Route
           path="profile/"
           element={
