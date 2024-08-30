@@ -68,7 +68,7 @@ const FoodCategories = () => {
         <div className="h-52">
           <Slider {...settings}>
             {data?.map((category) => (
-              <Link to={category.slug} className="categories" key={category.id}>
+              <Link to={`category/${category.slug}/`} className="categories" key={category.id}>
                 <div className="category-info hover:scale-100">
                   <img
                     src={`${import.meta.env.VITE_API_BASE_URL}/${

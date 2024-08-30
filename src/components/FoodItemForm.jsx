@@ -174,7 +174,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">Select Category</option>
-            {categories.map((category) => (
+            {categories?.map((category) => (
               <option value={category.id} key={category.id}>
                 {category.name}
               </option>
@@ -191,7 +191,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
             onChange={(e) => setFoodTag(e.target.value)}
           >
             <option value="">Select Tag</option>
-            {foodTags.map((tag) => (
+            {foodTags?.map((tag) => (
               <option value={tag.id} key={tag.id}>
                 {tag.name}
               </option>

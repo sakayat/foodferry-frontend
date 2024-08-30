@@ -27,7 +27,7 @@ import AddCategoryPage from "./pages/AddCategoryPage";
 import CategoryListPage from "./pages/CategoryListPage";
 import AddFoodTagPage from "./pages/AddFoodTagPage";
 import FoodTagListPage from "./pages/FoodTagListPage";
-import QuickFoodItem from "./components/QuickFoodItem";
+import FoodItem from "./components/FoodItem";
 
 function App() {
   return (
@@ -39,7 +39,8 @@ function App() {
         <Route path="sign-up/" element={<SignUpPage />} />
         <Route path="sign-in/" element={<SignInPage />} />
         <Route path="unauthorized/" element={<UnauthorizedPage />} />
-        <Route path="/:tag/" element={<QuickFoodItem />} />
+        <Route path="/:tag/" element={<FoodItem />} />
+        
         <Route
           path="profile/"
           element={

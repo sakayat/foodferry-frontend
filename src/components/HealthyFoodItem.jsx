@@ -3,8 +3,7 @@ import SectionTitle from "./SectionTitle";
 import SliderContent from "./SliderContent";
 import { useFoodItemsStore } from "../lib/store/zustandStore";
 
-const HomeChefsFoodItem = () => {
-
+const HealthyFoodItem = () => {
   useEffect(() => {
     fetchFoodItems();
   }, []);
@@ -14,11 +13,15 @@ const HomeChefsFoodItem = () => {
   return (
     <div className="pt-14 relative">
       <div className="xl:container m-auto px-8">
-        <SectionTitle title={"HomeChefs"} sliderId="homechefs" tag="homechefs" />
-        <SliderContent data={data} tag_name="homechefs" sliderId="homechefs" />
+        <SectionTitle
+          title={"Healthy food to explore"}
+          sliderId="healthy"
+          tag="healthy-food-to-explore"
+        />
+        <SliderContent data={data} tag_name="healthy-food-to-explore" sliderId="healthy" />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomeChefsFoodItem
+export default HealthyFoodItem;
