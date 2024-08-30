@@ -31,7 +31,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
       setPrice(foodItem.price || "");
       setCategory(foodItem.category || "");
       setFoodTag(foodItem.tags || "");
-      setIsAvailable(foodItem.is_available || "")
+      setIsAvailable(foodItem.is_available || "");
     }
   }, [foodItem]);
 
@@ -62,7 +62,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
     const formData = new FormData();
 
     formData.append("name", foodName);
-    formData.append("slug", foodName.toLowerCase().split(" ").join("-"))
+    formData.append("slug", foodName.toLowerCase().split(" ").join("-"));
     formData.append("description", description);
     formData.append("price", price);
     formData.append("image", foodImage);
@@ -103,6 +103,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
         return navigate("/restaurant/dashboard/food-items/");
       }
       const data = await res.json();
+
       setError(data);
     }
   };
@@ -214,7 +215,8 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
               error.description ||
               error.price ||
               error.category ||
-              error.tags}
+              error.tags ||
+              error.slug}
           </p>
         )}
         <button type="submit" className="default-btn py-3.5 w-full">

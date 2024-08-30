@@ -56,7 +56,6 @@ const Feedback = ({ slug }) => {
       return navigate("/sign-in/");
     }
 
-    const data = await res.json();
     fetchFeedbackList();
   };
 

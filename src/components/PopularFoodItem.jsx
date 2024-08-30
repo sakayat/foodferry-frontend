@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import SectionTitle from "./SectionTitle";
 import SliderContent from "./SliderContent";
 import { useFoodItemsStore } from "../lib/store/zustandStore";
 
-const FeaturedItems = () => {
+const PopularFoodItem = () => {
   useEffect(() => {
     fetchFoodItems();
   }, []);
@@ -14,18 +14,14 @@ const FeaturedItems = () => {
     <div className="pt-14 relative">
       <div className="xl:container m-auto px-8">
         <SectionTitle
-          title={"Quick and affordable"}
-          sliderId="quick-and-affordable"
-          tag="quick-and-affordable"
+          title={"Most popular local restaurants"}
+          sliderId="popular"
+          tag="popular"
         />
-        <SliderContent
-          data={data}
-          tag_name="quick-and-affordable"
-          sliderId="quick-and-affordable"
-        />
+        <SliderContent data={data} tag_name="popular" sliderId="popular" />
       </div>
     </div>
   );
 };
 
-export default FeaturedItems;
+export default PopularFoodItem;
