@@ -74,11 +74,11 @@ const FoodCategories = () => {
                     src={`${import.meta.env.VITE_API_BASE_URL}/${
                       category.image
                     }`}
-                    className="h-36 w-full"
+                    className="h-36 w-full rounded-xl"
                     alt=""
                   />
                 </div>
-                <span className="text-xl font-bold">{category.name}</span>
+                <span className="text-md font-bold">{category.name}</span>
               </Link>
             ))}
           </Slider>
