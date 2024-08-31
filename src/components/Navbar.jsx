@@ -1,17 +1,39 @@
-import { Menu, ShoppingBag, ShoppingCart, X } from "lucide-react";
+import {
+  List,
+  LogOut,
+  Menu,
+  ShoppingBag,
+  ShoppingCart,
+  Store,
+  User2Icon,
+  UserCircle,
+  X,
+} from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MenuCartItem from "./MenuCartItem";
 import MobileNav from "./MobileNav";
-import { useCartItemStore, useCartStore } from "../lib/store/zustandStore.jsx";
+import {
+  useCartItemStore,
+  useCartStore,
+  useProfileStore,
+} from "../lib/store/zustandStore.jsx";
 
 const Navbar = () => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
 
+  const { user } = useProfileStore();
+
+  console.log(user);
+
   const menuRef = useRef();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const dropdownRef = useRef(null);
 
   const { isCartOpen, setIsCartOpen } = useCartStore();
 
@@ -21,7 +43,7 @@ const Navbar = () => {
     }
   };
 
-  const { cartItems, clearCart, fetchCartList } = useCartItemStore();  
+  const { cartItems, clearCart, fetchCartList } = useCartItemStore();
 
   useEffect(() => {
     fetchCartList();
@@ -30,6 +52,19 @@ const Navbar = () => {
       document.removeEventListener("click", closeMenu);
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const closeDropDown = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("click", closeDropDown);
+
+    return () => {
+      document.removeEventListener("click", closeDropDown);
+    };
+  }, [isOpen]);
 
   const handleLogout = async () => {
     const res = await fetch(
@@ -45,7 +80,7 @@ const Navbar = () => {
 
     if (res.ok) {
       localStorage.removeItem("authToken");
-      clearCart()
+      clearCart();
       return navigate("sign-in/");
     }
   };
@@ -78,7 +113,9 @@ const Navbar = () => {
                 <span className="bg-[#286140] text-white p-2.5 rounded-full">
                   <ShoppingBag size={18} />
                 </span>
-                <Link to={"restaurant-list/"} className="font-bold px-4">Restaurant</Link>
+                <Link to={"restaurant-list/"} className="font-bold px-4">
+                  Restaurant
+                </Link>
               </Link>
             </li>
             <div className="relative">
@@ -93,17 +130,61 @@ const Navbar = () => {
               </span>
             </div>
             {token ? (
-              <>
-                <li>
-                  <Link to="profile/">Profile</Link>
-                </li>
-                <li>
-                  <Link to="order-history/">Orders</Link>
-                </li>
-                <li>
-                  <button onClick={() => handleLogout()}>LogOut</button>
-                </li>
-              </>
+              <div ref={dropdownRef}>
+                <button
+                  className="border w-12 h-12 rounded-full flex justify-center items-center"
+                  onClick={() => setIsOpen(!isOpen)}
+                >
+                  {user ? (
+                    <img
+                      src={`${import.meta.env.VITE_API_BASE_URL}/${
+                        user.profile_image
+                      }/`}
+                      alt=""
+                      className="w-12 h-12 rounded-full"
+                    />
+                  ) : (
+                    <User2Icon />
+                  )}
+                </button>
+                {isOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-[#286140] text-white rounded overflow-hidden shadow z-10">
+                    <div className="p-3 border-b font-medium text-md">
+                      <span className="">{user.username}</span>
+                    </div>
+                    <div className="py-2 border-b">
+                      <Link
+                        to="profile/"
+                        className="px-4 py-2 text-sm flex items-center"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <UserCircle size={18} className="mr-2" />
+                        <span>Profile</span>
+                      </Link>
+                    </div>
+                    <div className="py-2 border-b">
+                      <Link
+                        to="order-history/"
+                        className="px-4 py-2 text-sm flex items-center"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <List size={18} className="mr-2" />
+                        <span>Orders</span>
+                      </Link>
+                    </div>
+                    <div className="py-2">
+                      <button
+                        onClick={() => handleLogout()}
+                        className="px-4 py-2 text-sm flex items-center"
+                      >
+                        {" "}
+                        <LogOut size={18} className="mr-2" />{" "}
+                        <span>LogOut</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             ) : (
               <li>
                 <Link to="sign-in/">Sign In</Link>
