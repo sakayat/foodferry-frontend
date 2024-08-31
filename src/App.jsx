@@ -30,6 +30,7 @@ import FoodTagListPage from "./pages/FoodTagListPage";
 import FoodItem from "./components/FoodItem";
 import CategoryFoodPage from "./pages/CategoryFoodPage";
 import AllRestaurants from "./pages/AllRestaurants";
+import RestaurantFoodPage from "./pages/RestaurantFoodPage";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/:tag/" element={<FoodItem />} />
         <Route path="category/:slug/" element={<CategoryFoodPage />} />
         <Route path="all-restaurants/" element={<AllRestaurants />} />
+        <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />
         <Route
           path="profile/"
           element={
