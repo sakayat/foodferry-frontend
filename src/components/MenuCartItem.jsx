@@ -36,7 +36,7 @@ const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
         <div className="cart-footer border rounded py-3 px-4 space-y-5">
           <div className="cart-order-summary text-center space-x-4">
             <span>Subtotal:</span>
-            <span className="font-semibold">{currencyFormat(cartItems.total_price)}</span>
+            <span className="font-semibold">{currencyFormat(cartItems.total_price || 0)}</span>
           </div>
           <Link
             to="view-cart/"

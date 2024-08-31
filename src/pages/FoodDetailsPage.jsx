@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import { ChevronRight, Minus, Plus } from "lucide-react";
 import { useCartStore } from "../lib/store/zustandStore";
@@ -7,6 +7,7 @@ import Feedback from "../components/Feedback";
 
 const FoodDetailsPage = () => {
   const token = localStorage.getItem("authToken");
+  const navigate = useNavigate()
 
   const { isCartOpen, setIsCartOpen } = useCartStore();
 
@@ -46,7 +47,9 @@ const FoodDetailsPage = () => {
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
-
+    if(!token){
+      return navigate("/sign-in/")
+    }
     await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/cart/add-to-cart/${slug}/`,
       {
@@ -58,6 +61,7 @@ const FoodDetailsPage = () => {
         body: JSON.stringify({ quantity }),
       }
     );
+
     setIsCartOpen(!isCartOpen);
   };
 
