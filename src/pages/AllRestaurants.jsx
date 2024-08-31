@@ -7,7 +7,7 @@ const AllRestaurants = () => {
     fetchRestaurants();
   }, []);
 
-  const { restaurants, fetchRestaurants } = useRestaurantListStore();
+  const { restaurants, fetchRestaurants } = useRestaurantListStore();  
 
   return (
     <div className="py-5">

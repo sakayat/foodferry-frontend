@@ -78,7 +78,7 @@ const Navbar = () => {
                 <span className="bg-[#286140] text-white p-2.5 rounded-full">
                   <ShoppingBag size={18} />
                 </span>
-                <span className="font-bold px-4">Restaurant</span>
+                <Link to={"restaurant-list/"} className="font-bold px-4">Restaurant</Link>
               </Link>
             </li>
             <div className="relative">

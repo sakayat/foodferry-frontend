@@ -44,7 +44,7 @@ function App() {
         <Route path="unauthorized/" element={<UnauthorizedPage />} />
         <Route path="/:tag/" element={<FoodItem />} />
         <Route path="category/:slug/" element={<CategoryFoodPage />} />
-        <Route path="all-restaurants/" element={<AllRestaurants />} />
+        <Route path="restaurant-list/" element={<AllRestaurants />} />
         <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />
         <Route
           path="profile/"
