@@ -58,7 +58,7 @@ const ViewCartPage = () => {
           <div className="flex items-center gap-5 py-3">
             <h4 className="text-xl">Subtotal</h4>
             <span className="font-bold">
-              {currencyFormat(cartItems.total_price)}
+              {currencyFormat(cartItems.total_price || 0)}
             </span>
           </div>
           <Link

@@ -49,11 +49,11 @@ const CheckoutPage = () => {
                 ))}
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span>{currencyFormat(cartItems?.total_price)}</span>
+                  <span>{currencyFormat(cartItems?.total_price || 0)}</span>
                 </div>
                 <div className="text-2xl font-bold flex justify-between">
                   <span>Total</span>
-                  <span>{currencyFormat(cartItems?.total_price)}</span>
+                  <span>{currencyFormat(cartItems?.total_price || 0)}</span>
                 </div>
               </div>
             </div>
