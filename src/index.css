@@ -190,3 +190,8 @@ input[type="password"]::-ms-clear {
   gap: 1rem;
 }
 
+@media screen and (max-width: 480px){
+  ul.slick-dots {
+    margin: -25px 0;
+  }
+}
