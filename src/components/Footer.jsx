@@ -8,7 +8,9 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-5xl font-bold mb-4">DotEats</h3>
+            <h3 className="text-5xl font-bold mb-4">
+              <Link to="/">DotEats</Link>
+            </h3>
             <p className="text-lg">
               Delivering delicious meals to your doorstep.
             </p>
@@ -27,14 +29,14 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
-                  How It Works
-                </a>
+                <Link to="about/" className="hover:text-gray-300">
+                  About
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
-                  FAQs
-                </a>
+                <Link to="contact/" className="hover:text-gray-300">
+                  Contact
+                </Link>
               </li>
             </ul>
           </div>

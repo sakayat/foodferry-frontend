@@ -32,6 +32,7 @@ import CategoryFoodPage from "./pages/CategoryFoodPage";
 import AllRestaurants from "./pages/AllRestaurants";
 import RestaurantFoodPage from "./pages/RestaurantFoodPage";
 import Footer from "./components/Footer";
+import AboutUsPage from "./pages/AboutUsPage";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path="category/:slug/" element={<CategoryFoodPage />} />
         <Route path="restaurant-list/" element={<AllRestaurants />} />
         <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />
+        <Route path="about/" element={<AboutUsPage />} />
         <Route
           path="profile/"
           element={
