@@ -42,13 +42,27 @@ const MobileNav = ({ setIsCartOpen, setIsMenuOpen, menuRef }) => {
           </button>
         </li>
         <li className="py-3 border-b">
-          <Link to="/" onClick={() => setIsCartOpen((prev) => !prev)}>Home</Link>
+          <Link to="/" onClick={() => setIsCartOpen((prev) => !prev)}>
+            Home
+          </Link>
         </li>
         <li className="py-3 border-b">
           <Link to="/" className="flex items-center rounded-full">
             Store
           </Link>
         </li>
+
+        {token && (
+          <li className="py-3 border-b">
+            <Link
+              to="order-history/"
+              className="flex items-center gap-3"
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+            >
+              Orders
+            </Link>
+          </li>
+        )}
         <div className="flex justify-between items-center py-3 border-b">
           <Link
             to="view-cart/"
@@ -61,6 +75,7 @@ const MobileNav = ({ setIsCartOpen, setIsMenuOpen, menuRef }) => {
             {cartItems?.total_quantity || 0}
           </span>
         </div>
+
         <div className="absolute bottom-0 inset-x-0 w-full bg-[#286140] text-white px-3">
           {token ? (
             <div className="flex justify-between py-3">

@@ -8,7 +8,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import OrderHistoryPage from "./pages/OrderHistoryPage";
 import ProfilePage from "./pages/ProfilePage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
-import SignUpPage from "./pages/SignupPage";
+import SignUpPage from "./pages/SignUpPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AddFoodItemPage from "./pages/AddFoodItemPage";
 import RestaurantDashboardLayout from "./components/RestaurantDashboardLayout";
