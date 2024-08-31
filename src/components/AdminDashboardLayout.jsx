@@ -7,7 +7,7 @@ const AdminDashboardLayout = () => {
 
   return (
     <div className="dashboard">
-      <div className="flex">
+      <div className="flex flex-col lg:flex-row">
         <AdminDashboardSidebar
           activeItem={activeItem}
           setActiveItem={setActiveItem}
