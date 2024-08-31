@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-            <p className="text-sm">123 Food Street, Tasty City, FC 12345</p>
+            <p className="text-sm">Asfia Tower, House - 76 Rd No. 11, Dhaka 1213</p>
             <p className="text-sm">Phone: (555) 123-4567</p>
             <p className="text-sm">Email: info@doteats.com</p>
           </div>

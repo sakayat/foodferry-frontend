@@ -6,7 +6,7 @@ const SectionTitle = ({ title, sliderId, tag }) => {
   return (
     <div className="py-5 flex justify-between items-center relative">
       <h1 className="text-2xl md:text-4xl font-semibold">{title}</h1>
-      <div className="buttons flex items-center gap-5">
+      <div className="buttons flex flex-col md:flex-row items-center gap-5">
         <Link to={`${tag}/`} className="font-bold">
           See all
         </Link>
