@@ -8,7 +8,7 @@ const QuantityButton = ({
   setQuantity,
 }) => {
   return (
-    <div className="flex items-center justify-between gap-2 border border-black p-2 w-24 md:w-36">
+    <div className="flex items-center justify-between gap-2 border border-black p-2 w-32">
       <div className="text-2xl cursor-pointer" onClick={handleChangeMinusValue}>
         <div
           className="w-6 text-2xl cursor-pointer"

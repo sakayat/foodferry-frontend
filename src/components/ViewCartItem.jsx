@@ -40,7 +40,7 @@ const ViewCartItem = ({ item, fetchCartList }) => {
   };
 
   return (
-    <div className="cart-item grid grid-cols-12 gap-12 md:gap-0 py-5">
+    <div className="cart-item md:grid grid-cols-12 gap-12 md:gap-0 py-5">
       <div className="col-span-4 md:col-span-6">
         <div className="flex items-center gap-5">
           <img
@@ -50,19 +50,28 @@ const ViewCartItem = ({ item, fetchCartList }) => {
             alt=""
             className="w-20 h-20 hidden md:flex"
           />
-          <div className="space-y-3">
-            <h4>{item.food_item_name}</h4>
-            <span>{item.food_item_price}</span>
+          <div className="space-y-3 w-full">
+            <div className="flex items-center gap-5">
+              <span className="block md:hidden">Product Name:</span>
+              <h4>{item.food_item_name}</h4>
+            </div>
+            <div className="flex items-center gap-5">
+              <span className="block md:hidden">Product Price:</span>
+              <span>{currencyFormat(item.food_item_price)}</span>
+            </div>
           </div>
         </div>
       </div>
       <div className="col-span-4 md:col-span-3">
-        <QuantityButton
-          handleChangePlusValue={handleChangePlusValue}
-          handleChangeMinusValue={handleChangeMinusValue}
-          quantity={quantity}
-          setQuantity={setQuantity}
-        />
+        <div className="flex items-center gap-5 my-5 md:my-0">
+          <span className="block md:hidden">Quantity:</span>
+          <QuantityButton
+            handleChangePlusValue={handleChangePlusValue}
+            handleChangeMinusValue={handleChangeMinusValue}
+            quantity={quantity}
+            setQuantity={setQuantity}
+          />
+        </div>
       </div>
       <div className="col-span-4 md:col-span-3">
         <span>{currencyFormat(item.total_price)}</span>

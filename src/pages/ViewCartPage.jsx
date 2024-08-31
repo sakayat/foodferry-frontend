@@ -33,7 +33,7 @@ const ViewCartPage = () => {
         <div className="mb-5">
           <h2 className="text-3xl text-center">Your Cart</h2>
         </div>
-        <div className="cart-title grid grid-cols-12 gap-12 md:gap-0 border-b py-3">
+        <div className="cart-title hidden md:grid grid-cols-12 gap-12 md:gap-0 border-b py-3">
           <div className="col-span-4 md:col-span-6">
             <span>Product Name</span>
           </div>
@@ -61,7 +61,10 @@ const ViewCartPage = () => {
               {currencyFormat(cartItems.total_price)}
             </span>
           </div>
-          <Link to="/checkout" className="default-btn py-3 px-6 w-full md:w-96 text-center">
+          <Link
+            to="/checkout"
+            className="default-btn py-3 px-6 w-full md:w-96 text-center"
+          >
             Check Out
           </Link>
         </div>
