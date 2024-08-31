@@ -12,6 +12,12 @@ const UpdateProfilePage = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [profileImage, setProfileImage] = useState("");
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    setProfileImage(file);
+  };
 
   useEffect(() => {
     if (user) {
@@ -23,22 +29,26 @@ const UpdateProfilePage = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    const obj = {
-      first_name: firstName,
-      last_name: lastName,
-      phone_number: phoneNumber,
-    };
+
+    const formData = new FormData();
+
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("phone_number", phoneNumber);
+    formData.append("profile_image", profileImage);
+
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
       {
         method: "PUT",
         headers: {
-          "Content-type": "application/json",
           Authorization: `Token ${token}`,
         },
-        body: JSON.stringify(obj),
+        body: formData,
       }
     );
+    const data = await res.json()
+        
     if (res.ok) {
       return navigate("/profile/");
     }
@@ -90,6 +100,17 @@ const UpdateProfilePage = () => {
                 placeholder="phone number"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
+              />
+            </div>
+            <div className="form-control space-y-2">
+              <label htmlFor="" className="text-md font-semibold">
+                Profile Image
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+                onChange={handleImageUpload}
               />
             </div>
             <button className="default-btn py-3">Submit</button>

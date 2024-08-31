@@ -46,9 +46,19 @@ const ProfilePage = () => {
           )}
         </div>
         <div className="max-w-2xl profile space-y-5">
-          <img src="/src/assets/images/profile.png" alt="" className="w-28" />
           <div className="border border-black/20 py-5 px-4">
             <div className="flex flex-col gap-2">
+              <img
+                src={`${import.meta.env.VITE_API_BASE_URL}/${
+                  user.profile_image
+                }/`}
+                alt=""
+                className="w-28 rounded-full"
+              />
+              <div>
+                <span className="uppercase font-bold">Username</span>
+                <div className="">{user?.username}</div>
+              </div>
               <div>
                 <span className="uppercase font-bold">Full Name</span>
                 <div>
