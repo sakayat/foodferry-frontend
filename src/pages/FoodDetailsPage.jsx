@@ -96,7 +96,7 @@ const FoodDetailsPage = () => {
             <span className="font-bold">{currencyFormat(foodItem?.price)}</span>
             <span>Quantity</span>
             <form action="" className="space-y-5" onSubmit={handleAddToCart}>
-              <div className="flex items-center justify-between gap-2 border border-black p-2 w-24 md:w-36">
+              <div className="flex items-center justify-between gap-2 border border-black p-2 w-32">
                 <div
                   className="text-2xl cursor-pointer"
                   onClick={handleChangeMinusValue}
