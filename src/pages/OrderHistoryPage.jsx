@@ -11,12 +11,7 @@ const OrderHistoryPage = () => {
 
   const { orderList, fetchOrderList } = useOrderStore();
 
-  console.log(orderList);
-  
-
   const [foodItem, setFoodItem] = useState();
-
-  console.log(foodItem);
 
   const [isOpen, setIsOpen] = useState(false);
 

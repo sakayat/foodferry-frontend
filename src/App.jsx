@@ -31,11 +31,13 @@ import FoodItem from "./components/FoodItem";
 import CategoryFoodPage from "./pages/CategoryFoodPage";
 import AllRestaurants from "./pages/AllRestaurants";
 import RestaurantFoodPage from "./pages/RestaurantFoodPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
       <Navbar />
+      <main className="min-h-screen">
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="food/:slug/" element={<FoodDetailsPage />} />
@@ -129,6 +131,8 @@ function App() {
           <Route path="tag-list/" element={<FoodTagListPage />} />
         </Route>
       </Routes>
+      </main>
+      <Footer />
     </>
   );
 }

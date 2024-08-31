@@ -15,8 +15,6 @@ const CheckoutFrom = () => {
 
   const [errors, setErrors] = useState(null);
 
-  console.log(errors);
-
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
