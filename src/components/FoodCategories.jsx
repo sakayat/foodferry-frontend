@@ -14,7 +14,7 @@ const FoodCategories = () => {
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 5,
-    initialSlide: 0,
+    initialSlide: 1,
 
     responsive: [
       {

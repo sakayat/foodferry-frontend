@@ -29,6 +29,7 @@ import AddFoodTagPage from "./pages/AddFoodTagPage";
 import FoodTagListPage from "./pages/FoodTagListPage";
 import FoodItem from "./components/FoodItem";
 import CategoryFoodPage from "./pages/CategoryFoodPage";
+import AllRestaurants from "./pages/AllRestaurants";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="unauthorized/" element={<UnauthorizedPage />} />
         <Route path="/:tag/" element={<FoodItem />} />
         <Route path="category/:slug/" element={<CategoryFoodPage />} />
+        <Route path="all-restaurants/" element={<AllRestaurants />} />
         <Route
           path="profile/"
           element={
