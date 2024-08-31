@@ -25,8 +25,6 @@ const Navbar = () => {
 
   const { user } = useProfileStore();
 
-  console.log(user);
-
   const menuRef = useRef();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -135,7 +133,7 @@ const Navbar = () => {
                   className="border w-12 h-12 rounded-full flex justify-center items-center"
                   onClick={() => setIsOpen(!isOpen)}
                 >
-                  {user ? (
+                  {user.profile_image ? (
                     <img
                       src={`${import.meta.env.VITE_API_BASE_URL}/${
                         user.profile_image
