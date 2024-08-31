@@ -33,106 +33,111 @@ import AllRestaurants from "./pages/AllRestaurants";
 import RestaurantFoodPage from "./pages/RestaurantFoodPage";
 import Footer from "./components/Footer";
 import AboutUsPage from "./pages/AboutUsPage";
+import ContactUsPage from "./pages/ContactUsPage";
 
 function App() {
   return (
     <>
       <Navbar />
       <main className="min-h-screen">
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="food/:slug/" element={<FoodDetailsPage />} />
-        <Route path="sign-up/" element={<SignUpPage />} />
-        <Route path="sign-in/" element={<SignInPage />} />
-        <Route path="unauthorized/" element={<UnauthorizedPage />} />
-        <Route path="/:tag/" element={<FoodItem />} />
-        <Route path="category/:slug/" element={<CategoryFoodPage />} />
-        <Route path="restaurant-list/" element={<AllRestaurants />} />
-        <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />
-        <Route path="about/" element={<AboutUsPage />} />
-        <Route
-          path="profile/"
-          element={
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="update-profile/"
-          element={
-            <ProtectedRoute>
-              <UpdateProfilePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="view-cart/"
-          element={
-            <ProtectedRoute>
-              <ViewCartPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="checkout/"
-          element={
-            <ProtectedRoute>
-              <CheckoutPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="order-history/"
-          element={
-            <ProtectedRoute>
-              <OrderHistoryPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="restaurant/dashboard/"
-          element={
-            <ProtectedRoute requiredRole={"restaurant_owner"}>
-              <RestaurantDashboardLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="" element={<RestaurantDashboardHome />} />
-          <Route path="add-food-item/" element={<AddFoodItemPage />} />
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="food/:slug/" element={<FoodDetailsPage />} />
+          <Route path="sign-up/" element={<SignUpPage />} />
+          <Route path="sign-in/" element={<SignInPage />} />
+          <Route path="unauthorized/" element={<UnauthorizedPage />} />
+          <Route path="/:tag/" element={<FoodItem />} />
+          <Route path="category/:slug/" element={<CategoryFoodPage />} />
+          <Route path="restaurant-list/" element={<AllRestaurants />} />
+          <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />
+          <Route path="about/" element={<AboutUsPage />} />
+          <Route path="contact/" element={<ContactUsPage />} />
           <Route
-            path="update-food-item/:id/"
-            element={<UpdateRestaurantFood />}
+            path="profile/"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
           />
           <Route
-            path="update-restaurant-info/"
-            element={<UpdateRestaurantInfo />}
+            path="update-profile/"
+            element={
+              <ProtectedRoute>
+                <UpdateProfilePage />
+              </ProtectedRoute>
+            }
           />
-          <Route path="food-items/" element={<FoodItemsPage />} />
-        </Route>
+          <Route
+            path="view-cart/"
+            element={
+              <ProtectedRoute>
+                <ViewCartPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="checkout/"
+            element={
+              <ProtectedRoute>
+                <CheckoutPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="order-history/"
+            element={
+              <ProtectedRoute>
+                <OrderHistoryPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="restaurant/dashboard/"
+            element={
+              <ProtectedRoute requiredRole={"restaurant_owner"}>
+                <RestaurantDashboardLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="" element={<RestaurantDashboardHome />} />
+            <Route path="add-food-item/" element={<AddFoodItemPage />} />
+            <Route
+              path="update-food-item/:id/"
+              element={<UpdateRestaurantFood />}
+            />
+            <Route
+              path="update-restaurant-info/"
+              element={<UpdateRestaurantInfo />}
+            />
+            <Route path="food-items/" element={<FoodItemsPage />} />
+          </Route>
 
-        <Route
-          path="admin/dashboard/"
-          element={
-            <ProtectedRoute requiredRole={"admin"}>
-              <AdminDashboardLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="" element={<AdminDashboardHome />} />
-          <Route path="users/" element={<UsersPage />} />
           <Route
-            path="users/update-role/:id/"
-            element={<UpdateUserRolePage />}
-          />
-          <Route path="create-restaurant/" element={<CreateRestaurantPage />} />
-          <Route path="restaurant-list/" element={<RestaurantListPage />} />
-          <Route path="food-category/" element={<AddCategoryPage />} />
-          <Route path="category-list/" element={<CategoryListPage />} />
-          <Route path="food-tag/" element={<AddFoodTagPage />} />
-          <Route path="tag-list/" element={<FoodTagListPage />} />
-        </Route>
-      </Routes>
+            path="admin/dashboard/"
+            element={
+              <ProtectedRoute requiredRole={"admin"}>
+                <AdminDashboardLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="" element={<AdminDashboardHome />} />
+            <Route path="users/" element={<UsersPage />} />
+            <Route
+              path="users/update-role/:id/"
+              element={<UpdateUserRolePage />}
+            />
+            <Route
+              path="create-restaurant/"
+              element={<CreateRestaurantPage />}
+            />
+            <Route path="restaurant-list/" element={<RestaurantListPage />} />
+            <Route path="food-category/" element={<AddCategoryPage />} />
+            <Route path="category-list/" element={<CategoryListPage />} />
+            <Route path="food-tag/" element={<AddFoodTagPage />} />
+            <Route path="tag-list/" element={<FoodTagListPage />} />
+          </Route>
+        </Routes>
       </main>
       <Footer />
     </>
