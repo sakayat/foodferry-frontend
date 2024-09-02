@@ -79,7 +79,7 @@ const OrderHistoryPage = () => {
                     <td className="px-6 py-4">{item.status}</td>
                     <td className="px-6 py-4">
                       <button
-                        className="default-btn py-2 px-4"
+                        className="default-btn py-2 px-4 rounded"
                         onClick={() => handleViewOrderItem(item)}
                       >
                         View
@@ -92,36 +92,42 @@ const OrderHistoryPage = () => {
           </div>
         </div>
         {isOpen && (
-          <div className="absolute top-0 left-0 right-0 w-full h-full backdrop-blur-sm">
-            <div className="bg-white">
-              <div className="max-w-xl mx-auto shadow-2xl bg-white">
-                <div className="">
-                  <div className="flex justify-end py-2 px-4">
-                    <button onClick={() => setIsOpen(!isOpen)}>
-                      <X />
+          <div>
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+            <div className="fixed inset-0 flex items-center justify-center z-50">
+              <div className="w-full md:max-w-xl mx-auto shadow-2xl bg-[#dde6ce] rounded-lg">
+                <div className="flex h-40 text-sm relative">
+                  <div className="absolute top-2 right-2 py-1 px-2 bg-[#286140] shadow-lg rounded">
+                    <button
+                      onClick={() => setIsOpen(!isOpen)}
+                      className="p-1"
+                      aria-label="Close"
+                    >
+                      <X size={20} color="#FFFFFF" />
                     </button>
                   </div>
-                  <div className="">
-                    <img
-                      src={`${import.meta.env.VITE_API_BASE_URL}/media/${
-                        foodItem.item_image
-                      }`}
-                      alt=""
-                    />
-                    <div className="py-3 px-6 space-y-2">
-                      <h3 className="text-2xl">{foodItem.item_name}</h3>
-                      <div className="space-x-3">
-                        <span>Price:</span>
-                        <span>{currencyFormat(foodItem.item_price)}</span>
-                      </div>
-                      <div className="space-x-3">
-                        <span>Quantity:</span>
-                        <span>{foodItem.quantity}</span>
-                      </div>
-                      <div className="space-x-3">
-                        <span>Restaurant:</span>
-                        <span>{foodItem.restaurant}</span>
-                      </div>
+                  <img
+                    src={`${import.meta.env.VITE_API_BASE_URL}/media/${
+                      foodItem.item_image
+                    }`}
+                    alt={foodItem.item_name}
+                    className="w-40 object-cover rounded-l-lg"
+                  />
+                  <div className="py-3 px-6 space-y-2">
+                    <h3 className="text-lg font-semibold">
+                      {foodItem.item_name}
+                    </h3>
+                    <div className="space-x-3">
+                      <span className="font-medium">Price:</span>
+                      <span>{currencyFormat(foodItem.item_price)}</span>
+                    </div>
+                    <div className="space-x-3">
+                      <span className="font-medium">Quantity:</span>
+                      <span>{foodItem.quantity}</span>
+                    </div>
+                    <div className="space-x-3">
+                      <span className="font-medium">Restaurant:</span>
+                      <span>{foodItem.restaurant}</span>
                     </div>
                   </div>
                 </div>
