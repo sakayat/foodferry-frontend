@@ -93,7 +93,7 @@ const UserOrderListPage = () => {
                     {currencyFormat(order.subtotal)}
                   </td>
                   <td className="px-6 py-4">{order.status}</td>
-                  <td className="px-6 py-4 flex justify-center">
+                  <td className="px-6 py-4">
                     <button
                       className="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400"
                       onClick={() => handleStatus(order)}
@@ -108,8 +108,8 @@ const UserOrderListPage = () => {
         </div>
       </div>
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white dark:bg-gray-700 shadow-xl p-6 w-full max-w-lg">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white shadow-lg p-6 w-full max-w-lg">
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
               Update Status
             </h3>
