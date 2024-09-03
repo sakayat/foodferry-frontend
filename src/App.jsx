@@ -34,6 +34,7 @@ import RestaurantFoodPage from "./pages/RestaurantFoodPage";
 import Footer from "./components/Footer";
 import AboutUsPage from "./pages/AboutUsPage";
 import ContactUsPage from "./pages/ContactUsPage";
+import UserOrderListPage from "./pages/UserOrderListPage";
 
 function App() {
   return (
@@ -111,6 +112,7 @@ function App() {
               element={<UpdateRestaurantInfo />}
             />
             <Route path="food-items/" element={<FoodItemsPage />} />
+            <Route path="user-order/" element={<UserOrderListPage />} />
           </Route>
 
           <Route
