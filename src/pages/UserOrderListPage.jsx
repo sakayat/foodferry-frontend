@@ -1,10 +1,10 @@
 import { Edit } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { currencyFormat } from "../lib/utils";
+import { useRestaurantOrderStore } from "../lib/store/zustandStore";
 
 const UserOrderListPage = () => {
   const token = localStorage.getItem("authToken");
-  const [orderList, setOrderList] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const [orderId, setOrderId] = useState(null);
@@ -21,25 +21,11 @@ const UserOrderListPage = () => {
     fetchUserOrderList();
   }, []);
 
-  const fetchUserOrderList = async () => {
-    const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/user-order-list/`,
-      {
-        method: "get",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      }
-    );
-
-    const data = await res.json();
-    setOrderList(data);
-  };
+  const { orderList, fetchUserOrderList } = useRestaurantOrderStore();
 
   const handleStatus = async (order) => {
     setShowModal(true);
-    setStatus(order.status)
+    setStatus(order.status);
     setOrderId(order.id);
   };
 

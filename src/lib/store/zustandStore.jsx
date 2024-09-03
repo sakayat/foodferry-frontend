@@ -106,7 +106,6 @@ export const useRestaurantInfo = create((set, get) => ({
   },
 }));
 
-
 export const useFoodCategories = create((set, get) => ({
   token: localStorage.getItem("authToken"),
   categories: [],
@@ -237,5 +236,26 @@ export const useFoodTagStore = create((set, get) => ({
     );
     const data = await res.json();
     set({ tags: data });
+  },
+}));
+
+export const useRestaurantOrderStore = create((set, get) => ({
+  token: localStorage.getItem("authToken"),
+  orderList: [],
+  fetchUserOrderList: async () => {
+    const { token } = get();
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/user-order-list/`,
+      {
+        method: "get",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+
+    const data = await res.json();
+    set({ orderList: data });
   },
 }));

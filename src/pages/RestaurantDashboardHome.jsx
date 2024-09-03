@@ -1,18 +1,31 @@
-import { MapPin, Phone } from "lucide-react";
-import { useRestaurantInfo } from "../lib/store/zustandStore";
+import { MapPin, Phone, ShoppingBag } from "lucide-react";
+import {
+  useRestaurantInfo,
+  useRestaurantOrderStore,
+} from "../lib/store/zustandStore";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 const RestaurantDashboardHome = () => {
-
   useEffect(() => {
     fetchRestaurantInfo();
+    fetchUserOrderList();
   }, []);
 
   const { ownerInfo, fetchRestaurantInfo } = useRestaurantInfo();
 
+  const { orderList, fetchUserOrderList } = useRestaurantOrderStore();
+
+  const data = [
+    {
+      title: "Total Orders",
+      value: orderList.length,
+      icon: <ShoppingBag size={30} />,
+    },
+  ];
+
   return (
-    <div className="py-5 px-8 bg-[#dde6ce] shadow">
+    <div className="py-5 px-8 bg-[#dde6ce]">
       <div className="relative flex flex-col gap-5">
         <img
           src={`${import.meta.env.VITE_API_BASE_URL}/${ownerInfo.cover_image}`}
@@ -35,6 +48,20 @@ const RestaurantDashboardHome = () => {
             <span>{ownerInfo.phone_number}</span>
           </p>
         </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {data.map((item, i) => (
+          <div
+            className="flex items-center justify-between gap-2 py-3 px-6 border border-black"
+            key={i}
+          >
+            <div className="flex items-center space-x-3">
+              <span>{item.icon}</span>
+              <div className="text-xl font-medium">{item.title}</div>
+            </div>
+            <div className="text-4xl font-bold">{item.value}</div>
+          </div>
+        ))}
       </div>
     </div>
   );
