@@ -2,26 +2,57 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import NotFound from "../components/Notfound";
-
+import Pagination from "../components/Pagination";
 
 const CategoryFoodPage = () => {
   const { slug } = useParams();
 
+  const [pagination, setPagination] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     fetchFoodData();
-  }, []);
+  }, [currentPage]);
 
   const [foodData, setFoodData] = useState([]);
+
+  console.log(foodData);
 
   const fetchFoodData = async () => {
     const res = await fetch(
       `${
         import.meta.env.VITE_API_BASE_URL
-      }/api/restaurant/category-food-list/${slug}/`
+      }/api/restaurant/category-food-list/${slug}/?page=${currentPage}`
     );
     const data = await res.json();
-    setFoodData(data);
+    setFoodData(data.results);
+    setPagination({
+      count: data.count,
+      next: data.next,
+      prev: data.previous,
+    });
   };
+
+  const nextPage = (e) => {
+    e.preventDefault();
+    if (pagination.next) {
+      setCurrentPage((currPage) => currPage + 1);
+    }
+  };
+
+  const previousPage = (e) => {
+    e.preventDefault();
+    if (pagination.prev) {
+      setCurrentPage((currPage) => currPage - 1);
+    }
+  };
+
+  const totalPages = Math.ceil(pagination.count / 6);
+  const pageNumbers = [];
+
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className="py-5">
@@ -40,7 +71,7 @@ const CategoryFoodPage = () => {
                 key={food.id}
               >
                 <img
-                  src={`${import.meta.env.VITE_API_BASE_URL}/${food.image}`}
+                  src={food.image}
                   alt=""
                   className="h-44 w-full object-cover rounded-xl"
                 />
@@ -51,6 +82,18 @@ const CategoryFoodPage = () => {
           </div>
         ) : (
           <NotFound />
+        )}
+        {foodData.length > 0 && (
+          <div className="py-5">
+            <Pagination
+              pagination={pagination}
+              previousPage={previousPage}
+              nextPage={nextPage}
+              pageNumbers={pageNumbers}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </div>
         )}
       </div>
     </div>

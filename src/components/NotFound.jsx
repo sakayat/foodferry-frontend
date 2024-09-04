@@ -3,8 +3,8 @@ import notFoundImg from "../assets/images/not-found.png";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white shadow-lg rounded-lg">
+    <div className="flex items-center justify-center bg-gray-50 md:py-12">
+      <div className="max-w-lg w-full space-y-8 p-8 bg-white shadow-lg rounded-lg">
         <img className="mx-auto" src={notFoundImg} alt="" />
         <h1 className="text-3xl font-extrabold text-gray-900 text-center">
           Oops! No Data Found
