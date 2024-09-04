@@ -35,12 +35,14 @@ import Footer from "./components/Footer";
 import AboutUsPage from "./pages/AboutUsPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import UserOrderListPage from "./pages/UserOrderListPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <>
       <Navbar />
       <main className="min-h-screen">
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="food/:slug/" element={<FoodDetailsPage />} />
