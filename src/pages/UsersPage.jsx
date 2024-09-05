@@ -1,14 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { Edit, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useUsersStore } from "../lib/store/zustandStore";
+import Pagination from "../components/Pagination";
 
 const UsersPage = () => {
-  const { users, fetchUsers } = useUsersStore();
+  const token = localStorage.getItem("authToken");
+  const [users, setUsers] = useState([]);
+
+  const [pagination, setPagination] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [currentPage]);
+
+  const fetchUsers = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/users/?page=${currentPage}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    setUsers(data.results);
+    setPagination({
+      count: data.count,
+      next: data.next,
+      prev: data.previous,
+    });
+  };
+
+  const nextPage = (e) => {
+    e.preventDefault();
+    if (pagination.next) {
+      setCurrentPage((currPage) => currPage + 1);
+    }
+  };
+
+  const previousPage = (e) => {
+    e.preventDefault();
+    if (pagination.prev) {
+      setCurrentPage((currPage) => currPage - 1);
+    }
+  };
+
+  const totalPages = Math.ceil(pagination.count / 6);
+  const pageNumbers = [];
+
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className="max-w-6xl mx-auto px-8 py-5">
@@ -60,6 +105,16 @@ const UsersPage = () => {
               </tbody>
             ))}
           </table>
+        </div>
+        <div className="py-5">
+          <Pagination
+            pagination={pagination}
+            previousPage={previousPage}
+            nextPage={nextPage}
+            pageNumbers={pageNumbers}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </div>
     </div>
