@@ -51,10 +51,7 @@ const SliderContent = ({ data, tag_name, sliderId }) => {
         ?.filter((item) => item.food_tag == tag_name)
         ?.map((food) => (
           <SwiperSlide key={food.id}>
-            <Link
-              to={`food/${food.slug}`}
-              className="space-y-2 h-64 group "
-            >
+            <Link to={`food/${food.slug}`} className="space-y-2 h-64 group ">
               <img
                 src={`${import.meta.env.VITE_API_BASE_URL}/${food.image}`}
                 alt={food.name}
