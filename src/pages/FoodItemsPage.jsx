@@ -1,17 +1,63 @@
 import { Edit, Trash2 } from "lucide-react";
-import React, { useEffect } from "react";
-import { useRestaurantFoodItem } from "../lib/store/zustandStore";
+import React, { useEffect, useState } from "react";
 import { currencyFormat } from "../lib/utils";
 import { Link } from "react-router-dom";
+import Pagination from "../components/Pagination";
 
 const FoodItemsPage = () => {
   const token = localStorage.getItem("authToken");
 
-  const { restaurantFoods, fetchRestaurantFoodItem } = useRestaurantFoodItem();
+  const [data, setData] = useState([]);
+
+  const [pagination, setPagination] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetchRestaurantFoodItem();
-  }, []);
+  }, [currentPage]);
+
+  const fetchRestaurantFoodItem = async () => {
+    const res = await fetch(
+      `${
+        import.meta.env.VITE_API_BASE_URL
+      }/api/restaurant/restaurant-foods/?page=${currentPage}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    setData(data.results);
+    setPagination({
+      count: data.count,
+      next: data.next,
+      prev: data.previous,
+    });
+  };
+
+  const nextPage = (e) => {
+    e.preventDefault();
+    if (pagination.next) {
+      setCurrentPage((currPage) => currPage + 1);
+    }
+  };
+
+  const previousPage = (e) => {
+    e.preventDefault();
+    if (pagination.prev) {
+      setCurrentPage((currPage) => currPage - 1);
+    }
+  };
+
+  const totalPages = Math.ceil(pagination.count / 6);
+  const pageNumbers = [];
+
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   const handleDelete = async (id) => {
     await fetch(
@@ -34,9 +80,9 @@ const FoodItemsPage = () => {
         <h2 className="text-3xl">All Food Items</h2>
       </div>
 
-      <div class="relative overflow-x-auto">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <div className="relative overflow-x-auto">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
                 Name
@@ -59,17 +105,20 @@ const FoodItemsPage = () => {
             </tr>
           </thead>
           <tbody>
-            {restaurantFoods?.map((item) => (
-              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            {data?.map((item) => (
+              <tr
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                key={item.id}
+              >
                 <th
                   scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 dark:text-white space-x-5"
+                  className="px-6 py-4 font-medium text-gray-900 dark:text-white space-x-5"
                 >
                   {item.name}
                 </th>
-                <td class="px-6 py-4">{item.category_name}</td>
-                <td class="px-6 py-4">{currencyFormat(item.price)}</td>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">{item.category_name}</td>
+                <td className="px-6 py-4">{currencyFormat(item.price)}</td>
+                <td className="px-6 py-4">
                   <span
                     className={`py-1 px-4 rounded ${
                       item.is_available
@@ -80,7 +129,7 @@ const FoodItemsPage = () => {
                     {item.is_available ? "Yes" : "No"}
                   </span>
                 </td>
-                <td class="px-6 py-4">{item.food_tag}</td>
+                <td className="px-6 py-4">{item.food_tag}</td>
                 <td className="px-6 py-4 space-x-3 flex">
                   <button
                     onClick={() => handleEdit(item.id)}
@@ -103,6 +152,16 @@ const FoodItemsPage = () => {
             ))}
           </tbody>
         </table>
+        <div className="py-5">
+          <Pagination
+            pagination={pagination}
+            previousPage={previousPage}
+            nextPage={nextPage}
+            pageNumbers={pageNumbers}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
       </div>
     </div>
   );

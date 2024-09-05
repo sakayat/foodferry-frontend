@@ -145,26 +145,6 @@ export const useFoodTags = create((set) => ({
   },
 }));
 
-export const useRestaurantFoodItem = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
-  restaurantFoods: [],
-  fetchRestaurantFoodItem: async () => {
-    const { token } = get();
-    const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/restaurant-foods/`,
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      }
-    );
-    const data = await res.json();
-    set({ restaurantFoods: data });
-  },
-}));
-
 export const useUsersStore = create((set, get) => ({
   token: localStorage.getItem("authToken"),
   users: [],
