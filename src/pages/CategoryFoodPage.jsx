@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import Pagination from "../components/Pagination";
+import NotFound from "../components/Notfound";
 
 const CategoryFoodPage = () => {
   const { slug } = useParams();
@@ -79,7 +80,7 @@ const CategoryFoodPage = () => {
           </div>
         ) : (
           <div>
-            <h1 className="text-center text-3xl">Not Found</h1>
+           <NotFound />
           </div>
         )}
         {foodData.length > 0 && (
