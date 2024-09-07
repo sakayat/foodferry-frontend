@@ -34,7 +34,7 @@ const SignInPage = () => {
     if (res.ok) {
       localStorage.setItem("authToken", data.token);
       navigate("/");
-      window.location.reload()
+      window.location.reload();
     }
   };
 
@@ -93,8 +93,11 @@ const SignInPage = () => {
               </button>
             </form>
             <div className="form__footer border-t border-black/40 py-3 mt-5">
-              <div className="">
-                <Link to="/sign-up" className="flex justify-end">
+              <div className="flex justify-between">
+                <Link to="/forget-password" className="">
+                  Forget Password
+                </Link>
+                <Link to="/sign-up" className="">
                   Sign Up
                 </Link>
               </div>

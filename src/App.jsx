@@ -36,6 +36,7 @@ import AboutUsPage from "./pages/AboutUsPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import UserOrderListPage from "./pages/UserOrderListPage";
 import ScrollToTop from "./components/ScrollToTop";
+import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />
           <Route path="about/" element={<AboutUsPage />} />
           <Route path="contact/" element={<ContactUsPage />} />
+          <Route path="forget-password/" element={<ForgetPasswordPage />} />
           <Route
             path="profile/"
             element={
