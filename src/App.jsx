@@ -38,6 +38,7 @@ import UserOrderListPage from "./pages/UserOrderListPage";
 import ScrollToTop from "./components/ScrollToTop";
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import PublicOnlyRoute from "./components/PublicOnlyRoute";
 
 function App() {
   return (
@@ -57,8 +58,22 @@ function App() {
           <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />
           <Route path="about/" element={<AboutUsPage />} />
           <Route path="contact/" element={<ContactUsPage />} />
-          <Route path="forget-password/" element={<ForgetPasswordPage />} />
-          <Route path="reset-password/:uid/:token/" element={<ResetPasswordPage />} />
+          <Route
+            path="forget-password/"
+            element={
+              <PublicOnlyRoute>
+                <ForgetPasswordPage />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="reset-password/:uid/:token/"
+            element={
+              <PublicOnlyRoute>
+                <ResetPasswordPage />
+              </PublicOnlyRoute>
+            }
+          />
           <Route
             path="profile/"
             element={
