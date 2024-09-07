@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useProfileStore } from "../lib/store/zustandStore";
 
-const PublicOnlyRoute = ({ children }) => {
+const PublicRoute = ({ children }) => {
   const token = localStorage.getItem("authToken");
   const { user } = useProfileStore();
 
@@ -12,4 +12,4 @@ const PublicOnlyRoute = ({ children }) => {
   return children;
 };
 
-export default PublicOnlyRoute;
+export default PublicRoute;
