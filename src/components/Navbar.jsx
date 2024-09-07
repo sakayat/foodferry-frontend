@@ -92,7 +92,7 @@ const Navbar = () => {
               to="/"
               className="text-3xl font-bold uppercase tracking-[0.3rem]"
             >
-              DotEats
+              FoodFerry
             </Link>
           </div>
           {/* mobile menu button */}

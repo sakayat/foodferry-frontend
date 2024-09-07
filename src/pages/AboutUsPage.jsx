@@ -31,7 +31,7 @@ const AboutUsPage = () => {
     <div className="bg-gray-100 min-h-screen">
       <div className="bg-[#286140] text-white py-12">
         <div className="xl:container mx-auto px-8 space-y-3">
-          <h1 className="text-4xl font-bold">About DotEats</h1>
+          <h1 className="text-4xl font-bold">About FoodFerry</h1>
           <p className="text-xl">Delivering Happiness, One Meal at a Time</p>
         </div>
       </div>

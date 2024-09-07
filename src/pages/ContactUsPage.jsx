@@ -73,7 +73,7 @@ const ContactUsPage = () => {
             <div className="space-y-4">
               <div className="flex items-center">
                 <Mail className="w-6 h-6 mr-2" />
-                <span>support@quickeats.com</span>
+                <span>support@foodferry.com</span>
               </div>
               <div className="flex items-center">
                 <Phone className="w-6 h-6 mr-2" />
@@ -94,7 +94,7 @@ const ContactUsPage = () => {
                   height="300"
                   style={{ border: 0, borderRadius: "inherit" }}
                   loading="lazy"
-                  title="DotEats Location"
+                  title="FoodFerry Location"
                   allowFullScreen
                 />
               </div>

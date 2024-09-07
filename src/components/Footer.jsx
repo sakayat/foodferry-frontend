@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-5xl font-bold mb-4">
-              <Link to="/">DotEats</Link>
+              <Link to="/">FoodFerry</Link>
             </h3>
             <p className="text-lg">
               Delivering delicious meals to your doorstep.
@@ -44,7 +44,7 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
             <p className="text-sm">Asfia Tower, House - 76 Rd No. 11, Dhaka 1213</p>
             <p className="text-sm">Phone: (555) 123-4567</p>
-            <p className="text-sm">Email: info@doteats.com</p>
+            <p className="text-sm">Email: info@foodferry.com</p>
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
@@ -62,7 +62,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 text-center">
-          <p className="text-sm">&copy; 2024 DotEats All rights reserved.</p>
+          <p className="text-sm">&copy; 2024 FoodFerry All rights reserved.</p>
         </div>
       </div>
     </footer>
