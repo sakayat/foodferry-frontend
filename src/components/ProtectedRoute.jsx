@@ -18,6 +18,8 @@ const ProtectedRoute = ({ children, requiredRole }) => {
     return <Navigate to="/unauthorized/" />;
   }
 
+  
+
   return children;
 };
 

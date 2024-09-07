@@ -37,6 +37,7 @@ import ContactUsPage from "./pages/ContactUsPage";
 import UserOrderListPage from "./pages/UserOrderListPage";
 import ScrollToTop from "./components/ScrollToTop";
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
           <Route path="about/" element={<AboutUsPage />} />
           <Route path="contact/" element={<ContactUsPage />} />
           <Route path="forget-password/" element={<ForgetPasswordPage />} />
+          <Route path="reset-password/:uid/:token/" element={<ResetPasswordPage />} />
           <Route
             path="profile/"
             element={
