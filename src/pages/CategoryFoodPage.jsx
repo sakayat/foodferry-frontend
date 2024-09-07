@@ -81,7 +81,9 @@ const CategoryFoodPage = () => {
             ))}
           </div>
         ) : (
-          <NotFound />
+          <>
+            <NotFound />
+          </>
         )}
         {foodData.length > 0 && (
           <div className="py-5">
