@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
-import NotFound from "../components/Notfound";
+import NotFound from "../components/Notfound.jsx";
 import Pagination from "../components/Pagination";
 
 const CategoryFoodPage = () => {
@@ -15,8 +15,6 @@ const CategoryFoodPage = () => {
   }, [currentPage]);
 
   const [foodData, setFoodData] = useState([]);
-
-  console.log(foodData);
 
   const fetchFoodData = async () => {
     const res = await fetch(
