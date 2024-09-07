@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import Pagination from "../components/Pagination";
+import notFoundImg from "../assets/images/not-found.png"
 
 const CategoryFoodPage = () => {
   const { slug } = useParams();
