@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
-import NotFound from "../components/Notfound.jsx";
 import Pagination from "../components/Pagination";
 
 const CategoryFoodPage = () => {
@@ -79,9 +78,9 @@ const CategoryFoodPage = () => {
             ))}
           </div>
         ) : (
-          <>
-            <NotFound />
-          </>
+          <div>
+            <h1 className="text-center text-3xl">Not Found</h1>
+          </div>
         )}
         {foodData.length > 0 && (
           <div className="py-5">
