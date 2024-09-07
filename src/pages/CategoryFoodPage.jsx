@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import Pagination from "../components/Pagination";
-import NotFound from "../components/Notfound";
 
 const CategoryFoodPage = () => {
   const { slug } = useParams();
@@ -79,8 +78,23 @@ const CategoryFoodPage = () => {
             ))}
           </div>
         ) : (
-          <div>
-           <NotFound />
+          <div className="flex items-center justify-center bg-gray-50 md:py-12">
+            <div className="max-w-lg w-full space-y-8 p-8 bg-white shadow-lg rounded-lg">
+              <img className="mx-auto" src={notFoundImg} alt="" />
+              <h1 className="text-3xl font-extrabold text-gray-900 text-center">
+                Oops! No Data Found
+              </h1>
+              <p className="text-xl text-gray-600 text-center">
+                It seems like there's no data available in this category. Please
+                check back later or explore other categories.
+              </p>
+              <Link
+                to="/"
+                className="block default-btn py-3 px-6 rounded text-center"
+              >
+                Go Back Home
+              </Link>
+            </div>
           </div>
         )}
         {foodData.length > 0 && (
