@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import Pagination from "../components/Pagination";
-import notFoundImg from "../assets/images/not-found.png"
+import notFoundImg from "../assets/images/not-found.png";
 
 const CategoryFoodPage = () => {
   const { slug } = useParams();
@@ -23,7 +23,8 @@ const CategoryFoodPage = () => {
       }/api/restaurant/category-food-list/${slug}/?page=${currentPage}`
     );
     const data = await res.json();
-    setFoodData(data.results);
+
+    setFoodData(data);
     setPagination({
       count: data.count,
       next: data.next,
@@ -56,13 +57,13 @@ const CategoryFoodPage = () => {
     <div className="py-5">
       <div className="xl:container mx-auto px-8">
         <div className="py-5">
-          {foodData.length > 0 && (
+          {foodData.count > 0 && (
             <h2 className="text-3xl capitalize">{slug}</h2>
           )}
         </div>
-        {foodData.length > 0 ? (
+        {foodData.count > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {foodData?.map((food) => (
+            {foodData.results.map((food) => (
               <Link
                 to={`/food/${food.slug}`}
                 className="space-y-1"
@@ -78,7 +79,8 @@ const CategoryFoodPage = () => {
               </Link>
             ))}
           </div>
-        ) : (
+        )}
+        {foodData.count === 0 && (
           <div className="flex items-center justify-center bg-gray-50 md:py-12">
             <div className="max-w-lg w-full space-y-8 p-8 bg-white shadow-lg rounded-lg">
               <img className="mx-auto" src={notFoundImg} alt="" />
