@@ -240,8 +240,9 @@ export const useRestaurantOrderStore = create((set, get) => ({
   },
 }));
 
-export const useRenderProfileStore = create((set, get) => ({
+export const useRenderProfileInfoStore = create((set, get) => ({
   token: localStorage.getItem("authToken"),
+  user: {},
   fetchProfileInfo: async () => {
     const { token } = get();
     const res = await fetch(
@@ -254,5 +255,7 @@ export const useRenderProfileStore = create((set, get) => ({
         },
       }
     );
+    const data = await res.json();
+    set({ user: data });
   },
 }));

@@ -6,9 +6,7 @@ import { currencyFormat } from "../lib/utils";
 import CheckoutFrom from "../components/CheckoutFrom";
 
 const CheckoutPage = () => {
-
   const { cartItems } = useCartItemStore();
-
 
   return (
     <div className="pt-5">

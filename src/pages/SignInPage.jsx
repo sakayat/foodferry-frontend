@@ -1,7 +1,7 @@
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useCartItemStore, useRenderProfileStore } from "../lib/store/zustandStore";
+import { useCartItemStore, useRenderProfileInfoStore } from "../lib/store/zustandStore";
 
 const SignInPage = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const SignInPage = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const { fetchProfileInfo } = useRenderProfileStore();
+  const { fetchProfileInfo } = useRenderProfileInfoStore();
   const {fetchCartList} = useCartItemStore()
 
   const handleSubmit = async (e) => {

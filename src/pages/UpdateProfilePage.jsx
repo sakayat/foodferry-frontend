@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import BreadCrumbs from "../components/BreadCrumbs";
-import { useProfileStore } from "../lib/store/zustandStore";
-import { useNavigate } from "react-router-dom";
+import { useRenderProfileInfoStore } from "../lib/store/zustandStore";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const UpdateProfilePage = () => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const { user } = useProfileStore();
+  useEffect(() => {
+    fetchProfileInfo();
+  }, []);
+
+  const { user, fetchProfileInfo } = useRenderProfileInfoStore();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -47,10 +52,10 @@ const UpdateProfilePage = () => {
         body: formData,
       }
     );
-    const data = await res.json()
-        
+    const data = await res.json();
+
     if (res.ok) {
-      return navigate("/profile/");
+      return navigate(location.state?.returnTo || "/profile/");
     }
   };
 

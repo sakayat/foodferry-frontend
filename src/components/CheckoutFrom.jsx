@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useCartItemStore, useProfileStore } from "../lib/store/zustandStore";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  useCartItemStore,
+  useRenderProfileInfoStore,
+} from "../lib/store/zustandStore";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const CheckoutFrom = () => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [address, setAddress] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
 
   const { fetchCartList } = useCartItemStore();
 
-  const { user } = useProfileStore();
+  useEffect(() => {
+    fetchProfileInfo();
+  }, []);
+
+  const { user, fetchProfileInfo } = useRenderProfileInfoStore();
 
   const [errors, setErrors] = useState(null);
 
@@ -49,6 +57,12 @@ const CheckoutFrom = () => {
       fetchCartList();
       return navigate("/order-history");
     }
+  };
+
+  const handleNavigate = () => {
+    return navigate("/update-profile/", {
+      state: { returnTo: location.pathname },
+    });
   };
 
   return (
@@ -137,7 +151,9 @@ const CheckoutFrom = () => {
           {errors.error || errors.profileError}
         </p>
       )}
-      {errors?.profileError && <Link to="/profile">Update your profile</Link>}
+      {errors?.profileError && (
+        <button onClick={() => handleNavigate()}>Update your profile</button>
+      )}
       <button className="default-btn py-3 px-6 w-full">Place order</button>
     </form>
   );
