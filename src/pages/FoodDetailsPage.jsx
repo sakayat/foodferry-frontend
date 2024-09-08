@@ -4,6 +4,7 @@ import { currencyFormat } from "../lib/utils";
 import { ChevronRight, Minus, Plus } from "lucide-react";
 import { useCartStore } from "../lib/store/zustandStore";
 import Feedback from "../components/Feedback";
+import FoodDetailsSkeleton from "../components/FoodDetailsSkeleton";
 
 const FoodDetailsPage = () => {
   const token = localStorage.getItem("authToken");
@@ -14,7 +15,7 @@ const FoodDetailsPage = () => {
 
   const { slug } = useParams();
 
-  const [foodItem, setFoodItem] = useState();  
+  const [foodItem, setFoodItem] = useState();
 
   useEffect(() => {
     fetchFoodDetails();
@@ -66,6 +67,8 @@ const FoodDetailsPage = () => {
     setIsCartOpen(!isCartOpen);
   };
 
+  console.log(foodItem);
+
   return (
     <div className="pt-10">
       <div className="xl:container mx-auto px-8">
@@ -84,59 +87,65 @@ const FoodDetailsPage = () => {
             </li>
           </ul>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="image">
-            <img
-              src={`${import.meta.env.VITE_API_BASE_URL}/${foodItem?.image}`}
-              alt=""
-              className="w-full h-full rounded-xl"
-            />
-          </div>
-          <div className="flex flex-col gap-5">
-            <span className="font-semibold">{foodItem?.category_name}</span>
-            <h2 className="text-4xl font-bold uppercase tracking-widest">
-              {foodItem?.name}
-            </h2>
-            <p className="text-xl leading-6 lowercase">
-              {foodItem?.description}
-            </p>
-            <span className="font-bold">{currencyFormat(foodItem?.price)}</span>
-            <span>Quantity</span>
-            <form action="" className="space-y-5" onSubmit={handleAddToCart}>
-              <div className="flex items-center justify-between gap-2 border border-black p-2 w-32">
-                <div
-                  className="text-2xl cursor-pointer"
-                  onClick={handleChangeMinusValue}
-                >
+        {!foodItem ? (
+          <FoodDetailsSkeleton />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="image">
+              <img
+                src={`${import.meta.env.VITE_API_BASE_URL}/${foodItem.image}`}
+                alt=""
+                className="w-full h-full rounded-xl"
+              />
+            </div>
+            <div className="flex flex-col gap-5">
+              <span className="font-semibold">{foodItem.category_name}</span>
+              <h2 className="text-4xl font-bold uppercase tracking-widest">
+                {foodItem.name}
+              </h2>
+              <p className="text-xl leading-6 lowercase">
+                {foodItem.description}
+              </p>
+              <span className="font-bold">
+                {currencyFormat(foodItem.price)}
+              </span>
+              <span>Quantity</span>
+              <form action="" className="space-y-5" onSubmit={handleAddToCart}>
+                <div className="flex items-center justify-between gap-2 border border-black p-2 w-32">
                   <div
-                    className="w-6 text-2xl cursor-pointer"
-                    onClick={() => handleChangeMinusValue()}
+                    className="text-2xl cursor-pointer"
+                    onClick={handleChangeMinusValue}
                   >
-                    <Minus size={18} />
+                    <div
+                      className="w-6 text-2xl cursor-pointer"
+                      onClick={() => handleChangeMinusValue()}
+                    >
+                      <Minus size={18} />
+                    </div>
+                  </div>
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    className="outline-none font-bold text-center w-8"
+                  />
+                  <div
+                    className="text-2xl cursor-pointer"
+                    onClick={handleChangePlusValue}
+                  >
+                    <Plus size={18} />
                   </div>
                 </div>
-                <input
-                  type="number"
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
-                  className="outline-none font-bold text-center w-8"
-                />
-                <div
-                  className="text-2xl cursor-pointer"
-                  onClick={handleChangePlusValue}
+                <button
+                  className="px-6 default-btn border h-12 w-full uppercase"
+                  type="submit"
                 >
-                  <Plus size={18} />
-                </div>
-              </div>
-              <button
-                className="px-6 default-btn border h-12 w-full uppercase"
-                type="submit"
-              >
-                Add to cart
-              </button>
-            </form>
+                  Add to cart
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
+        )}
         <Feedback slug={slug} />
       </div>
     </div>
