@@ -1,15 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import SectionTitle from "./SectionTitle";
 import SliderContent from "./SliderContent";
-import { useFoodItemsStore } from "../lib/store/zustandStore";
 
-const FeaturedItems = () => {
-
-  useEffect(() => {
-    fetchFoodItems();
-  }, []);
-
-  const { data, fetchFoodItems } = useFoodItemsStore();
+const FeaturedItems = ({data}) => {
 
   return (
     <div className="pt-14 relative">

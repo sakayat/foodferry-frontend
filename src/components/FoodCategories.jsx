@@ -5,8 +5,23 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 
 const FoodCategories = () => {
+  const [data, setData] = useState([]);
 
-  const [data, setData] = useState([])
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-categories/`
+      );
+      const data = await res.json();
+      setData(data);
+    } catch (error) {
+      console.log("something went wrong");
+    }
+  };
 
   const settings = {
     dots: true,
@@ -47,18 +62,6 @@ const FoodCategories = () => {
     ],
   };
 
-  useEffect(() => {
-    fetchCategories()
-  }, [])
-
-  const fetchCategories = async () => {
-    const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-categories/`
-    );
-    const data = await res.json();
-    setData(data)
-  };
-
   return (
     <div className="pt-10">
       <div className="xl:container mx-auto px-8">
@@ -68,7 +71,11 @@ const FoodCategories = () => {
         <div className="h-52">
           <Slider {...settings}>
             {data?.map((category) => (
-              <Link to={`category/${category.slug}/`} className="categories" key={category.id}>
+              <Link
+                to={`category/${category.slug}/`}
+                className="categories"
+                key={category.id}
+              >
                 <div className="category-info hover:scale-100">
                   <img
                     src={`${import.meta.env.VITE_API_BASE_URL}/${

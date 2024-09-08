@@ -1,5 +1,4 @@
-import React from "react";
-import HeroSection from "../components/HeroSection";
+import React, { useEffect, useState } from "react";
 import FoodCategories from "../components/FoodCategories";
 import FeaturedItems from "../components/FeaturedItems";
 import PopularFoodItem from "../components/PopularFoodItem";
@@ -8,15 +7,34 @@ import HealthyFoodItem from "../components/HealthyFoodItem";
 import HomeChefsFoodItem from "../components/HomeChefsFoodItem";
 
 const HomePage = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchFoodItems();
+  }, []);
+
+  const fetchFoodItems = async () => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/foods/`
+      );
+
+      const data = await res.json();
+      setData(data);
+    } catch (error) {
+      console.log("something went wrong");
+    }
+  };
+
+
   return (
     <div className="w-full">
-      {/* <HeroSection /> */}
       <FoodCategories />
-      <FeaturedItems />
-      <PopularFoodItem />
-      <HomeChefsFoodItem />
-      <BudgetSpotsFoodItem />
-      <HealthyFoodItem />
+      <FeaturedItems data={data} />
+      <PopularFoodItem data={data} />
+      <HomeChefsFoodItem data={data} />
+      <BudgetSpotsFoodItem data={data} />
+      <HealthyFoodItem data={data} />
     </div>
   );
 };

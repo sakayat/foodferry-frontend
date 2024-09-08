@@ -3,12 +3,8 @@ import SectionTitle from "./SectionTitle";
 import SliderContent from "./SliderContent";
 import { useFoodItemsStore } from "../lib/store/zustandStore";
 
-const BudgetSpotsFoodItem = () => {
-  useEffect(() => {
-    fetchFoodItems();
-  }, []);
-
-  const { data, fetchFoodItems } = useFoodItemsStore();
+const BudgetSpotsFoodItem = ({data}) => {
+  
   return (
     <div className="pt-14 relative">
       <div className="xl:container m-auto px-8">
