@@ -2,6 +2,7 @@ import {
   List,
   LogOut,
   Menu,
+  Search,
   ShoppingBag,
   ShoppingCart,
   Store,
@@ -28,12 +29,15 @@ const Navbar = () => {
   const menuRef = useRef();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
 
   const dropdownRef = useRef(null);
 
   const { isCartOpen, setIsCartOpen } = useCartStore();
+  const [searchItem, setSearchItem] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const closeMenu = (e) => {
     if (menuRef.current && menuRef.current.contains(e.target)) {
@@ -83,18 +87,91 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    fetchSearchResults();
+  }, [searchItem]);
+
+  const fetchSearchResults = async () => {
+    if (searchItem) {
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/api/restaurant/search-food/?search=${searchItem}`
+      );
+      const data = await res.json();
+      setSearchResults(data.results);
+    } else {
+      setSearchResults([]);
+    }
+  };
+
   return (
     <div className="bg-white text-black border-b">
       <div className="xl:container mx-auto px-8">
         <nav className="py-4 flex items-center justify-between relative">
-          <div className="logo">
-            <Link
-              to="/"
-              className="text-3xl font-bold uppercase tracking-[0.3rem]"
-            >
+          <div className="logo flex items-center gap-2">
+            <Link to="/" className="text-2xl uppercase">
               FoodFerry
             </Link>
+            <button
+              className="bg-black text-white py-2 px-4 rounded-full"
+              onClick={() => setIsSearchModalOpen(true)}
+            >
+              <Search size={18} />
+            </button>
           </div>
+          {isSearchModalOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-start z-50">
+              <div className="bg-white p-6 rounded w-96 h-screen overflow-y-auto relative">
+                <div className="flex items-center justify-between pb-3">
+                  <h2 className="text-xl font-bold">Search</h2>
+                  <button
+                    className="py-3 rounded"
+                    onClick={() => setIsSearchModalOpen(false)}
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  className="py-3 px-6 border border-black w-full outline-none placeholder-gray-600 focus:border-gray-300 rounded"
+                  placeholder="Search your favorite foods..."
+                  value={searchItem}
+                  onChange={(e) => setSearchItem(e.target.value)}
+                />
+                {searchItem && (
+                  <div className="bg-white border border-gray-300 rounded mt-2 w-full">
+                    <ul>
+                      {searchResults?.map((item) => (
+                        <li
+                          key={item.id}
+                          className="flex items-center p-2 hover:bg-gray-100"
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-16 h-16 object-cover rounded mr-4"
+                          />
+                          <div>
+                            <a
+                              href={`/food/${item.slug}/`}
+                              className="font-bold"
+                              onClick={() =>
+                                setIsSearchModalOpen(!isSearchModalOpen)
+                              }
+                            >
+                              {item.name}
+                            </a>
+                            <div className="text-gray-500">${item.price}</div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
           {/* mobile menu button */}
           <button
             className="md:hidden flex"
