@@ -14,11 +14,11 @@ const FoodDetailsPage = () => {
 
   const { slug } = useParams();
 
-  const [foodItem, setFoodItem] = useState();
+  const [foodItem, setFoodItem] = useState();  
 
   useEffect(() => {
     fetchFoodDetails();
-  }, []);
+  }, [slug]);
 
   const fetchFoodDetails = async () => {
     const res = await fetch(
