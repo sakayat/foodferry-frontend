@@ -94,7 +94,7 @@ const Navbar = () => {
               FoodFerry
             </Link>
             <button
-              className="bg-black text-white py-2 px-4 rounded-full"
+              className="bg-[#286140] text-white py-2 px-4 rounded-full w-14 h-8 flex items-center justify-center"
               onClick={() => setIsSearchModalOpen(true)}
             >
               <Search size={18} />
@@ -154,7 +154,7 @@ const Navbar = () => {
                   )}
                 </button>
                 {isOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-[#286140] text-white rounded overflow-hidden shadow z-10">
+                  <div className="absolute right-0 mt-3 w-48 bg-[#286140] opacity-90 text-white rounded overflow-hidden shadow z-10 px-2">
                     <div className="p-3 border-b font-medium text-md">
                       <span className="">{user.username}</span>
                     </div>
