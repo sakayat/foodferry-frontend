@@ -53,7 +53,7 @@ const ProfilePage = () => {
                   user.profile_image
                 }/`}
                 alt=""
-                className="w-28 rounded-full"
+                className="w-28 h-28 rounded-full"
               />
               <div>
                 <span className="uppercase font-bold">Username</span>
