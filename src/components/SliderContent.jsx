@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import FoodItemSkeleton from "./FoodItemSkeleton";
 
 const SliderContent = ({ data, tag_name, sliderId }) => {
   const swiperRef = useRef();
@@ -47,21 +48,25 @@ const SliderContent = ({ data, tag_name, sliderId }) => {
         },
       }}
     >
-      {data
-        ?.filter((item) => item.food_tag == tag_name)
-        ?.map((food) => (
-          <SwiperSlide key={food.id}>
-            <Link to={`food/${food.slug}`} className="space-y-2 h-64 group ">
-              <img
-                src={`${import.meta.env.VITE_API_BASE_URL}/${food.image}`}
-                alt={food.name}
-                className="h-44 w-full object-cover transform group-hover:scale-110 transition duration-500 ease-in-out rounded-xl"
-              />
-              <h4 className="font-bold">{food.name}</h4>
-              <span className="price">{currencyFormat(food.price)}</span>
-            </Link>
-          </SwiperSlide>
-        ))}
+      {data.length === 0 ? (
+        <FoodItemSkeleton />
+      ) : (
+        data
+          ?.filter((item) => item.food_tag == tag_name)
+          ?.map((food) => (
+            <SwiperSlide key={food.id}>
+              <Link to={`food/${food.slug}`} className="space-y-2 h-64 group ">
+                <img
+                  src={`${import.meta.env.VITE_API_BASE_URL}/${food.image}`}
+                  alt={food.name}
+                  className="h-44 w-full object-cover transform group-hover:scale-110 transition duration-500 ease-in-out rounded-xl"
+                />
+                <h4 className="font-bold">{food.name}</h4>
+                <span className="price">{currencyFormat(food.price)}</span>
+              </Link>
+            </SwiperSlide>
+          ))
+      )}
     </Swiper>
   );
 };

@@ -8,6 +8,7 @@ import HomeChefsFoodItem from "../components/HomeChefsFoodItem";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     fetchFoodItems();
@@ -18,7 +19,6 @@ const HomePage = () => {
       const res = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/foods/`
       );
-
       const data = await res.json();
       setData(data);
     } catch (error) {
@@ -26,11 +26,10 @@ const HomePage = () => {
     }
   };
 
-
   return (
     <div className="w-full">
       <FoodCategories />
-      <FeaturedItems data={data} />
+      <FeaturedItems data={data}/>
       <PopularFoodItem data={data} />
       <HomeChefsFoodItem data={data} />
       <BudgetSpotsFoodItem data={data} />
