@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
+import CategorySkeleton from "./CategorySkeleton";
 
 const FoodCategories = () => {
   const [data, setData] = useState([]);
@@ -69,26 +70,30 @@ const FoodCategories = () => {
           <h1 className="text-4xl font-semibold">Food categories</h1>
         </div>
         <div className="h-52">
-          <Slider {...settings}>
-            {data?.map((category) => (
-              <Link
-                to={`category/${category.slug}/`}
-                className="categories"
-                key={category.id}
-              >
-                <div className="category-info hover:scale-100">
-                  <img
-                    src={`${import.meta.env.VITE_API_BASE_URL}/${
-                      category.image
-                    }`}
-                    className="h-36 w-full rounded-xl"
-                    alt=""
-                  />
-                </div>
-                <span className="text-md font-bold">{category.name}</span>
-              </Link>
-            ))}
-          </Slider>
+          {data.length === 0 ? (
+            <CategorySkeleton />
+          ) : (
+            <Slider {...settings}>
+              {data.map((category) => (
+                <Link
+                  to={`category/${category.slug}/`}
+                  className="categories"
+                  key={category.id}
+                >
+                  <div className="category-info hover:scale-100">
+                    <img
+                      src={`${import.meta.env.VITE_API_BASE_URL}/${
+                        category.image
+                      }`}
+                      className="h-36 w-full rounded-xl"
+                      alt=""
+                    />
+                  </div>
+                  <span className="text-md font-bold">{category.name}</span>
+                </Link>
+              ))}
+            </Slider>
+          )}
         </div>
       </div>
     </div>
