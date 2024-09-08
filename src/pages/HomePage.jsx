@@ -10,7 +10,7 @@ import HomeChefsFoodItem from "../components/HomeChefsFoodItem";
 const HomePage = () => {
   return (
     <div className="w-full">
-      <HeroSection />
+      {/* <HeroSection /> */}
       <FoodCategories />
       <FeaturedItems />
       <PopularFoodItem />
