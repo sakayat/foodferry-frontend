@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import { ChevronRight, Minus, Plus } from "lucide-react";
 import { useCartStore } from "../lib/store/zustandStore";
@@ -7,7 +7,8 @@ import Feedback from "../components/Feedback";
 
 const FoodDetailsPage = () => {
   const token = localStorage.getItem("authToken");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { isCartOpen, setIsCartOpen } = useCartStore();
 
@@ -47,8 +48,8 @@ const FoodDetailsPage = () => {
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
-    if(!token){
-      return navigate("/sign-in/")
+    if (!token) {
+      return navigate("/sign-in/", { state: { returnTo: location.pathname } });
     }
     await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/cart/add-to-cart/${slug}/`,
@@ -96,7 +97,9 @@ const FoodDetailsPage = () => {
             <h2 className="text-4xl font-bold uppercase tracking-widest">
               {foodItem?.name}
             </h2>
-            <p className="text-xl leading-6 lowercase">{foodItem?.description}</p>
+            <p className="text-xl leading-6 lowercase">
+              {foodItem?.description}
+            </p>
             <span className="font-bold">{currencyFormat(foodItem?.price)}</span>
             <span>Quantity</span>
             <form action="" className="space-y-5" onSubmit={handleAddToCart}>
@@ -134,7 +137,7 @@ const FoodDetailsPage = () => {
             </form>
           </div>
         </div>
-        <Feedback slug={slug}/>
+        <Feedback slug={slug} />
       </div>
     </div>
   );

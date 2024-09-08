@@ -1,14 +1,18 @@
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useCartItemStore, useRenderProfileStore } from "../lib/store/zustandStore";
 
 const SignInPage = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const { fetchProfileInfo } = useRenderProfileStore();
+  const {fetchCartList} = useCartItemStore()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,8 +37,9 @@ const SignInPage = () => {
 
     if (res.ok) {
       localStorage.setItem("authToken", data.token);
-      navigate("/");
-      window.location.reload();
+      navigate(location.state?.returnTo || "/");
+      fetchProfileInfo();
+      fetchCartList()
     }
   };
 
