@@ -123,7 +123,7 @@ const SignUpPage = () => {
                   {error.username || error.password || error.error}
                 </p>
               )}
-              <button className="default-btn w-fit mx-auto py-3 px-8">
+              <button className="default-btn rounded w-fit mx-auto py-3 px-8">
                 Submit
               </button>
             </form>

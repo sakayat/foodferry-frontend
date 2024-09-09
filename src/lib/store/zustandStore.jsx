@@ -237,10 +237,8 @@ export const useRestaurantOrderStore = create((set, get) => ({
 }));
 
 export const useRenderProfileInfoStore = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
   user: {},
-  fetchProfileInfo: async () => {
-    const { token } = get();
+  fetchProfileInfo: async (token) => {
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
       {

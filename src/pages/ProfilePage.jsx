@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BreadCrumbs from "../components/BreadCrumbs";
 import { useRenderProfileInfoStore } from "../lib/store/zustandStore";
 
 const ProfilePage = () => {
+  const token = localStorage.getItem("authToken");
+
   const { user, fetchProfileInfo } = useRenderProfileInfoStore();
 
   useEffect(() => {
-    fetchProfileInfo();
+    fetchProfileInfo(token);
   }, []);
+  
 
   return (
     <div className="py-5">
@@ -71,7 +74,7 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-          <button className="default-btn py-3 px-6">
+          <button className="default-btn rounded py-3 px-6">
             <Link to="/update-profile/">Update profile</Link>
           </button>
         </div>

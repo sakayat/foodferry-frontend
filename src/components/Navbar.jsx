@@ -27,7 +27,7 @@ const Navbar = () => {
   const { user, fetchProfileInfo } = useRenderProfileInfoStore();
 
   useEffect(() => {
-    fetchProfileInfo();
+    fetchProfileInfo(token);
   }, []);
 
   const menuRef = useRef();

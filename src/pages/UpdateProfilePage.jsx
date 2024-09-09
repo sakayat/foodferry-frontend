@@ -12,8 +12,9 @@ const UpdateProfilePage = () => {
   const { user, fetchProfileInfo } = useRenderProfileInfoStore();
 
   useEffect(() => {
-    fetchProfileInfo();
+    fetchProfileInfo(token);
   }, []);
+  
   
 
   const [firstName, setFirstName] = useState("");
@@ -125,7 +126,7 @@ const UpdateProfilePage = () => {
                 onChange={handleImageUpload}
               />
             </div>
-            <button className="default-btn py-3">Submit</button>
+            <button className="default-btn rounded py-3">Submit</button>
             {error && <p className="py-3 text-rose-500">{error}</p>}
           </form>
         </div>

@@ -1,7 +1,7 @@
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useCartItemStore, useRenderProfileInfoStore } from "../lib/store/zustandStore";
+import { useCartItemStore } from "../lib/store/zustandStore";
 
 const SignInPage = () => {
   const navigate = useNavigate();
@@ -37,7 +37,6 @@ const SignInPage = () => {
     if (res.ok) {
       localStorage.setItem("authToken", data.token);
       navigate(location.state?.returnTo || "/profile");
-      window.location.reload()
     }
   };
 
@@ -93,7 +92,7 @@ const SignInPage = () => {
                   {error.username || error.password || error.error}
                 </p>
               )}
-              <button className="default-btn w-fit mx-auto py-3 px-8">
+              <button className="default-btn rounded w-fit mx-auto py-3 px-8">
                 Submit
               </button>
             </form>
