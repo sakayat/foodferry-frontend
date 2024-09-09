@@ -84,8 +84,8 @@ const Navbar = () => {
     if (res.ok) {
       localStorage.removeItem("authToken");
       clearCart();
-      navigate("sign-in/");
-      fetchProfileInfo()
+      return navigate("sign-in/");
+
     }
   };
 

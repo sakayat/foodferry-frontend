@@ -258,4 +258,20 @@ export const useRenderProfileInfoStore = create((set, get) => ({
     const data = await res.json();
     set({ user: data });
   },
+  updateProfileInfo: async (data) => {
+    const { token } = get();
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+        body: data,
+      }
+    );
+    if (res.ok) {
+      get().fetchProfileInfo();
+    }
+  },
 }));

@@ -11,7 +11,6 @@ const SignInPage = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const { fetchProfileInfo } = useRenderProfileInfoStore();
   const {fetchCartList} = useCartItemStore()
 
   const handleSubmit = async (e) => {
@@ -37,8 +36,7 @@ const SignInPage = () => {
 
     if (res.ok) {
       localStorage.setItem("authToken", data.token);
-      navigate(location.state?.returnTo || "/");
-      fetchProfileInfo();
+      navigate(location.state?.returnTo || "/profile");
       fetchCartList()
     }
   };

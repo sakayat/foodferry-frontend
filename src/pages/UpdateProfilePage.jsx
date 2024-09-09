@@ -60,9 +60,9 @@ const UpdateProfilePage = () => {
     setError(data.phone_number)
 
     if (res.ok) {
-      return navigate(location.state?.returnTo || "/profile/");
+      navigate(location.state?.returnTo || "/profile/");
+      fetchProfileInfo()
     }
-    fetchProfileInfo()
   };
 
   return (
