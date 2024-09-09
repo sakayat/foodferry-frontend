@@ -18,6 +18,7 @@ const UpdateProfilePage = () => {
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [profileImage, setProfileImage] = useState("");
+  const [error, setError] = useState("");
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -52,7 +53,6 @@ const UpdateProfilePage = () => {
         body: formData,
       }
     );
-    const data = await res.json();
 
     if (res.ok) {
       return navigate(location.state?.returnTo || "/profile/");
@@ -105,6 +105,7 @@ const UpdateProfilePage = () => {
                 placeholder="phone number"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
+                required
               />
             </div>
             <div className="form-control space-y-2">
