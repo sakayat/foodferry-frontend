@@ -1,24 +1,26 @@
 import React, { useEffect } from "react";
 import { Users, FolderTree, Tag, Store } from "lucide-react";
 import {
-  useUsersStore,
+  useUserListStore,
   useRestaurantListStore,
   useFoodCategoriesStore,
   useFoodTagStore,
 } from "../lib/store/zustandStore";
 
 const AdminDashboardHome = () => {
+  
+
+  const { users, fetchUsers } = useUserListStore();
+  const { categories, fetchCategories } = useFoodCategoriesStore();
+  const { tags, fetchTags } = useFoodTagStore();
+  const { restaurants, fetchRestaurants } = useRestaurantListStore();
+
   useEffect(() => {
     fetchUsers();
     fetchRestaurants();
     fetchCategories();
     fetchTags();
   }, []);
-
-  const { users, fetchUsers } = useUsersStore();
-  const { categories, fetchCategories } = useFoodCategoriesStore();
-  const { tags, fetchTags } = useFoodTagStore();
-  const { restaurants, fetchRestaurants } = useRestaurantListStore();
 
   const data = [
     {
