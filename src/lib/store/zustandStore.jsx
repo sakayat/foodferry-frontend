@@ -275,3 +275,21 @@ export const useRenderProfileInfoStore = create((set, get) => ({
     }
   },
 }));
+
+
+export const useUserListStore = create((set, get) => ({
+  token: localStorage.getItem("authToken"),
+  users: [],
+  fetchUsers: async () => {
+    const { token } = get();
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/user-list/`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    });
+    const data = await res.json();
+    set({ users: data });
+  },
+}));

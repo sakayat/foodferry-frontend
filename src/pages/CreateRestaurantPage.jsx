@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useUsersStore } from "../lib/store/zustandStore";
+import { useUserListStore } from "../lib/store/zustandStore";
 import { useNavigate } from "react-router-dom";
 
 const CreateRestaurantPage = () => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
-  const { users, fetchUsers } = useUsersStore();
+
+  const { users, fetchUsers } = useUserListStore();
 
   const [selectedOwner, setSelectedOwner] = useState("");
   const [name, setName] = useState("");
@@ -48,8 +49,6 @@ const CreateRestaurantPage = () => {
       return navigate("/admin/dashboard/restaurant-list/");
     }
     const data = await res.json();
-
-    console.log(data);
 
     setError(data);
   };
