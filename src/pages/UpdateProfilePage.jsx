@@ -54,6 +54,9 @@ const UpdateProfilePage = () => {
       }
     );
 
+    const data = await res.json()
+    setError(data.phone_number)
+
     if (res.ok) {
       return navigate(location.state?.returnTo || "/profile/");
     }
@@ -120,6 +123,7 @@ const UpdateProfilePage = () => {
               />
             </div>
             <button className="default-btn py-3">Submit</button>
+            {error && <p className="py-3 text-rose-500">{error}</p>}
           </form>
         </div>
       </div>
