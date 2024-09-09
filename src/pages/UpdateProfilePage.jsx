@@ -13,9 +13,7 @@ const UpdateProfilePage = () => {
 
   useEffect(() => {
     fetchProfileInfo();
-  }, [user]);
-
-  console.log(user);
+  }, []);
   
 
   const [firstName, setFirstName] = useState("");
@@ -64,6 +62,7 @@ const UpdateProfilePage = () => {
     if (res.ok) {
       return navigate(location.state?.returnTo || "/profile/");
     }
+    fetchProfileInfo()
   };
 
   return (
