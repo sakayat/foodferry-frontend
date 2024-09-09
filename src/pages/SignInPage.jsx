@@ -65,6 +65,7 @@ const SignInPage = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
+                required
               />
               <div className="relative">
                 <input
@@ -73,6 +74,7 @@ const SignInPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
+                  required
                 />
                 <div className="show__password absolute top-4 right-0 px-6">
                   <div
