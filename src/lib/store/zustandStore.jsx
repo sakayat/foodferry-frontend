@@ -10,7 +10,6 @@ export const useCartStore = create((set) => ({
 export const useFoodItemsStore = create((set, get) => ({
   data: [],
   fetchFoodItems: async () => {
-    const { token } = get();
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/foods/`
     );
@@ -24,10 +23,7 @@ export const useCartItemStore = create((set, get) => ({
   token: localStorage.getItem("authToken"),
   cartItems: [],
   fetchCartList: async () => {
-    const { token } = get();
-    if (!token) {
-      return;
-    }
+    const { token } = get()
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/cart/list/`,
       {

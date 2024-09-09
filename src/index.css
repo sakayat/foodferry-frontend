@@ -135,13 +135,6 @@ input[type="password"]::-ms-clear {
   background-color: rgba(179,165,141,.33);
 }
 
-.cart-container {
-  background-color: var(--antique-white);
-}
-
-.cart-footer{
-  background-color: rgba(90,83,71,.2);
-}
 
 .default-btn{
   background: var(--primary-color);
