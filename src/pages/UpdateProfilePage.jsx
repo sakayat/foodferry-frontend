@@ -8,11 +8,15 @@ const UpdateProfilePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    fetchProfileInfo();
-  }, []);
 
   const { user, fetchProfileInfo } = useRenderProfileInfoStore();
+
+  useEffect(() => {
+    fetchProfileInfo();
+  }, [user]);
+
+  console.log(user);
+  
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

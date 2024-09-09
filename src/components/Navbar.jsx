@@ -5,7 +5,6 @@ import {
   Search,
   ShoppingBag,
   ShoppingCart,
-  Store,
   User2Icon,
   UserCircle,
   X,
@@ -17,7 +16,7 @@ import MobileNav from "./MobileNav";
 import {
   useCartItemStore,
   useCartStore,
-  useProfileStore,
+  useRenderProfileInfoStore,
 } from "../lib/store/zustandStore.jsx";
 import SearchModal from "./SearchModal.jsx";
 
@@ -25,7 +24,11 @@ const Navbar = () => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
 
-  const { user } = useProfileStore();
+  const { user, fetchProfileInfo } = useRenderProfileInfoStore();
+
+  useEffect(() => {
+    fetchProfileInfo()
+  }, [])
 
   const menuRef = useRef();
 
