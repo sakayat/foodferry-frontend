@@ -27,8 +27,8 @@ const Navbar = () => {
   const { user, fetchProfileInfo } = useRenderProfileInfoStore();
 
   useEffect(() => {
-    fetchProfileInfo()
-  }, [])
+    fetchProfileInfo();
+  }, []);
 
   const menuRef = useRef();
 
@@ -85,7 +85,6 @@ const Navbar = () => {
       localStorage.removeItem("authToken");
       clearCart();
       return navigate("sign-in/");
-
     }
   };
 
@@ -139,66 +138,69 @@ const Navbar = () => {
                 {cartItems?.total_quantity || 0}
               </span>
             </div>
-            {token ? (
-              <div ref={dropdownRef}>
-                <button
-                  className="border w-12 h-12 rounded-full flex justify-center items-center"
-                  onClick={() => setIsOpen(!isOpen)}
-                >
-                  {user.profile_image ? (
-                    <img
-                      src={`${import.meta.env.VITE_API_BASE_URL}/${
-                        user.profile_image
-                      }/`}
-                      alt=""
-                      className="w-12 h-12 rounded-full"
-                    />
-                  ) : (
-                    <User2Icon />
+
+            <div className="" ref={dropdownRef}>
+              {token ? (
+                <div>
+                  <button
+                    className="border w-12 h-12 rounded-full flex justify-center items-center"
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
+                    {user.profile_image ? (
+                      <img
+                        src={`${import.meta.env.VITE_API_BASE_URL}/${
+                          user.profile_image
+                        }/`}
+                        alt=""
+                        className="w-12 h-12 rounded-full"
+                      />
+                    ) : (
+                      <User2Icon />
+                    )}
+                  </button>
+                  {isOpen && (
+                    <div className="absolute right-0 mt-3 w-48 bg-[#286140] opacity-90 text-white rounded overflow-hidden shadow z-10 px-2">
+                      <div className="p-3 border-b font-medium text-md">
+                        <span className="">{user.username}</span>
+                      </div>
+                      <div className="py-2 border-b">
+                        <Link
+                          to="profile/"
+                          className="px-4 py-2 text-sm flex items-center"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          <UserCircle size={18} className="mr-2" />
+                          <span>Profile</span>
+                        </Link>
+                      </div>
+                      <div className="py-2 border-b">
+                        <Link
+                          to="order-history/"
+                          className="px-4 py-2 text-sm flex items-center"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          <List size={18} className="mr-2" />
+                          <span>Orders</span>
+                        </Link>
+                      </div>
+                      <div className="py-2">
+                        <button
+                          onClick={() => handleLogout()}
+                          className="px-4 py-2 text-sm flex items-center"
+                        >
+                          <LogOut size={18} className="mr-2" />
+                          <span>LogOut</span>
+                        </button>
+                      </div>
+                    </div>
                   )}
-                </button>
-                {isOpen && (
-                  <div className="absolute right-0 mt-3 w-48 bg-[#286140] opacity-90 text-white rounded overflow-hidden shadow z-10 px-2">
-                    <div className="p-3 border-b font-medium text-md">
-                      <span className="">{user.username}</span>
-                    </div>
-                    <div className="py-2 border-b">
-                      <Link
-                        to="profile/"
-                        className="px-4 py-2 text-sm flex items-center"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <UserCircle size={18} className="mr-2" />
-                        <span>Profile</span>
-                      </Link>
-                    </div>
-                    <div className="py-2 border-b">
-                      <Link
-                        to="order-history/"
-                        className="px-4 py-2 text-sm flex items-center"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <List size={18} className="mr-2" />
-                        <span>Orders</span>
-                      </Link>
-                    </div>
-                    <div className="py-2">
-                      <button
-                        onClick={() => handleLogout()}
-                        className="px-4 py-2 text-sm flex items-center"
-                      >
-                        <LogOut size={18} className="mr-2" />
-                        <span>LogOut</span>
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <li>
-                <Link to="sign-in/">Sign In</Link>
-              </li>
-            )}
+                </div>
+              ) : (
+                <li>
+                  <Link to="sign-in/">Sign In</Link>
+                </li>
+              )}
+            </div>
           </ul>
         </nav>
       </div>
