@@ -47,8 +47,12 @@ const MobileNav = ({ setIsCartOpen, setIsMenuOpen, menuRef }) => {
           </Link>
         </li>
         <li className="py-3 border-b">
-          <Link to="/" className="flex items-center rounded-full">
-            Store
+          <Link
+            to="restaurant-list/"
+            className="flex items-center rounded-full"
+            onClick={() => setIsCartOpen((prev) => !prev)}
+          >
+            Restaurant
           </Link>
         </li>
 
