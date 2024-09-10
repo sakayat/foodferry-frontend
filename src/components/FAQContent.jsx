@@ -39,7 +39,7 @@ import faqImage from "../assets/images/faq.png";
 const FAQContent = () => {
   return (
     <div className="py-5">
-      <div className="xl:container mx-auto p-8">
+      <div className="xl:container mx-auto px-8">
         <div className="py-5">
           <h1 className="text-3xl font-bold">Frequently Asked Questions</h1>
         </div>

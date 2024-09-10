@@ -7,6 +7,7 @@ import HealthyFoodItem from "../components/HealthyFoodItem";
 import HomeChefsFoodItem from "../components/HomeChefsFoodItem";
 import HomeBanner from "../components/HomeBanner";
 import FAQContent from "../components/FAQContent";
+import BrandShowcase from "../components/BrandShowcase";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
@@ -38,6 +39,7 @@ const HomePage = () => {
       <BudgetSpotsFoodItem data={data} />
       <HealthyFoodItem data={data} />
       <FAQContent />
+      <BrandShowcase />
     </div>
   );
 };
