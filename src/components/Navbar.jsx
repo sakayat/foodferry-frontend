@@ -93,7 +93,7 @@ const Navbar = () => {
       <div className="xl:container mx-auto px-8">
         <nav className="py-4 flex items-center justify-between relative">
           <div className="logo flex items-center gap-2">
-            <Link to="/" className="text-2xl uppercase">
+            <Link to="/" className="text-2xl uppercase font-bold">
               FoodFerry
             </Link>
             <button
@@ -115,7 +115,10 @@ const Navbar = () => {
           >
             <Menu />
           </button>
-          <ul className="hidden md:flex items-center gap-10">
+          <ul className="hidden md:flex items-center gap-10 font-bold">
+            <li className="">
+              <Link to="our-menu/">Our menu</Link>
+            </li>
             <li>
               <Link
                 to="/restaurant-list/"
@@ -127,6 +130,7 @@ const Navbar = () => {
                 <span className="font-bold px-4">Restaurant</span>
               </Link>
             </li>
+
             <div className="relative">
               <button
                 className="border border-[#286140] p-2.5 rounded-full"

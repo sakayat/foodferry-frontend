@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import SliderItem from "./SliderItem";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const HeroSection = () => {
+const HomeBanner = () => {
   const data = [
     {
       id: 1,
@@ -85,4 +85,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default HomeBanner;

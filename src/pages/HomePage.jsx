@@ -5,6 +5,7 @@ import PopularFoodItem from "../components/PopularFoodItem";
 import BudgetSpotsFoodItem from "../components/BudgetSpotsFoodItem";
 import HealthyFoodItem from "../components/HealthyFoodItem";
 import HomeChefsFoodItem from "../components/HomeChefsFoodItem";
+import HomeBanner from "../components/HomeBanner";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
@@ -28,6 +29,7 @@ const HomePage = () => {
 
   return (
     <div className="w-full">
+      <HomeBanner />
       <FoodCategories />
       <FeaturedItems data={data}/>
       <PopularFoodItem data={data} />

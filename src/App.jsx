@@ -40,6 +40,7 @@ import CreateRestaurantPage from "./pages/dashboard/admin/CreateRestaurantPage";
 import RestaurantListPage from "./pages/dashboard/admin/RestaurantListPage";
 import CategoryListPage from "./pages/dashboard/admin/CategoryListPage";
 import FoodTagListPage from "./pages/dashboard/admin/FoodTagListPage";
+import OurMenuPage from "./pages/OurMenuPage";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
           <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />
           <Route path="about/" element={<AboutUsPage />} />
           <Route path="contact/" element={<ContactUsPage />} />
+          <Route path="our-menu/" element={<OurMenuPage />}/>
           <Route
             path="forget-password/"
             element={

@@ -67,7 +67,7 @@ const FoodCategories = () => {
     <div className="pt-10">
       <div className="xl:container mx-auto px-8">
         <div className="py-3">
-          <h1 className="text-4xl font-semibold">Food categories</h1>
+          <h1 className="text-4xl font-semibold">Our categories</h1>
         </div>
         <div className="h-52">
           {data.length === 0 ? (
