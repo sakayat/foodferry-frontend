@@ -56,25 +56,23 @@ const OurMenuPage = () => {
         <div className="py-5">
           <h1 className="text-center text-3xl">Discover Our Menu</h1>
         </div>
-        <div className="">
-          <div className="mb-4">
-            <div className="flex border-b border-gray-200">
-              {menu.map((item) => (
-                <button
-                  key={item.id}
-                  className={`py-3 px-4 text-md font-medium leading-5 ${
-                    activeTab === item.name
-                      ? "text-black border-b-2 border-[#286140]"
-                      : "text-gray-500 hover:text-gray-700 hover:border-gray-300"
-                  }`}
-                  onClick={() => handleMenuItem(item)}
-                >
-                  {item.name}
-                </button>
-              ))}
-            </div>
+        <div className="space-y-8">
+          <div className="flex border-b border-gray-200">
+            {menu.map((item) => (
+              <button
+                key={item.id}
+                className={`py-3 px-4 text-md font-medium leading-5 ${
+                  activeTab === item.name
+                    ? "text-black border-b-2 border-[#286140]"
+                    : "text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                }`}
+                onClick={() => handleMenuItem(item)}
+              >
+                {item.name}
+              </button>
+            ))}
           </div>
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {foodItem.map((item) => (
               <div
                 key={item.id}
