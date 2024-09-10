@@ -11,7 +11,7 @@ const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
 
   useEffect(() => {
     if (token) {
-      fetchCartList();
+      fetchCartList(token);
     }
   }, []);
 
@@ -47,7 +47,7 @@ const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
           </div>
           <Link
             to="view-cart/"
-            className="py-2.5 flex justify-center w-full default-btn"
+            className="py-2.5 flex justify-center w-full default-btn rounded"
             onClick={() => setIsCartOpen(!isCartOpen)}
           >
             View Cart

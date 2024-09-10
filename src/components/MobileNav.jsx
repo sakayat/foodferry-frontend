@@ -8,7 +8,7 @@ const MobileNav = ({ setIsCartOpen, setIsMenuOpen, menuRef }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchCartList();
+    fetchCartList(token);
   }, []);
 
   const { cartItems, fetchCartList } = useCartItemStore();

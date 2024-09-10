@@ -6,11 +6,12 @@ import ViewCartItem from "../components/ViewCartItem";
 import { currencyFormat } from "../lib/utils";
 
 const ViewCartPage = () => {
-  useEffect(() => {
-    fetchCartList();
-  }, []);
-
+  const token = localStorage.getItem("authToken");
   const { cartItems, fetchCartList } = useCartItemStore();
+
+  useEffect(() => {
+    fetchCartList(token);
+  }, []);
 
   return (
     <div className="pt-5">
@@ -63,7 +64,7 @@ const ViewCartPage = () => {
           </div>
           <Link
             to="/checkout"
-            className="default-btn py-3 px-6 w-full md:w-96 text-center"
+            className="default-btn rounded py-3 px-6 w-full md:w-96 text-center"
           >
             Check Out
           </Link>

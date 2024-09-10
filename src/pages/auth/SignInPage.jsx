@@ -36,8 +36,8 @@ const SignInPage = () => {
     
     if (res.ok) {
       localStorage.setItem("authToken", data.token);
+      fetchCartList(data.token);
       navigate(location.state?.returnTo || "/profile");
-      window.location.reload()
     }
   };
 

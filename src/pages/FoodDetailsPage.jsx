@@ -135,7 +135,7 @@ const FoodDetailsPage = () => {
                   </div>
                 </div>
                 <button
-                  className="px-6 default-btn border h-12 w-full uppercase"
+                  className="px-6 default-btn rounded border h-12 w-full uppercase"
                   type="submit"
                 >
                   Add to cart

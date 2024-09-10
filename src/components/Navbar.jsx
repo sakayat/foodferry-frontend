@@ -49,7 +49,7 @@ const Navbar = () => {
   const { cartItems, clearCart, fetchCartList } = useCartItemStore();
 
   useEffect(() => {
-    fetchCartList();
+    fetchCartList(token);
     document.addEventListener("click", closeMenu);
     return () => {
       document.removeEventListener("click", closeMenu);

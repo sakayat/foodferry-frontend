@@ -13,7 +13,6 @@ export const useFoodItemsStore = create((set, get) => ({
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/foods/`
     );
-
     const data = await res.json();
     set({ data });
   },
@@ -22,15 +21,14 @@ export const useFoodItemsStore = create((set, get) => ({
 export const useCartItemStore = create((set, get) => ({
   token: localStorage.getItem("authToken"),
   cartItems: [],
-  fetchCartList: async () => {
-    const { token } = get()
+  fetchCartList: async (newToken) => {
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/cart/list/`,
       {
         method: "get",
         headers: {
           "Content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Token ${newToken}`,
         },
       }
     );
@@ -270,19 +268,21 @@ export const useRenderProfileInfoStore = create((set, get) => ({
   },
 }));
 
-
 export const useUserListStore = create((set, get) => ({
   token: localStorage.getItem("authToken"),
   users: [],
   fetchUsers: async () => {
     const { token } = get();
-    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/user-list/`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/user-list/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
     const data = await res.json();
     set({ users: data });
   },

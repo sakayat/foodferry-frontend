@@ -22,7 +22,7 @@ const CartInfo = ({ item, fetchCartList }) => {
     );
     const data = await res.json();
     setNewData(data);
-    fetchCartList();
+    fetchCartList(token);
   };
 
   const handleChangeQuantity = (quantity) => {
@@ -48,7 +48,7 @@ const CartInfo = ({ item, fetchCartList }) => {
         Authorization: `Token ${token}`,
       },
     });
-    fetchCartList();
+    fetchCartList(token);
   };
 
   return (

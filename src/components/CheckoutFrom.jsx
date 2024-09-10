@@ -154,7 +154,7 @@ const CheckoutFrom = () => {
       {errors?.profileError && (
         <button onClick={() => handleNavigate()}>Update your profile</button>
       )}
-      <button className="default-btn py-3 px-6 w-full">Place order</button>
+      <button className="default-btn rounded py-3 px-6 w-full">Place order</button>
     </form>
   );
 };
