@@ -29,6 +29,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="our-menu/" className="hover:text-gray-300">
+                  Our Menu
+                </Link>
+              </li>
+              <li>
                 <Link to="about/" className="hover:text-gray-300">
                   About
                 </Link>

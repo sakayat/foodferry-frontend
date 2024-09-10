@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import OurMenuSkeleton from "../components/OurMenuSkeleton";
 
 const OurMenuPage = () => {
   const [menu, setMenu] = useState([]);
@@ -56,6 +57,7 @@ const OurMenuPage = () => {
         <div className="py-5">
           <h1 className="text-center text-3xl">Discover Our Menu</h1>
         </div>
+        {menu.length === 0 && <OurMenuSkeleton />}
         <div className="space-y-8">
           <div className="flex border-b border-gray-200">
             {menu.map((item) => (
