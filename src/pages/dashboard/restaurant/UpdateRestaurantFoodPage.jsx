@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useFoodCategories, useFoodTags } from "../lib/store/zustandStore";
-import FoodItemForm from "../components/FoodItemForm";
+import { useFoodCategories, useFoodTags } from "../../../lib/store/zustandStore";
+import FoodItemForm from "./components/FoodItemForm";
 
-const UpdateRestaurantFood = () => {
+
+const UpdateRestaurantFoodPage = () => {
   const { id } = useParams();
 
   useEffect(() => {
@@ -23,4 +24,4 @@ const UpdateRestaurantFood = () => {
   );
 };
 
-export default UpdateRestaurantFood;
+export default UpdateRestaurantFoodPage;

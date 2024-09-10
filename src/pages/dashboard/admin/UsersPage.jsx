@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Edit, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import Pagination from "../components/Pagination";
+import Pagination from "../../../components/Pagination";
+
 
 const UsersPage = () => {
   const token = localStorage.getItem("authToken");

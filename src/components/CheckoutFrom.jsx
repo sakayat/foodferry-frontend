@@ -15,11 +15,11 @@ const CheckoutFrom = () => {
 
   const { fetchCartList } = useCartItemStore();
 
-  useEffect(() => {
-    fetchProfileInfo();
-  }, []);
-
   const { user, fetchProfileInfo } = useRenderProfileInfoStore();
+
+  useEffect(() => {
+    fetchProfileInfo(token);
+  }, []);
 
   const [errors, setErrors] = useState(null);
 

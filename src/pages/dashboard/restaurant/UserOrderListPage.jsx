@@ -1,7 +1,7 @@
 import { Edit } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { currencyFormat } from "../lib/utils";
-import { useRestaurantOrderStore } from "../lib/store/zustandStore";
+import { currencyFormat } from "../../../lib/utils";
+import { useRestaurantOrderStore } from "../../../lib/store/zustandStore";
 
 const UserOrderListPage = () => {
   const token = localStorage.getItem("authToken");

@@ -1,8 +1,8 @@
 import { Edit, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { currencyFormat } from "../lib/utils";
 import { Link } from "react-router-dom";
-import Pagination from "../components/Pagination";
+import { currencyFormat } from "../../../lib/utils";
+import Pagination from "../../../components/Pagination";
 
 const FoodItemsPage = () => {
   const token = localStorage.getItem("authToken");

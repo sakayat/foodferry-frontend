@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useFoodCategories, useFoodTagStore } from "../lib/store/zustandStore";
-import FoodItemForm from "../components/FoodItemForm";
+import { useFoodCategories, useFoodTagStore } from "../../../lib/store/zustandStore";
+import FoodItemForm from "./components/FoodItemForm";
+
 
 const AddFoodItemPage = () => {
   useEffect(() => {

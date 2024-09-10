@@ -21,7 +21,7 @@ const ViewCartItem = ({ item, fetchCartList }) => {
     );
     const data = await res.json();
     setNewData(data);
-    fetchCartList();
+    fetchCartList(token);
   };
 
   const handleChangeQuantity = (quantity) => {

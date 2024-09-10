@@ -5,11 +5,11 @@ import { useOrderStore } from "../lib/store/zustandStore";
 import { currencyFormat } from "../lib/utils";
 
 const OrderHistoryPage = () => {
+  const { orderList, fetchOrderList } = useOrderStore();
+
   useEffect(() => {
     fetchOrderList();
   }, []);
-
-  const { orderList, fetchOrderList } = useOrderStore();
 
   const [foodItem, setFoodItem] = useState();
 

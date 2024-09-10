@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import AdminDashboardSidebar from "./AdminDashboardSidebar";
+import AdminDashboardHomePage from "../AdminDashboardHomePage";
+
 
 const AdminDashboardLayout = () => {
   const [activeItem, setActiveItem] = useState("Dashboard");
@@ -8,7 +9,7 @@ const AdminDashboardLayout = () => {
   return (
     <div className="dashboard">
       <div className="flex flex-col lg:flex-row">
-        <AdminDashboardSidebar
+        <AdminDashboardHomePage
           activeItem={activeItem}
           setActiveItem={setActiveItem}
         />

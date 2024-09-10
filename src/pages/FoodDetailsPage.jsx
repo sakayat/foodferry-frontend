@@ -67,8 +67,6 @@ const FoodDetailsPage = () => {
     setIsCartOpen(!isCartOpen);
   };
 
-  console.log(foodItem);
-
   return (
     <div className="pt-10">
       <div className="xl:container mx-auto px-8">

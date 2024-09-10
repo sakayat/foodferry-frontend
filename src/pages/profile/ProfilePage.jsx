@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import BreadCrumbs from "../components/BreadCrumbs";
-import { useRenderProfileInfoStore } from "../lib/store/zustandStore";
+import BreadCrumbs from "../../components/BreadCrumbs";
+import { useRenderProfileInfoStore } from "../../lib/store/zustandStore";
 
 const ProfilePage = () => {
   const token = localStorage.getItem("authToken");

@@ -1,32 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
-import SignInPage from "./pages/SignInPage";
+
 import FoodDetailsPage from "./pages/FoodDetailsPage";
 import ViewCartPage from "./pages/ViewCartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderHistoryPage from "./pages/OrderHistoryPage";
-import ProfilePage from "./pages/ProfilePage";
-import UpdateProfilePage from "./pages/UpdateProfilePage";
-import SignUpPage from "./pages/SignUpPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import AddFoodItemPage from "./pages/AddFoodItemPage";
-import RestaurantDashboardLayout from "./components/RestaurantDashboardLayout";
-import RestaurantDashboardHome from "./pages/RestaurantDashboardHome";
+import RestaurantDashboardLayout from "./pages/dashboard/restaurant/components/layout/RestaurantDashboardLayout";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
-import FoodItemsPage from "./pages/FoodItemsPage";
-import UpdateRestaurantFood from "./pages/UpdateRestaurantFood";
-import UpdateRestaurantInfo from "./pages/UpdateRestaurantInfo";
-import AdminDashboardLayout from "./components/AdminDashboardLayout";
-import AdminDashboardHome from "./pages/AdminDashboardHome";
-import UsersPage from "./pages/UsersPage";
-import UpdateUserRolePage from "./pages/UpdateUserRolePage";
-import CreateRestaurantPage from "./pages/CreateRestaurantPage";
-import RestaurantListPage from "./pages/RestaurantListPage";
-import AddCategoryPage from "./pages/AddCategoryPage";
-import CategoryListPage from "./pages/CategoryListPage";
-import AddFoodTagPage from "./pages/AddFoodTagPage";
-import FoodTagListPage from "./pages/FoodTagListPage";
+import AdminDashboardHome from "./pages/dashboard/admin/AdminDashboardHomePage";
+import UpdateUserRolePage from "./pages/dashboard/admin/UpdateUserRolePage";
+import AddCategoryPage from "./pages/dashboard/admin/AddCategoryPage";
+import AddFoodTagPage from "./pages/dashboard/admin/AddFoodTagPage";
 import FoodItem from "./components/FoodItem";
 import CategoryFoodPage from "./pages/CategoryFoodPage";
 import AllRestaurants from "./pages/AllRestaurants";
@@ -34,11 +20,26 @@ import RestaurantFoodPage from "./pages/RestaurantFoodPage";
 import Footer from "./components/Footer";
 import AboutUsPage from "./pages/AboutUsPage";
 import ContactUsPage from "./pages/ContactUsPage";
-import UserOrderListPage from "./pages/UserOrderListPage";
+import UserOrderListPage from "./pages/dashboard/restaurant/UserOrderListPage";
 import ScrollToTop from "./components/ScrollToTop";
-import ForgetPasswordPage from "./pages/ForgetPasswordPage";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ForgetPasswordPage from "./pages/auth/ForgetPasswordPage";
+import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import PublicRoute from "./components/PublicRoute";
+import SignInPage from "./pages/Auth/SignInPage";
+import ProfilePage from "./pages/profile/ProfilePage";
+import UpdateProfilePage from "./pages/profile/UpdateProfilePage";
+import SignUpPage from "./pages/Auth/SignUpPage";
+import AddFoodItemPage from "./pages/dashboard/restaurant/AddFoodItemPage";
+import RestaurantDashboardHomePage from "./pages/dashboard/restaurant/RestaurantDashboardHomePage";
+import FoodItemsPage from "./pages/dashboard/restaurant/FoodItemsPage";
+import UpdateRestaurantFoodPage from "./pages/dashboard/restaurant/UpdateRestaurantFoodPage";
+import UpdateRestaurantInfoPage from "./pages/dashboard/restaurant/UpdateRestaurantInfoPage";
+import AdminDashboardLayout from "./pages/dashboard/admin/layout/AdminDashboardLayout";
+import UsersPage from "./pages/dashboard/admin/UsersPage";
+import CreateRestaurantPage from "./pages/dashboard/admin/CreateRestaurantPage";
+import RestaurantListPage from "./pages/dashboard/admin/RestaurantListPage";
+import CategoryListPage from "./pages/dashboard/admin/CategoryListPage";
+import FoodTagListPage from "./pages/dashboard/admin/FoodTagListPage";
 
 function App() {
   return (
@@ -122,15 +123,15 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route path="" element={<RestaurantDashboardHome />} />
+            <Route path="" element={<RestaurantDashboardHomePage />} />
             <Route path="add-food-item/" element={<AddFoodItemPage />} />
             <Route
               path="update-food-item/:id/"
-              element={<UpdateRestaurantFood />}
+              element={<UpdateRestaurantFoodPage />}
             />
             <Route
               path="update-restaurant-info/"
-              element={<UpdateRestaurantInfo />}
+              element={<UpdateRestaurantInfoPage />}
             />
             <Route path="food-items/" element={<FoodItemsPage />} />
             <Route path="user-order/" element={<UserOrderListPage />} />

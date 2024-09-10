@@ -1,71 +1,74 @@
 import React, { useEffect, useState } from "react";
-import { useFoodTagStore } from "../lib/store/zustandStore";
 import { Edit, Trash2 } from "lucide-react";
+import { useFoodCategoriesStore } from "../../../lib/store/zustandStore";
 
-const FoodTagListPage = () => {
+const CategoryListPage = () => {
   const token = localStorage.getItem("authToken");
-
   useEffect(() => {
-    fetchTags();
+    fetchCategories();
   }, []);
 
-  const { tags, fetchTags } = useFoodTagStore();
+  const { categories, fetchCategories } = useFoodCategoriesStore();
 
   const [showModal, setShowModal] = useState(false);
-  const [tagItem, setTagItem] = useState({});
+  const [categoryItem, setCategoryItem] = useState({});
 
-  const handleTagData = async (tag) => {
-    setTagItem(tag);
-    setError("");
+  const handleCategoryData = async (category) => {
+    setCategoryItem(category);
     setShowModal(!showModal);
   };
 
-  const [tagName, setTagName] = useState("");
+  const [categoryName, setCategoryName] = useState("");
+  const [categoryImage, setCategoryImage] = useState("");
 
   useEffect(() => {
-    if (tagItem) {
-      setTagName(tagItem.name || "");
+    if (categoryItem) {
+      setCategoryName(categoryItem.name || "");
+      setCategoryImage(categoryItem.image);
     }
-  }, [tagItem]);
+  }, [categoryItem]);
 
   const [error, setError] = useState("");
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    setCategoryImage(file);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const obj = {
-      name: tagName,
-      slug: tagName.toLowerCase().split(" ").join("-"),
-    };
+    const formData = new FormData();
+
+    formData.append("name", categoryName);
+    formData.append("slug", categoryName.toLowerCase().split(" ").join("-"));
+    formData.append("image", categoryImage);
 
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/update-tag/${
-        tagItem.id
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/update-category/${
+        categoryItem.id
       }/`,
       {
         method: "PUT",
         headers: {
-          "Content-type": "application/json",
           Authorization: `Token ${token}`,
         },
-        body: JSON.stringify(obj),
+        body: formData,
       }
     );
-
     if (res.ok) {
       setShowModal(!showModal);
     }
-
     const data = await res.json();
-
     setError(data);
-
-    fetchTags();
+    fetchCategories();
   };
 
-  const handleDeleteTag = async (id) => {
+  const handleDeleteCategory = async (id) => {
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/delete-tag/${id}/`,
+      `${
+        import.meta.env.VITE_API_BASE_URL
+      }/api/restaurant/delete-category/${id}/`,
       {
         method: "DELETE",
         headers: {
@@ -73,13 +76,13 @@ const FoodTagListPage = () => {
         },
       }
     );
-    fetchTags();
+    fetchCategories();
   };
 
   return (
     <div className="max-w-6xl mx-auto px-8 py-5">
       <div className="py-5">
-        <h2 className="text-3xl">Tag List</h2>
+        <h2 className="text-3xl">Category List</h2>
       </div>
       <div className="category-list">
         <div className="relative overflow-x-auto">
@@ -87,32 +90,32 @@ const FoodTagListPage = () => {
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  Tag Name
+                  Category Name
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Action
                 </th>
               </tr>
             </thead>
-            {tags?.map((tag) => (
-              <tbody key={tag.id}>
+            {categories?.map((category) => (
+              <tbody key={category.id}>
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {tag.name}
+                    {category.name}
                   </th>
                   <td className="px-6 py-4 space-x-5">
                     <button
                       className="text-green-600 hover:text-green-800"
-                      onClick={() => handleTagData(tag)}
+                      onClick={() => handleCategoryData(category)}
                     >
                       <Edit size={18} />
                     </button>
                     <button
                       className="text-rose-600 hover:text-red-800"
-                      onClick={() => handleDeleteTag(tag.id)}
+                      onClick={() => handleDeleteCategory(category.id)}
                     >
                       <Trash2 size={18} />
                     </button>
@@ -127,26 +130,38 @@ const FoodTagListPage = () => {
         <div className="fixed inset-0 flex items-center justify-center w-full z-50 bg-black bg-opacity-50">
           <div className="w-full">
             <div className="max-w-xl mx-auto bg-white p-6 shadow-lg">
-              <h3 className="text-lg font-bold mb-4">Update Tag</h3>
+              <h3 className="text-lg font-bold mb-4">Update Category</h3>
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="form-control space-y-2">
                   <label htmlFor="" className="text-md font-semibold">
-                    Tag Name
+                    Category Name
                   </label>
                   <input
                     type="text"
-                    value={tagName}
-                    onChange={(e) => setTagName(e.target.value)}
+                    value={categoryName}
+                    onChange={(e) => setCategoryName(e.target.value)}
                     className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
-                    placeholder="tag name"
+                    placeholder="Category name"
                   />
                 </div>
+                <div className="form-control space-y-2">
+                  <label htmlFor="" className="text-md font-semibold">
+                    Category Image
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+                    onChange={handleImageUpload}
+                  />
+                </div>
+
                 {error && (
                   <p className="py-3 text-rose-500">
-                    {error.name || error.slug}
+                    {error.name || error.slug || error.image}
                   </p>
                 )}
-                <div className="flex justify-end space-x-4">
+                <div className="mt-4 flex justify-end space-x-4">
                   <button type="submit" className="default-btn py-3.5 w-full">
                     Submit
                   </button>
@@ -166,4 +181,4 @@ const FoodTagListPage = () => {
   );
 };
 
-export default FoodTagListPage;
+export default CategoryListPage;

@@ -1,7 +1,7 @@
 import { Home, Info, List, Pen, PlusCircle, User2 } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { useRestaurantInfo } from "../lib/store/zustandStore";
+import { useRestaurantInfo } from "../../../../lib/store/zustandStore";
 
 const AdminDashboardSidebar = ({ activeItem, setActiveItem }) => {
   const menuItems = [

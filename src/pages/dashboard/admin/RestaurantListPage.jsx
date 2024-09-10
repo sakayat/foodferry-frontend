@@ -1,6 +1,7 @@
 import { Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { useRestaurantListStore } from "../lib/store/zustandStore";
+import { useRestaurantListStore } from "../../../lib/store/zustandStore";
+
 
 const RestaurantListPage = () => {
   const token = localStorage.getItem("authToken");

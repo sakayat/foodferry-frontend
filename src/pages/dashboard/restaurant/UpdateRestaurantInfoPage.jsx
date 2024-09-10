@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRestaurantInfo } from "../lib/store/zustandStore";
+import { useRestaurantInfo } from "../../../lib/store/zustandStore";
 
-const UpdateRestaurantInfo = () => {
+const UpdateRestaurantInfoPage = () => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
 
@@ -132,4 +132,4 @@ const UpdateRestaurantInfo = () => {
   );
 };
 
-export default UpdateRestaurantInfo;
+export default UpdateRestaurantInfoPage;

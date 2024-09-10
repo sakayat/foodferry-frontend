@@ -2,11 +2,11 @@ import { MapPin, Phone, ShoppingBag } from "lucide-react";
 import {
   useRestaurantInfo,
   useRestaurantOrderStore,
-} from "../lib/store/zustandStore";
+} from "../../../lib/store/zustandStore";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
-const RestaurantDashboardHome = () => {
+const RestaurantDashboardHomePage = () => {
   useEffect(() => {
     fetchRestaurantInfo();
     fetchUserOrderList();
@@ -67,4 +67,4 @@ const RestaurantDashboardHome = () => {
   );
 };
 
-export default RestaurantDashboardHome;
+export default RestaurantDashboardHomePage;

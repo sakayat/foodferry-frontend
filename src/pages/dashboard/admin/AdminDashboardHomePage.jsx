@@ -5,9 +5,9 @@ import {
   useRestaurantListStore,
   useFoodCategoriesStore,
   useFoodTagStore,
-} from "../lib/store/zustandStore";
+} from "../../../lib/store/zustandStore";
 
-const AdminDashboardHome = () => {
+const AdminDashboardHomePage = () => {
   
 
   const { users, fetchUsers } = useUserListStore();
@@ -66,4 +66,4 @@ const AdminDashboardHome = () => {
   );
 };
 
-export default AdminDashboardHome;
+export default AdminDashboardHomePage;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useUserListStore } from "../lib/store/zustandStore";
+
 import { useNavigate } from "react-router-dom";
+import { useUserListStore } from "../../../lib/store/zustandStore";
 
 const CreateRestaurantPage = () => {
   const token = localStorage.getItem("authToken");

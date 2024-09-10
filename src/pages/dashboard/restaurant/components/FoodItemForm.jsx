@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRestaurantInfo } from "../lib/store/zustandStore";
+import { useRestaurantInfo } from "../../../../lib/store/zustandStore";
 
 const FoodItemForm = ({ categories, foodTags, id }) => {
   const token = localStorage.getItem("authToken");
