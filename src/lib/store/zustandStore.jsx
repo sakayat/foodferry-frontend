@@ -157,7 +157,7 @@ export const useUsersStore = create((set, get) => ({
 }));
 
 export const useRestaurantListStore = create((set, get) => ({
-  restaurants: [],
+  restaurantData: [],
   fetchRestaurants: async () => {
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/list/`,
@@ -169,7 +169,7 @@ export const useRestaurantListStore = create((set, get) => ({
       }
     );
     const data = await res.json();
-    set({ restaurants: data });
+    set({ restaurantData: data });
   },
 }));
 
