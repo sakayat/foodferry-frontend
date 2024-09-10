@@ -4,6 +4,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SliderItem from "./SliderItem";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import image1 from "../assets/images/slider1.png"
+import image2 from "../assets/images/slider2.png"
+import image3 from "../assets/images/slider3.jpg"
 
 const HomeBanner = () => {
   const data = [
@@ -12,21 +15,21 @@ const HomeBanner = () => {
       text: "Hot Summer Offer!",
       sub_title: "Try brand new",
       title: "BIG MAMA BURGER!",
-      image: "src/assets/images/slider1.png",
+      image: image1
     },
     {
       id: 2,
       text: "Friday offer!",
       sub_title: "Making people happy",
       title: "Vincent pizza",
-      image: "src/assets/images/slider2.png",
+      image: image2
     },
     {
       id: 1,
       text: "Hot Summer Offer!",
       sub_title: "Try brand new",
       title: "Delicious Disheswith",
-      image: "src/assets/images/slider4.png",
+      image: image3
     },
   ];
 
