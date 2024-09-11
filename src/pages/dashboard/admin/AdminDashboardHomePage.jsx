@@ -23,7 +23,7 @@ const AdminDashboardHomePage = () => {
   const data = [
     {
       title: "Total users",
-      value: users.length,
+      value: 16,
       icon: <Users size={30} />,
     },
     {
