@@ -8,12 +8,10 @@ import {
 } from "../../../lib/store/zustandStore";
 
 const AdminDashboardHomePage = () => {
-  
-
   const { users, fetchUsers } = useUserListStore();
   const { categories, fetchCategories } = useFoodCategoriesStore();
   const { tags, fetchTags } = useFoodTagStore();
-  const { restaurants, fetchRestaurants } = useRestaurantListStore();
+  const { restaurantData, fetchRestaurants } = useRestaurantListStore();
 
   useEffect(() => {
     fetchUsers();
@@ -26,22 +24,22 @@ const AdminDashboardHomePage = () => {
     {
       title: "Total users",
       value: users.length,
-      icon: <Users size={30}/>
+      icon: <Users size={30} />,
     },
     {
       title: "Total Categories",
       value: categories.length,
-      icon: <FolderTree size={30}/>
+      icon: <FolderTree size={30} />,
     },
     {
       title: "Total Tags",
       value: tags.length,
-      icon: <Tag size={30}/>
+      icon: <Tag size={30} />,
     },
     {
       title: "Total Restaurants",
-      value: restaurants.length,
-      icon: <Store size={30}/>
+      value: restaurantData.length,
+      icon: <Store size={30} />,
     },
   ];
 

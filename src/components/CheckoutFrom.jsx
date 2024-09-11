@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   useCartItemStore,
   useRenderProfileInfoStore,
+  useOrderStore,
 } from "../lib/store/zustandStore";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -14,6 +15,7 @@ const CheckoutFrom = () => {
   const [paymentMethod, setPaymentMethod] = useState("");
 
   const { fetchCartList } = useCartItemStore();
+  const { fetchOrderList } = useOrderStore();
 
   const { user, fetchProfileInfo } = useRenderProfileInfoStore();
 
@@ -55,6 +57,7 @@ const CheckoutFrom = () => {
 
     if (user.first_name && user.phone_number && user.last_name) {
       fetchCartList();
+      fetchOrderList();
       return navigate("/order-history");
     }
   };
@@ -154,7 +157,9 @@ const CheckoutFrom = () => {
       {errors?.profileError && (
         <button onClick={() => handleNavigate()}>Update your profile</button>
       )}
-      <button className="default-btn rounded py-3 px-6 w-full">Place order</button>
+      <button className="default-btn rounded py-3 px-6 w-full">
+        Place order
+      </button>
     </form>
   );
 };
