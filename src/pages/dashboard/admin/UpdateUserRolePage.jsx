@@ -41,6 +41,7 @@ const UpdateUserRolePage = () => {
       }
     );
     const data = await res.json();
+    
     setUser(data);
   };
 

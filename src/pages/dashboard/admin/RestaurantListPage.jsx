@@ -10,7 +10,7 @@ const RestaurantListPage = () => {
     fetchRestaurants();
   }, []);
 
-  const { restaurants, fetchRestaurants } = useRestaurantListStore();
+  const { restaurantData, fetchRestaurants } = useRestaurantListStore();
 
   const [showModal, setShowModal] = useState(false);
   const [restaurantInfo, setRestaurantInfo] = useState(null);
@@ -67,7 +67,7 @@ const RestaurantListPage = () => {
               </tr>
             </thead>
             <tbody>
-              {restaurants.map((restaurant) => (
+              {restaurantData.map((restaurant) => (
                 <tr
                   key={restaurant.id}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
