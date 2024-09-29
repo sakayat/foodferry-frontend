@@ -6,7 +6,7 @@ import { useCartItemStore } from "../../lib/store/zustandStore";
 const SignInPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -15,23 +15,25 @@ const SignInPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userObj = {
-      username,
-      password,
-    };
+
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/login/`,
 
       {
-        method: "post",
+        method: "POST",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(userObj),
+        body: JSON.stringify({email, password}),
       }
     );
 
+    console.log(res);
+    
+
     const data = await res.json();
+    console.log(data);
+    
     setError(data);
     
     if (res.ok) {
@@ -58,11 +60,11 @@ const SignInPage = () => {
               onSubmit={handleSubmit}
             >
               <input
-                type="text"
+                type="email"
                 className="py-3 px-6 border border-black w-full outline-none placeholder-gray-600 focus:border-gray-300"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
                 required
               />
               <div className="relative">
@@ -90,7 +92,7 @@ const SignInPage = () => {
               </div>
               {error && (
                 <p className="py-1 text-rose-500">
-                  {error.username || error.password || error.error}
+                  {error.email || error.password || error.error}
                 </p>
               )}
               <button className="default-btn rounded w-fit mx-auto py-3 px-8">
