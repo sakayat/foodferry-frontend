@@ -8,14 +8,11 @@ const UpdateProfilePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-
   const { user, fetchProfileInfo } = useRenderProfileInfoStore();
 
   useEffect(() => {
     fetchProfileInfo(token);
   }, []);
-  
-  
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -23,9 +20,24 @@ const UpdateProfilePage = () => {
   const [profileImage, setProfileImage] = useState("");
   const [error, setError] = useState("");
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    setProfileImage(file);
+    if (!file) return;
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "hxdbn2v3");
+    data.append("cloud_name", "dmbu1haaj");
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/dmbu1haaj/image/upload`,
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const imageUrl = await res.json();
+    setProfileImage(imageUrl.url);
   };
 
   useEffect(() => {
@@ -39,30 +51,30 @@ const UpdateProfilePage = () => {
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-
-    formData.append("first_name", firstName);
-    formData.append("last_name", lastName);
-    formData.append("phone_number", phoneNumber);
-    formData.append("profile_image", profileImage);
-
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
       {
         method: "PUT",
         headers: {
+          "content-type": "application/json",
           Authorization: `Token ${token}`,
         },
-        body: formData,
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          phone_number: phoneNumber,
+          profile_image: profileImage,
+        }),
       }
     );
 
-    const data = await res.json()
-    setError(data.phone_number)
+    const data = await res.json();
+
+    setError(data.phone_number);
 
     if (res.ok) {
       navigate(location.state?.returnTo || "/profile/");
-      fetchProfileInfo()
+      fetchProfileInfo();
     }
   };
 
@@ -84,7 +96,7 @@ const UpdateProfilePage = () => {
               </label>
               <input
                 type="text"
-                className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+                className="py-3 px-6 border rounded border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
                 placeholder="first name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -96,7 +108,7 @@ const UpdateProfilePage = () => {
               </label>
               <input
                 type="text"
-                className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+                className="py-3 px-6 border rounded border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
                 placeholder="last name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -108,7 +120,7 @@ const UpdateProfilePage = () => {
               </label>
               <input
                 inputMode="numeric"
-                className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+                className="py-3 px-6 border rounded border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
                 placeholder="phone number"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -122,7 +134,7 @@ const UpdateProfilePage = () => {
               <input
                 type="file"
                 accept="image/*"
-                className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+                className="py-2.5 px-6 border rounded border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
                 onChange={handleImageUpload}
               />
             </div>

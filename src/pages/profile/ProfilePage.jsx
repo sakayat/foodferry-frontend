@@ -32,13 +32,11 @@ const ProfilePage = () => {
             </button>
           )}
         </div>
-        <div className="max-w-2xl profile space-y-5">
-          <div className="border border-black/20 py-5 px-4">
+        <div className="profile space-y-5">
+          <div className="border rounded border-black/20 py-5 px-4">
             <div className="flex flex-col gap-2">
               <img
-                src={`${import.meta.env.VITE_API_BASE_URL}/${
-                  user.profile_image
-                }/`}
+                src={user.profile_image}
                 alt=""
                 className="w-28 h-28 rounded-full"
               />
