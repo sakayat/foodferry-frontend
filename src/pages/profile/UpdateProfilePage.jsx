@@ -23,6 +23,7 @@ const UpdateProfilePage = () => {
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "hxdbn2v3");
@@ -45,6 +46,7 @@ const UpdateProfilePage = () => {
       setFirstName(user.first_name || "");
       setLastName(user.last_name || "");
       setPhoneNumber(user.phone_number || "");
+      setProfileImage(user.profile_image || "")
     }
   }, [user]);
 
