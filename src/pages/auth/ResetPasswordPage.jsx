@@ -11,8 +11,6 @@ const ResetPasswordPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
-  console.log(error);
-
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -73,7 +71,7 @@ const ResetPasswordPage = () => {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="py-3 px-6 border border-black w-full outline-none placeholder-gray-600 focus:border-gray-300"
+                  className="py-3 px-6 border border-black rounded w-full outline-none placeholder-gray-600 focus:border-gray-300"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
@@ -81,7 +79,7 @@ const ResetPasswordPage = () => {
                 <div className="show__password absolute top-4 right-0 px-6">
                   <div
                     onClick={() => handleShowPassword()}
-                    className=" cursor-pointer"
+                    className="cursor-pointer"
                   >
                     {showPassword ? (
                       <EyeOffIcon size={18} />
@@ -94,7 +92,7 @@ const ResetPasswordPage = () => {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="py-3 px-6 border border-black w-full outline-none placeholder-gray-600 focus:border-gray-300"
+                  className="py-3 px-6 border border-black rounded w-full outline-none placeholder-gray-600 focus:border-gray-300"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm Password"
@@ -117,7 +115,7 @@ const ResetPasswordPage = () => {
                   {error.password || error.confirm_password || error.error}
                 </p>
               )}
-              <button className="default-btn w-fit mx-auto py-3 px-8">
+              <button className="default-btn rounded w-fit mx-auto py-3 px-8">
                 Submit
               </button>
             </form>

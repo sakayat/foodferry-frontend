@@ -77,7 +77,7 @@ const UpdateUserRolePage = () => {
           <label className="text-md font-semibold">User Name</label>
           <input
             type="text"
-            className="py-3 px-6 border border-gray-300 w-full  outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-gray-300 rounded w-full  outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             placeholder={user.username}
             disabled
           />
@@ -86,7 +86,7 @@ const UpdateUserRolePage = () => {
           <label className="text-md font-semibold">Email</label>
           <input
             type="text"
-            className="py-3 px-6 border border-gray-300 w-full  outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-gray-300 rounded w-full  outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             placeholder={user.email}
             disabled
           />
@@ -95,7 +95,7 @@ const UpdateUserRolePage = () => {
           <label className="text-md font-semibold">Phone Number</label>
           <input
             type="text"
-            className="py-3 px-6 border border-gray-300 w-full  outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-gray-300 rounded w-full  outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             placeholder={user.phone_number}
             disabled
           />
@@ -105,7 +105,7 @@ const UpdateUserRolePage = () => {
           <select
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            className="py-3 px-6 border border-black w-full outline-none focus:border-gray-300"
+            className="py-3 px-6 border border-black rounded w-full outline-none focus:border-gray-300"
           >
             {userRoles.map((role) => (
               <option key={role.value} value={role.value}>
@@ -115,7 +115,7 @@ const UpdateUserRolePage = () => {
           </select>
         </div>
         {error && <p className="py-3 text-rose-500">{error.error}</p>}
-        <button className="default-btn py-3.5 w-full">Submit</button>
+        <button className="default-btn rounded py-3.5 w-full">Submit</button>
       </form>
     </div>
   );

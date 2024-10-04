@@ -23,6 +23,8 @@ const UserOrderListPage = () => {
 
   const { orderList, fetchUserOrderList } = useRestaurantOrderStore();
 
+  console.log(orderList);
+
   const handleStatus = async (order) => {
     setShowModal(true);
     setStatus(order.status);
@@ -57,55 +59,59 @@ const UserOrderListPage = () => {
         </h2>
       </div>
       <div className="user-order mb-8">
-        <div className="relative overflow-x-auto">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-300">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Delivery Address
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Phone Number
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Payment
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Status
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            {orderList.map((order) => (
-              <tbody key={order.id} className="bg-white dark:bg-gray-800">
-                <tr className="border-b dark:border-gray-700">
-                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                    {order.item_name}
-                  </td>
-                  <td className="px-6 py-4">{order.address}</td>
-                  <td className="px-6 py-4">{order.phone_number}</td>
-                  <td className="px-6 py-4">
-                    {currencyFormat(order.subtotal)}
-                  </td>
-                  <td className="px-6 py-4">{order.status}</td>
-                  <td className="px-6 py-4">
-                    <button
-                      className="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400"
-                      onClick={() => handleStatus(order)}
-                    >
-                      <Edit size={18} />
-                    </button>
-                  </td>
+        {!orderList.error ? (
+          <div className="relative overflow-x-auto">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-300">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Delivery Address
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Phone Number
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Payment
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Status
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Action
+                  </th>
                 </tr>
-              </tbody>
-            ))}
-          </table>
-        </div>
+              </thead>
+              {orderList?.map((order) => (
+                <tbody key={order.id} className="bg-white dark:bg-gray-800">
+                  <tr className="border-b dark:border-gray-700">
+                    <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                      {order.item_name}
+                    </td>
+                    <td className="px-6 py-4">{order.address}</td>
+                    <td className="px-6 py-4">{order.phone_number}</td>
+                    <td className="px-6 py-4">
+                      {currencyFormat(order.subtotal)}
+                    </td>
+                    <td className="px-6 py-4">{order.status}</td>
+                    <td className="px-6 py-4">
+                      <button
+                        className="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400"
+                        onClick={() => handleStatus(order)}
+                      >
+                        <Edit size={18} />
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+            </table>
+          </div>
+        ) : (
+          <h4>{orderList.error}</h4>
+        )}
       </div>
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">

@@ -5,7 +5,7 @@ import { useRestaurantInfo } from "../lib/store/zustandStore";
 
 const Sidebar = ({ activeItem, setActiveItem }) => {
   const menuItems = [
-    { name: "Dashboard", icon: Home, link: "/restaurant/dashboard/" },
+    { name: "Home", icon: Home, link: "/restaurant/dashboard/" },
     { name: "Add Food Item", icon: PlusCircle, link: "add-food-item/" },
     {
       name: "Update Restaurant Info",
@@ -30,7 +30,7 @@ const Sidebar = ({ activeItem, setActiveItem }) => {
                 activeItem === item.name
                   ? "bg-[#286140] text-white"
                   : "hover-bg-gray-200"
-              }`}
+              } ${ownerInfo.error ? "pointer-events-none opacity-80" : ""}  `}
               onClick={() => setActiveItem(item.name)}
             >
               <div className="flex items-center gap-3">

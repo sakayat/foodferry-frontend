@@ -54,7 +54,7 @@ const ForgetPasswordPage = () => {
               >
                 <input
                   type="email"
-                  className="py-3 px-6 border border-black w-full outline-none placeholder-gray-600 focus:border-gray-300"
+                  className="py-3 px-6 border border-black rounded w-full outline-none placeholder-gray-600 focus:border-gray-300"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
@@ -62,7 +62,7 @@ const ForgetPasswordPage = () => {
 
                 {error && <p className="py-1 text-rose-500">{error.error}</p>}
                 <button
-                  className={`default-btn w-fit mx-auto py-3 px-8 ${
+                  className={`default-btn rounded w-fit mx-auto py-3 px-8 ${
                     loading ? "opacity-50 cursor-wait" : ""
                   }`}
                   disabled={false}

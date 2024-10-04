@@ -22,10 +22,16 @@ export const useCartItemStore = create((set, get) => ({
   token: localStorage.getItem("authToken"),
   cartItems: [],
   fetchCartList: async (newToken) => {
+    
+    if (!token) {
+      set({ error: "Token not found." });
+      return;
+    }
+
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/cart/list/`,
       {
-        method: "get",
+        method: "GET",
         headers: {
           "Content-type": "application/json",
           Authorization: `Token ${newToken}`,
@@ -40,6 +46,11 @@ export const useCartItemStore = create((set, get) => ({
 
 export const useProfileStore = create((set) => {
   const fetchProfileInfo = async () => {
+    if (!token) {
+      set({ error: "Token not found." });
+      return;
+    }
+
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
       {
@@ -237,6 +248,10 @@ export const useRestaurantOrderStore = create((set, get) => ({
 export const useRenderProfileInfoStore = create((set, get) => ({
   user: {},
   fetchProfileInfo: async (token) => {
+    if (!token) {
+      set({ error: "Token not found." });
+      return;
+    }
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
       {

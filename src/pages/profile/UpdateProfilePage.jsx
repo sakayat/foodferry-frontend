@@ -46,37 +46,41 @@ const UpdateProfilePage = () => {
       setFirstName(user.first_name || "");
       setLastName(user.last_name || "");
       setPhoneNumber(user.phone_number || "");
-      setProfileImage(user.profile_image || "")
+      setProfileImage(user.profile_image || "");
     }
   }, [user]);
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-        body: JSON.stringify({
-          first_name: firstName,
-          last_name: lastName,
-          phone_number: phoneNumber,
-          profile_image: profileImage,
-        }),
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+          body: JSON.stringify({
+            first_name: firstName,
+            last_name: lastName,
+            phone_number: phoneNumber,
+            profile_image: profileImage,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      setError(data.phone_number);
+
+      if (res.ok) {
+        navigate(location.state?.returnTo || "/profile/");
+        fetchProfileInfo();
       }
-    );
-
-    const data = await res.json();
-
-    setError(data.phone_number);
-
-    if (res.ok) {
-      navigate(location.state?.returnTo || "/profile/");
-      fetchProfileInfo();
+    } catch (error) {
+      console.log("something went wrong");
     }
   };
 

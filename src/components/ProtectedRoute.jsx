@@ -6,19 +6,15 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   const token = localStorage.getItem("authToken");
   const { user } = useProfileStore();
 
-  useEffect(() => {
-
-  }, [token])
+  useEffect(() => {}, [token]);
 
   if (!token) {
     return <Navigate to="/sign-in/" />;
   }
 
-  if (requiredRole && !user?.role?.includes(requiredRole)) {
+  if (requiredRole && user.role !== requiredRole) {
     return <Navigate to="/unauthorized/" />;
   }
-
-  
 
   return children;
 };

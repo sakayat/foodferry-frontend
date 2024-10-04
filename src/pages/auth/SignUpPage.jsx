@@ -64,14 +64,14 @@ const SignUpPage = () => {
             >
               <input
                 type="text"
-                className="py-3 px-6 border border-black w-full outline-none placeholder-gray-600 focus:border-gray-300"
+                className="py-3 px-6 border border-black rounded w-full outline-none placeholder-gray-600 focus:border-gray-300"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
               />
               <input
                 type="email"
-                className="py-3 px-6 border border-black w-full outline-none placeholder-gray-600 focus:border-gray-300"
+                className="py-3 px-6 border border-black rounded w-full outline-none placeholder-gray-600 focus:border-gray-300"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
@@ -79,7 +79,7 @@ const SignUpPage = () => {
               <div className="relative password">
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="py-3 px-6 border border-black w-full outline-none placeholder-gray-600 focus:border-gray-300"
+                  className="py-3 px-6 border border-black rounded w-full outline-none placeholder-gray-600 focus:border-gray-300"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
@@ -100,7 +100,7 @@ const SignUpPage = () => {
               <div className="relative confirm-password">
                 <input
                   type={showConfirmPassword ? "text" : "password"}
-                  className="py-3 px-6 border border-black w-full outline-none placeholder-gray-600 focus:border-gray-300"
+                  className="py-3 px-6 border border-black w-full rounded outline-none placeholder-gray-600 focus:border-gray-300"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm Password"

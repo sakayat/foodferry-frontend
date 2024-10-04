@@ -131,17 +131,19 @@ const Navbar = () => {
               </Link>
             </li>
 
-            <div className="relative">
-              <button
-                className="border border-[#286140] p-2.5 rounded-full"
-                onClick={() => setIsCartOpen(!isCartOpen)}
-              >
-                <ShoppingCart size={18} />
-              </button>
-              <span className="absolute top-0 bg-[#286140] font-bold w-6 h-6 flex justify-center left-8 rounded-full text-white">
-                {cartItems?.total_quantity || 0}
-              </span>
-            </div>
+            {user.role !== "admin" && user.role !== "restaurant_owner" && (
+              <div className="relative">
+                <button
+                  className="border border-[#286140] p-2.5 rounded-full"
+                  onClick={() => setIsCartOpen(!isCartOpen)}
+                >
+                  <ShoppingCart size={18} />
+                </button>
+                <span className="absolute top-0 bg-[#286140] font-bold w-6 h-6 flex justify-center left-8 rounded-full text-white">
+                  {cartItems?.total_quantity || 0}
+                </span>
+              </div>
+            )}
 
             <div className="" ref={dropdownRef}>
               {token ? (
@@ -175,16 +177,19 @@ const Navbar = () => {
                           <span>Profile</span>
                         </Link>
                       </div>
-                      <div className="py-2 border-b">
-                        <Link
-                          to="order-history/"
-                          className="px-4 py-2 text-sm flex items-center"
-                          onClick={() => setIsOpen(false)}
-                        >
-                          <List size={18} className="mr-2" />
-                          <span>Orders</span>
-                        </Link>
-                      </div>
+                      {user.role !== "admin" &&
+                        user.role !== "restaurant_owner" && (
+                          <div className="py-2 border-b">
+                            <Link
+                              to="order-history/"
+                              className="px-4 py-2 text-sm flex items-center"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              <List size={18} className="mr-2" />
+                              <span>Orders</span>
+                            </Link>
+                          </div>
+                        )}
                       <div className="py-2">
                         <button
                           onClick={() => handleLogout()}

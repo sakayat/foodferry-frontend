@@ -3,7 +3,7 @@ import Sidebar from "../../../../../components/Sidebar";
 import { Outlet } from "react-router-dom";
 
 const RestaurantDashboardLayout = () => {
-  const [activeItem, setActiveItem] = useState("Dashboard");
+  const [activeItem, setActiveItem] = useState("Home");
 
   
   return (

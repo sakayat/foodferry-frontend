@@ -68,7 +68,7 @@ const CreateRestaurantPage = () => {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             placeholder="Restaurant name"
           />
         </div>
@@ -81,7 +81,7 @@ const CreateRestaurantPage = () => {
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300 resize-none"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300 resize-none"
             placeholder="Restaurant address"
             rows={3}
           />
@@ -94,7 +94,7 @@ const CreateRestaurantPage = () => {
             type="text"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-black w-full rounded outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             placeholder="Restaurant phone number"
           />
         </div>
@@ -114,7 +114,7 @@ const CreateRestaurantPage = () => {
             Owner
           </label>
           <select
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             value={selectedOwner}
             onChange={(e) => setSelectedOwner(e.target.value)}
           >
@@ -136,7 +136,7 @@ const CreateRestaurantPage = () => {
               error.slug}
           </p>
         )}
-        <button type="submit" className="default-btn py-3.5 w-full">
+        <button type="submit" className="default-btn rounded py-3.5 w-full">
           Create Restaurant
         </button>
       </form>

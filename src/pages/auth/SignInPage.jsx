@@ -24,18 +24,14 @@ const SignInPage = () => {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({email, password}),
+        body: JSON.stringify({ email, password }),
       }
     );
 
-    console.log(res);
-    
-
     const data = await res.json();
-    console.log(data);
-    
+
     setError(data);
-    
+
     if (res.ok) {
       localStorage.setItem("authToken", data.token);
       fetchCartList(data.token);
@@ -61,7 +57,7 @@ const SignInPage = () => {
             >
               <input
                 type="email"
-                className="py-3 px-6 border border-black w-full outline-none placeholder-gray-600 focus:border-gray-300"
+                className="py-3 px-6 border border-black rounded w-full outline-none placeholder-gray-600 focus:border-gray-300"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
@@ -70,7 +66,7 @@ const SignInPage = () => {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="py-3 px-6 border border-black w-full outline-none placeholder-gray-600 focus:border-gray-300"
+                  className="py-3 px-6 border border-black rounded w-full outline-none placeholder-gray-600 focus:border-gray-300"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"

@@ -137,7 +137,7 @@ const FoodTagListPage = () => {
                     type="text"
                     value={tagName}
                     onChange={(e) => setTagName(e.target.value)}
-                    className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+                    className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
                     placeholder="tag name"
                   />
                 </div>
@@ -147,11 +147,11 @@ const FoodTagListPage = () => {
                   </p>
                 )}
                 <div className="flex justify-end space-x-4">
-                  <button type="submit" className="default-btn py-3.5 w-full">
+                  <button type="submit" className="default-btn rounded py-3.5 w-full">
                     Submit
                   </button>
                   <button
-                    className="px-4 py-2 bg-gray-300 hover:bg-gray-400 w-full"
+                    className="px-4 py-2 bg-gray-300 hover:bg-gray-400 w-full rounded"
                     onClick={() => setShowModal(!showModal)}
                   >
                     Cancel

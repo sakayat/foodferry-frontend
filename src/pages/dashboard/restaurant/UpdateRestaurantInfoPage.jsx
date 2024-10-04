@@ -75,7 +75,7 @@ const UpdateRestaurantInfoPage = () => {
           </label>
           <input
             type="text"
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             placeholder="restaurant name"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -87,7 +87,7 @@ const UpdateRestaurantInfoPage = () => {
           </label>
           <textarea
             type="text"
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300 resize-none"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300 resize-none"
             placeholder="address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -100,7 +100,7 @@ const UpdateRestaurantInfoPage = () => {
           </label>
           <input
             type="text"
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             placeholder="phone number"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
@@ -113,7 +113,7 @@ const UpdateRestaurantInfoPage = () => {
           <input
             type="file"
             accept="image/*"
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             placeholder="cover image"
             onChange={handleImageUpload}
           />
@@ -126,7 +126,7 @@ const UpdateRestaurantInfoPage = () => {
               error.cover_image}
           </p>
         )}
-        <button className="default-btn py-3.5 w-full">Submit</button>
+        <button className="default-btn rounded py-3.5 w-full">Submit</button>
       </form>
     </div>
   );

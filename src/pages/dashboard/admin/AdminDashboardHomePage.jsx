@@ -23,7 +23,7 @@ const AdminDashboardHomePage = () => {
   const data = [
     {
       title: "Total users",
-      value: 16,
+      value: users.length,
       icon: <Users size={30} />,
     },
     {
@@ -48,10 +48,10 @@ const AdminDashboardHomePage = () => {
       <div className="py-5">
         <h2 className="text-3xl font-bold">Admin Dashboard</h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2  gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {data.map((item, i) => (
           <div
-            className="flex flex-col items-center gap-2 py-3 px-6 border border-gray-300"
+            className="flex flex-col items-center gap-2 rounded py-3 px-6 border border-gray-300"
             key={i}
           >
             <span>{item.icon}</span>
