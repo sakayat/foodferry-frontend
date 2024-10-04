@@ -30,19 +30,29 @@ const CategoryListPage = () => {
 
   const [error, setError] = useState("");
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    setCategoryImage(file);
+    if (!file) return;
+
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "hxdbn2v3");
+    data.append("cloud_name", "dmbu1haaj");
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/dmbu1haaj/image/upload`,
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const imageUrl = await res.json();
+    setCategoryImage(imageUrl.url);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-
-    formData.append("name", categoryName);
-    formData.append("slug", categoryName.toLowerCase().split(" ").join("-"));
-    formData.append("image", categoryImage);
 
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/update-category/${
@@ -51,9 +61,14 @@ const CategoryListPage = () => {
       {
         method: "PUT",
         headers: {
+          "Content-type": "application/json",
           Authorization: `Token ${token}`,
         },
-        body: formData,
+        body: JSON.stringify({
+          name: categoryName,
+          slug: categoryName.toLowerCase().split(" ").join("-"),
+          image: categoryImage,
+        }),
       }
     );
     if (res.ok) {
@@ -104,7 +119,14 @@ const CategoryListPage = () => {
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    {category.name}
+                    <div className="flex items-center gap-5">
+                      <img
+                        src={category.image}
+                        alt=""
+                        className="w-20 h-20 rounded"
+                      />
+                      {category.name}
+                    </div>
                   </th>
                   <td className="px-6 py-4 space-x-5">
                     <button
@@ -162,7 +184,10 @@ const CategoryListPage = () => {
                   </p>
                 )}
                 <div className="mt-4 flex justify-end space-x-4">
-                  <button type="submit" className="default-btn rounded py-3.5 w-full">
+                  <button
+                    type="submit"
+                    className="default-btn rounded py-3.5 w-full"
+                  >
                     Submit
                   </button>
                   <button

@@ -57,7 +57,7 @@ const SliderContent = ({ data, tag_name, sliderId }) => {
             <SwiperSlide key={food.id}>
               <Link to={`food/${food.slug}`} className="space-y-2 h-64 group ">
                 <img
-                  src={`${import.meta.env.VITE_API_BASE_URL}/${food.image}`}
+                  src={food.image}
                   alt={food.name}
                   className="h-44 w-full object-cover transform group-hover:scale-110 transition duration-500 ease-in-out rounded-xl"
                 />

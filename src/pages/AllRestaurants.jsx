@@ -25,7 +25,7 @@ const AllRestaurants = () => {
           {restaurantData.map((item) => (
             <Link key={item.id} to={`/restaurant/${item.slug}/`} className="">
               <img
-                src={`${import.meta.env.VITE_API_BASE_URL}/${item.cover_image}`}
+                src={item.cover_image}
                 alt=""
                 className="h-72 lg:h-44 w-full object-cover rounded-xl"
               />

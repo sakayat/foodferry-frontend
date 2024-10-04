@@ -44,9 +44,7 @@ const ViewCartItem = ({ item, fetchCartList }) => {
       <div className="col-span-4 md:col-span-6">
         <div className="flex items-center gap-5">
           <img
-            src={`${import.meta.env.VITE_API_BASE_URL}/media/${
-              item.food_image
-            }`}
+            src={item.food_image}
             alt=""
             className="w-20 h-20 hidden md:flex"
           />

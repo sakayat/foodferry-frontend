@@ -107,9 +107,7 @@ const OrderHistoryPage = () => {
                     </button>
                   </div>
                   <img
-                    src={`${import.meta.env.VITE_API_BASE_URL}/media/${
-                      foodItem.item_image
-                    }`}
+                    src={foodItem.item_image}
                     alt={foodItem.item_name}
                     className="w-40 object-cover rounded-l-lg"
                   />

@@ -91,7 +91,7 @@ const FoodDetailsPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="image">
               <img
-                src={`${import.meta.env.VITE_API_BASE_URL}/${foodItem.image}`}
+                src={foodItem.image}
                 alt=""
                 className="w-full h-full rounded-xl"
               />
@@ -109,7 +109,7 @@ const FoodDetailsPage = () => {
               </span>
               <span>Quantity</span>
               <form action="" className="space-y-5" onSubmit={handleAddToCart}>
-                <div className="flex items-center justify-between gap-2 border border-black p-2 w-32">
+                <div className="flex items-center justify-between gap-2 border rounded border-black p-2 w-32">
                   <div
                     className="text-2xl cursor-pointer"
                     onClick={handleChangeMinusValue}
@@ -134,6 +134,7 @@ const FoodDetailsPage = () => {
                     <Plus size={18} />
                   </div>
                 </div>
+
                 <button
                   className="px-6 default-btn rounded border h-12 w-full uppercase"
                   type="submit"

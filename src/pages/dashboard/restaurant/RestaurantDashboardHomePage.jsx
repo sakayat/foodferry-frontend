@@ -10,7 +10,7 @@ const RestaurantDashboardHomePage = () => {
 
   const { ownerInfo, fetchRestaurantInfo } = useRestaurantInfo();
   const { orderList, fetchUserOrderList } = useRestaurantOrderStore();
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,9 +41,7 @@ const RestaurantDashboardHomePage = () => {
       <div>
         <div className="relative flex flex-col gap-5">
           <img
-            src={`${import.meta.env.VITE_API_BASE_URL}/${
-              ownerInfo.cover_image
-            }`}
+            src={ownerInfo.cover_image}
             alt=""
             className="lg:h-48 w-24 lg:w-48 rounded-xl"
           />

@@ -79,7 +79,7 @@ const CheckoutFrom = () => {
         </label>
         <input
           type="email"
-          className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+          className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
           placeholder={user.email}
           disabled
         />
@@ -90,7 +90,7 @@ const CheckoutFrom = () => {
         </label>
         <input
           type="email"
-          className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+          className="py-3 px-6 border rounded border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
           placeholder={user.phone_number}
           disabled
         />
@@ -102,7 +102,7 @@ const CheckoutFrom = () => {
           </label>
           <input
             type="text"
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border rounded border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             placeholder={user.first_name}
             disabled
           />
@@ -113,7 +113,7 @@ const CheckoutFrom = () => {
           </label>
           <input
             type="text"
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border rounded border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             placeholder={user.last_name}
             disabled
           />
@@ -125,7 +125,7 @@ const CheckoutFrom = () => {
         </label>
         <textarea
           type="text"
-          className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300 resize-none"
+          className="py-3 px-6 border rounded border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300 resize-none"
           placeholder="Address"
           rows={3}
           required
@@ -137,7 +137,7 @@ const CheckoutFrom = () => {
         <label htmlFor="" className="text-xl">
           Payment
         </label>
-        <div className="flex items-center gap-3 py-3 px-6 border border-black">
+        <div className="flex items-center gap-3 py-3 px-6 border rounded border-black">
           <select
             className="w-full h-full outline-none"
             value={paymentMethod}

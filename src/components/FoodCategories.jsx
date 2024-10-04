@@ -82,9 +82,7 @@ const FoodCategories = () => {
                 >
                   <div className="category-info hover:scale-100 rounded-xl">
                     <img
-                      src={`${import.meta.env.VITE_API_BASE_URL}/${
-                        category.image
-                      }`}
+                      src={category.image}
                       className="h-36 w-full rounded-xl"
                       alt=""
                     />

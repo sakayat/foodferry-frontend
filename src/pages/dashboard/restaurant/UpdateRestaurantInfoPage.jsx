@@ -28,29 +28,43 @@ const UpdateRestaurantInfoPage = () => {
     }
   }, [ownerInfo]);
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    setCoverImage(file);
+    if (!file) return;
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "hxdbn2v3");
+    data.append("cloud_name", "dmbu1haaj");
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/dmbu1haaj/image/upload`,
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const imageUrl = await res.json();
+    setCoverImage(imageUrl.url);
   };
+
 
   const handleUpdateInfo = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-
-    formData.append("name", name);
-    formData.append("address", address);
-    formData.append("phone_number", phoneNumber);
-    formData.append("cover_image", coverImage);
 
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/update/`,
       {
         method: "PUT",
         headers: {
+          "Content-type": "application/json",
           Authorization: `Token ${token}`,
         },
-        body: formData,
+        body: JSON.stringify({
+          name,
+          address,
+          phone_number: phoneNumber,
+          cover_image: coverImage,
+        }),
       }
     );
 

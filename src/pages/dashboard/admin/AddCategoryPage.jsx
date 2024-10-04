@@ -1,44 +1,61 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const AddCategoryPage = () => {
   const token = localStorage.getItem("authToken");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [categoryName, setCategoryName] = useState("");
   const [categoryImage, setCategoryImage] = useState("");
 
   const [error, setError] = useState("");
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    setCategoryImage(file);
+    if (!file) return;
+
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "hxdbn2v3");
+    data.append("cloud_name", "dmbu1haaj");
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/dmbu1haaj/image/upload`,
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const imageUrl = await res.json();
+    setCategoryImage(imageUrl.url);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-
-    formData.append("name", categoryName);
-    formData.append("slug", categoryName.toLowerCase().split(" ").join("-"));
-    formData.append("image", categoryImage);
 
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-category/`,
       {
         method: "POST",
         headers: {
+          "Content-type": "application/json",
           Authorization: `Token ${token}`,
         },
-        body: formData,
+        body: JSON.stringify({
+          name: categoryName,
+          slug: categoryName.toLowerCase().split(" ").join("-"),
+          image: categoryImage,
+        }),
       }
     );
-    if(res.ok){
-      return navigate("/admin/dashboard/category-list")
+    if (res.ok) {
+      return navigate("/admin/dashboard/category-list");
     }
     const data = await res.json();
+
+    console.log(data);
+
     setError(data);
   };
 
@@ -71,7 +88,6 @@ const AddCategoryPage = () => {
             onChange={handleImageUpload}
           />
         </div>
-
         {error && (
           <p className="py-3 text-rose-500">{error.name || error.slug}</p>
         )}

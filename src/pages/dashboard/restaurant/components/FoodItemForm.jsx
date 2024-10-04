@@ -51,9 +51,25 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
     setFoodItem(data);
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    setFoodImage(file);
+    if (!file) return;
+
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "hxdbn2v3");
+    data.append("cloud_name", "dmbu1haaj");
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/dmbu1haaj/image/upload`,
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const imageUrl = await res.json();
+    setFoodImage(imageUrl.url);
   };
 
   const handleSubmit = async (e) => {
@@ -78,9 +94,19 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
         {
           method: "PUT",
           headers: {
+            "content-type": "application/json",
             Authorization: `Token ${token}`,
           },
-          body: formData,
+          body: JSON.stringify({
+            name: foodName,
+            slug: foodName.toLowerCase().split(" ").join("-"),
+            description,
+            price,
+            image: foodImage,
+            category,
+            tags: foodTag,
+            is_available: isAvailable,
+          }),
         }
       );
       const data = await res.json();
@@ -94,9 +120,19 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
         {
           method: "POST",
           headers: {
+            "content-type": "application/json",
             Authorization: `Token ${token}`,
           },
-          body: formData,
+          body: JSON.stringify({
+            name: foodName,
+            slug: foodName.toLowerCase().split(" ").join("-"),
+            description,
+            price,
+            image: foodImage,
+            category,
+            tags: foodTag,
+            is_available: isAvailable,
+          }),
         }
       );
       if (res.ok) {

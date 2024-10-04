@@ -55,9 +55,7 @@ const CartInfo = ({ item, fetchCartList }) => {
     <div className="cart-product space-y-5 w-full py-2 px-4">
       <div className="flex items-center gap-5">
         <img
-          src={`${import.meta.env.VITE_API_BASE_URL}/media/${
-            newData.food_image
-          }`}
+          src={newData.food_image}
           alt=""
           className="w-14 h-14 rounded"
         />
