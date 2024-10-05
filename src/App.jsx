@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 
@@ -43,6 +43,7 @@ import FoodTagListPage from "./pages/dashboard/admin/FoodTagListPage";
 import OurMenuPage from "./pages/OurMenuPage";
 
 function App() {
+  const token = localStorage.getItem("authToken");
   return (
     <>
       <Navbar />
@@ -51,8 +52,14 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="food/:slug/" element={<FoodDetailsPage />} />
-          <Route path="sign-up/" element={<SignUpPage />} />
-          <Route path="sign-in/" element={<SignInPage />} />
+          <Route
+            path="sign-up/"
+            element={token ? <Navigate to="/profile" /> : <SignUpPage />}
+          />
+          <Route
+            path="sign-in/"
+            element={token ? <Navigate to="/profile" /> : <SignInPage />}
+          />
           <Route path="unauthorized/" element={<UnauthorizedPage />} />
           <Route path="/:tag/" element={<FoodItem />} />
           <Route path="category/:slug/" element={<CategoryFoodPage />} />
@@ -60,7 +67,7 @@ function App() {
           <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />
           <Route path="about/" element={<AboutUsPage />} />
           <Route path="contact/" element={<ContactUsPage />} />
-          <Route path="our-menu/" element={<OurMenuPage />}/>
+          <Route path="our-menu/" element={<OurMenuPage />} />
           <Route
             path="forget-password/"
             element={
