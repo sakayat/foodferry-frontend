@@ -20,10 +20,6 @@ const UpdateProfilePage = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [error, setError] = useState("");
 
-  console.log(user.profile_image);
-
-  console.log(profileImage === null);
-
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
