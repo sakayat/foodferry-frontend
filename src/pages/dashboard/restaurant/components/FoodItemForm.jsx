@@ -67,24 +67,12 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
         body: data,
       }
     );
-
     const imageUrl = await res.json();
     setFoodImage(imageUrl.url);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-
-    formData.append("name", foodName);
-    formData.append("slug", foodName.toLowerCase().split(" ").join("-"));
-    formData.append("description", description);
-    formData.append("price", price);
-    formData.append("image", foodImage);
-    formData.append("category", category);
-    formData.append("tags", foodTag);
-    formData.append("is_available", isAvailable);
 
     if (id) {
       const res = await fetch(
@@ -139,6 +127,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
         return navigate("/restaurant/dashboard/food-items/");
       }
       const data = await res.json();
+      console.log(data);
 
       setError(data);
     }
@@ -252,7 +241,8 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
               error.price ||
               error.category ||
               error.tags ||
-              error.slug}
+              error.slug ||
+              error.image}
           </p>
         )}
         <button type="submit" className="default-btn rounded py-3.5 w-full">
