@@ -115,9 +115,15 @@ const Navbar = () => {
           >
             <Menu />
           </button>
-          <ul className="hidden md:flex items-center gap-10 font-bold">
+          <ul className="hidden md:flex items-center gap-5">
             <li className="">
               <Link to="our-menu/">Our menu</Link>
+            </li>
+            <li className="">
+              <Link to="/about">About</Link>
+            </li>
+            <li className="">
+              <Link to="/contact">Contacts</Link>
             </li>
             <li>
               <Link
@@ -127,10 +133,9 @@ const Navbar = () => {
                 <span className="bg-[#286140] text-white p-2.5 rounded-full">
                   <ShoppingBag size={18} />
                 </span>
-                <span className="font-bold px-4">Restaurant</span>
+                <span className="px-4">Restaurant</span>
               </Link>
             </li>
-
             {user.role !== "admin" && user.role !== "restaurant_owner" && (
               <div className="relative">
                 <button
@@ -144,7 +149,6 @@ const Navbar = () => {
                 </span>
               </div>
             )}
-
             <div className="" ref={dropdownRef}>
               {token ? (
                 <div>
@@ -216,7 +220,11 @@ const Navbar = () => {
         <div className="fixed top-0 left-0 w-full h-screen z-80 bg-black/30"></div>
       )}
       {isMenuOpen && (
-        <MobileNav setIsMenuOpen={setIsMenuOpen} menuRef={menuRef} />
+        <MobileNav
+          setIsMenuOpen={setIsMenuOpen}
+          menuRef={menuRef}
+          user={user}
+        />
       )}
       {isCartOpen && (
         <MenuCartItem setIsCartOpen={setIsCartOpen} isCartOpen={isCartOpen} />

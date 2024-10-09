@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LogIn, LogOut, User, User2, X } from "lucide-react";
 import { useCartItemStore } from "../lib/store/zustandStore";
 
-const MobileNav = ({ setIsCartOpen, setIsMenuOpen, menuRef }) => {
+const MobileNav = ({ setIsCartOpen, setIsMenuOpen, menuRef, user }) => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
 
@@ -33,11 +33,10 @@ const MobileNav = ({ setIsCartOpen, setIsMenuOpen, menuRef }) => {
   };
 
   return (
-    <div className="absolute left-0 bg-white w-96 z-20 min-h-[calc(100dvh-4rem)] border-t">
+    <div className="absolute left-0 bg-white w-96 z-20 min-h-[calc(100vh-4rem)] border-t">
       <ul className="flex flex-col px-3">
-        <li className="flex justify-between py-3 border-b" ref={menuRef}>
-          <Link>Menu</Link>
-          <button>
+        <li className="flex justify-end py-3 border-b" ref={menuRef}>
+          <button className="bg-[#286140] rounded text-white p-2">
             <X size={18} />
           </button>
         </li>
@@ -45,6 +44,17 @@ const MobileNav = ({ setIsCartOpen, setIsMenuOpen, menuRef }) => {
           <Link to="/" onClick={() => setIsCartOpen((prev) => !prev)}>
             Home
           </Link>
+        </li>
+        <li className="py-3 border-b">
+          <Link to="/about" onClick={() => setIsMenuOpen((prev) => !prev)}>
+            About
+          </Link>
+        </li>
+        <li
+          className="py-3 border-b"
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+        >
+          <Link to="/contact">Contacts</Link>
         </li>
         <li className="py-3 border-b">
           <Link
@@ -67,7 +77,8 @@ const MobileNav = ({ setIsCartOpen, setIsMenuOpen, menuRef }) => {
             </Link>
           </li>
         )}
-        <div className="flex justify-between items-center py-3 border-b">
+        {
+          user.role !== "admin" && user.role !== "restaurant_owner" && <div className="flex justify-between items-center py-3 border-b">
           <Link
             to="view-cart/"
             className=""
@@ -79,7 +90,8 @@ const MobileNav = ({ setIsCartOpen, setIsMenuOpen, menuRef }) => {
             {cartItems?.total_quantity || 0}
           </span>
         </div>
-
+        }
+        
         <div className="absolute bottom-0 inset-x-0 w-full bg-[#286140] text-white px-3">
           {token ? (
             <div className="flex justify-between py-3">
