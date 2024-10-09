@@ -43,7 +43,7 @@ import FoodTagListPage from "./pages/dashboard/admin/FoodTagListPage";
 import OurMenuPage from "./pages/OurMenuPage";
 
 function App() {
-  // const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem("authToken");
   return (
     <>
       <Navbar />
@@ -52,8 +52,22 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="food/:slug/" element={<FoodDetailsPage />} />
-          <Route path="sign-up/" element={<SignUpPage />} />
-          <Route path="sign-in/" element={<SignInPage />} />
+          <Route
+            path="sign-up/"
+            element={
+              <PublicRoute>
+                <SignUpPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="sign-in/"
+            element={
+              <PublicRoute>
+                <SignInPage />
+              </PublicRoute>
+            }
+          />
           <Route path="unauthorized/" element={<UnauthorizedPage />} />
           <Route path="/:tag/" element={<FoodItem />} />
           <Route path="category/:slug/" element={<CategoryFoodPage />} />

@@ -8,8 +8,8 @@ const ProtectedRoute = ({ children, requiredRole }) => {
 
   useEffect(() => {}, [token]);
 
-  if (!user) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+  if (!token && user) {
+    return <Navigate to="/sign-in" />;
   }
 
   if (requiredRole && user.role !== requiredRole) {

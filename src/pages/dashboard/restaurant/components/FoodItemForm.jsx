@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRestaurantInfo } from "../../../../lib/store/zustandStore";
 
 const FoodItemForm = ({ categories, foodTags, id }) => {
   const token = localStorage.getItem("authToken");
@@ -127,8 +126,6 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
         return navigate("/restaurant/dashboard/food-items/");
       }
       const data = await res.json();
-      console.log(data);
-
       setError(data);
     }
   };
@@ -159,7 +156,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
           </label>
           <textarea
             type="text"
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300 resize-none"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300 resize-none"
             placeholder="food description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -172,7 +169,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
           </label>
           <input
             type="text"
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             placeholder="food price"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
@@ -185,7 +182,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
           <input
             type="file"
             accept="image/*"
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             onChange={handleImageUpload}
           />
         </div>
@@ -194,7 +191,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
             Food Category
           </label>
           <select
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -211,7 +208,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
             Food Tag
           </label>
           <select
-            className="py-3 px-6 border border-black w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
+            className="py-3 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
             value={foodTag}
             onChange={(e) => setFoodTag(e.target.value)}
           >
