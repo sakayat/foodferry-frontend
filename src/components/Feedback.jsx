@@ -95,7 +95,7 @@ const Feedback = ({ slug }) => {
         <h3 className="text-xl font-semibold mb-2">Leave a Comment</h3>
         <form className="space-y-3" onSubmit={handleSubmit}>
           <textarea
-            className="w-full p-2 border border-gray-300  outline-none resize-none"
+            className="w-full p-2 border rounded border-gray-300  outline-none resize-none"
             rows="3"
             placeholder="Write your comment here..."
             value={comment}
@@ -113,7 +113,7 @@ const Feedback = ({ slug }) => {
                 />
               ))}
             </div>
-            <button className="default-btn py-3 px-8 w-44">Submit</button>
+            <button className="default-btn rounded py-3 px-8 w-44">Submit</button>
           </div>
         </form>
       </div>
