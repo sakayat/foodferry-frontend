@@ -9,6 +9,7 @@ const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
   const token = localStorage.getItem("authToken");
   const { cartItems, fetchCartList } = useCartItemStore();
 
+
   useEffect(() => {
     if (token) {
       fetchCartList(token);

@@ -17,8 +17,12 @@ const UpdateProfilePage = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [profileImage, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState(null);
   const [error, setError] = useState("");
+
+  console.log(user.profile_image);
+
+  console.log(profileImage === null);
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -46,7 +50,6 @@ const UpdateProfilePage = () => {
       setFirstName(user.first_name || "");
       setLastName(user.last_name || "");
       setPhoneNumber(user.phone_number || "");
-      setProfileImage(user.profile_image || "");
     }
   }, [user]);
 
@@ -73,7 +76,7 @@ const UpdateProfilePage = () => {
 
       const data = await res.json();
 
-      setError(data.phone_number);
+      setError(data);
 
       if (res.ok) {
         navigate(location.state?.returnTo || "/profile/");
@@ -144,8 +147,12 @@ const UpdateProfilePage = () => {
                 onChange={handleImageUpload}
               />
             </div>
+            {error && (
+              <p className="py-3 text-rose-500">
+                {error.phone_number || error.profile_image}
+              </p>
+            )}
             <button className="default-btn rounded py-3">Submit</button>
-            {error && <p className="py-3 text-rose-500">{error}</p>}
           </form>
         </div>
       </div>

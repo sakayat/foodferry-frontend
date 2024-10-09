@@ -27,7 +27,10 @@ const Navbar = () => {
   const { user, fetchProfileInfo } = useRenderProfileInfoStore();
 
   useEffect(() => {
-    fetchProfileInfo(token);
+    const getUserProfile = async () => {
+      await fetchProfileInfo(token);
+    };
+    getUserProfile();
   }, []);
 
   const menuRef = useRef();
@@ -84,7 +87,8 @@ const Navbar = () => {
     if (res.ok) {
       localStorage.removeItem("authToken");
       clearCart();
-      return navigate("sign-in/");
+      navigate("/sign-in");
+      window.location.reload();
     }
   };
 

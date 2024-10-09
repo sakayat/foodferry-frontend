@@ -10,15 +10,12 @@ const RestaurantDashboardHomePage = () => {
 
   const { ownerInfo, fetchRestaurantInfo } = useRestaurantInfo();
   const { orderList, fetchUserOrderList } = useRestaurantOrderStore();
-  
+
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        await fetchRestaurantInfo();
-        await fetchUserOrderList();
-      } catch (error) {
-        setIsLoading(false);
-      }
+      await fetchRestaurantInfo();
+      await fetchUserOrderList();
+      setIsLoading(false);
     };
 
     fetchData();

@@ -247,18 +247,14 @@ export const useRestaurantOrderStore = create((set, get) => ({
 
 export const useRenderProfileInfoStore = create((set, get) => ({
   user: {},
-  fetchProfileInfo: async (token) => {
-    if (!token) {
-      set({ error: "Token not found." });
-      return;
-    }
+  fetchProfileInfo: async (UserToken) => {
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `Token ${UserToken}`,
         },
       }
     );

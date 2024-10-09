@@ -11,7 +11,7 @@ const UnauthorizedPage = () => {
           You do not have permission to view this page.
         </p>
         <Link
-          to="/"
+          to="/profile"
           className="text-blue-500 rounded hover:text-blue-600 inline-block"
         >
           Go Back Home
