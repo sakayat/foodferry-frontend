@@ -23,8 +23,6 @@ const UserOrderListPage = () => {
 
   const { orderList, fetchUserOrderList } = useRestaurantOrderStore();
 
-  console.log(orderList);
-
   const handleStatus = async (order) => {
     setShowModal(true);
     setStatus(order.status);

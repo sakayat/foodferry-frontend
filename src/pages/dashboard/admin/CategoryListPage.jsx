@@ -55,7 +55,7 @@ const CategoryListPage = () => {
     e.preventDefault();
 
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/update-category/${
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/category/update/${
         categoryItem.id
       }/`,
       {
@@ -83,7 +83,7 @@ const CategoryListPage = () => {
     const res = await fetch(
       `${
         import.meta.env.VITE_API_BASE_URL
-      }/api/restaurant/delete-category/${id}/`,
+      }/api/restaurant/category/delete/${id}/`,
       {
         method: "DELETE",
         headers: {

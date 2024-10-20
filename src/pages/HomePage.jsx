@@ -20,7 +20,7 @@ const HomePage = () => {
   const fetchFoodItems = async () => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/foods/`
+        `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/items/`
       );
       const data = await res.json();
       setData(data);

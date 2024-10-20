@@ -15,7 +15,7 @@ const FoodCategories = () => {
   const fetchCategories = async () => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-categories/`
+        `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/categories/`
       );
       const data = await res.json();
       setData(data);

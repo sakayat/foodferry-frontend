@@ -97,7 +97,7 @@ export const useRestaurantInfo = create((set, get) => ({
   fetchRestaurantInfo: async () => {
     const { token } = get();
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/restaurant-info/`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/info/`,
       {
         method: "get",
         headers: {
@@ -117,7 +117,7 @@ export const useFoodCategories = create((set, get) => ({
   fetchFoodCategories: async () => {
     const { token } = get();
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-categories/`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/categories/`,
       {
         method: "GET",
         headers: {
@@ -136,7 +136,7 @@ export const useFoodTags = create((set) => ({
   foodTags: [],
   fetchFoodTags: async () => {
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-tags/`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/tags/`,
       {
         method: "GET",
         headers: {
@@ -190,7 +190,7 @@ export const useFoodCategoriesStore = create((set, get) => ({
   fetchCategories: async () => {
     const { token } = get();
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-categories/`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/categories/`,
       {
         method: "GET",
         headers: {

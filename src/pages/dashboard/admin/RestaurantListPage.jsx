@@ -19,7 +19,6 @@ const RestaurantListPage = () => {
     setRestaurantInfo(restaurant);
     setShowModal(!showModal);
   };
-  console.log(restaurantInfo);
 
   const handleDeleteRestaurant = async (id) => {
     const res = await fetch(

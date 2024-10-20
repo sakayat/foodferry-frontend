@@ -39,7 +39,7 @@ const FoodTagListPage = () => {
     };
 
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/update-tag/${
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/tag/update/${
         tagItem.id
       }/`,
       {
@@ -147,7 +147,10 @@ const FoodTagListPage = () => {
                   </p>
                 )}
                 <div className="flex justify-end space-x-4">
-                  <button type="submit" className="default-btn rounded py-3.5 w-full">
+                  <button
+                    type="submit"
+                    className="default-btn rounded py-3.5 w-full"
+                  >
                     Submit
                   </button>
                   <button

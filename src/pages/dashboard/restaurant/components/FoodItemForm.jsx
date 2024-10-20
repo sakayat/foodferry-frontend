@@ -36,7 +36,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
 
   const fetchFoodItem = async () => {
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/update-food/${id}/`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/item/update/${id}/`,
       {
         method: "GET",
         headers: {
@@ -77,7 +77,7 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
       const res = await fetch(
         `${
           import.meta.env.VITE_API_BASE_URL
-        }/api/restaurant/update-food/${id}/`,
+        }/api/restaurant/item/update/${id}/`,
         {
           method: "PUT",
           headers: {
@@ -97,9 +97,11 @@ const FoodItemForm = ({ categories, foodTags, id }) => {
         }
       );
       const data = await res.json();
+      
       if (res.ok) {
         return navigate("/restaurant/dashboard/food-items/");
       }
+      
       setError(data);
     } else {
       const res = await fetch(

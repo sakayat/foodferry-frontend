@@ -1,4 +1,4 @@
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Loader, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { currencyFormat } from "../../../lib/utils";
@@ -11,6 +11,7 @@ const FoodItemsPage = () => {
 
   const [pagination, setPagination] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemId, setItemId] = useState(null);
 
   useEffect(() => {
     fetchRestaurantFoodItem();
@@ -20,7 +21,7 @@ const FoodItemsPage = () => {
     const res = await fetch(
       `${
         import.meta.env.VITE_API_BASE_URL
-      }/api/restaurant/restaurant-foods/?page=${currentPage}`,
+      }/api/restaurant/foods/?page=${currentPage}`,
       {
         method: "GET",
         headers: {
@@ -60,10 +61,9 @@ const FoodItemsPage = () => {
   }
 
   const handleDelete = async (id) => {
-    await fetch(
-      `${
-        import.meta.env.VITE_API_BASE_URL
-      }/api/restaurant/delete-food-item/${id}/`,
+    setItemId(id);
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food/delete/${id}/`,
       {
         method: "DELETE",
         headers: {
@@ -71,6 +71,10 @@ const FoodItemsPage = () => {
         },
       }
     );
+
+    if (res.ok) {
+      setItemId(null);
+    }
     fetchRestaurantFoodItem();
   };
 
@@ -105,51 +109,78 @@ const FoodItemsPage = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((item) => (
-              <tr
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                key={item.id}
-              >
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 dark:text-white space-x-5"
-                >
-                  {item.name}
-                </th>
-                <td className="px-6 py-4">{item.category_name}</td>
-                <td className="px-6 py-4">{currencyFormat(item.price)}</td>
-                <td className="px-6 py-4">
-                  <span
-                    className={`py-1 px-4 rounded ${
-                      item.is_available
-                        ? "bg-green-200 text-green-800"
-                        : "bg-red-200 text-red-800"
-                    }`}
+            {data.length == 0
+              ? Array.from({ length: 10 }).map((_, id) => (
+                  <tr
+                    key={id}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                   >
-                    {item.is_available ? "Yes" : "No"}
-                  </span>
-                </td>
-                <td className="px-6 py-4">{item.food_tag}</td>
-                <td className="px-6 py-4 space-x-3 flex">
-                  <button
-                    onClick={() => handleEdit(item.id)}
-                    className="mr-2 text-blue-600 hover:text-blue-800"
+                    <th scope="row" className="px-6 py-4">
+                      <div className="w-full bg-gray-200 h-8" />
+                    </th>
+                    <td className="px-6 py-4">
+                      <div className="w-full bg-gray-200 h-8" />
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="w-full bg-gray-200 h-8" />
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="w-full bg-gray-200 h-8" />
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="w-full bg-gray-200 h-8" />
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="w-full bg-gray-200 h-8" />
+                    </td>
+                  </tr>
+                ))
+              : data?.map((item) => (
+                  <tr
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    key={item.id}
                   >
-                    <Link
-                      to={`/restaurant/dashboard/update-food-item/${item.id}/`}
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 dark:text-white space-x-5"
                     >
-                      <Edit size={18} />
-                    </Link>
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="text-red-600 hover:text-red-800"
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                </td>
-              </tr>
-            ))}
+                      {item.name}
+                    </th>
+                    <td className="px-6 py-4">{item.category_name}</td>
+                    <td className="px-6 py-4">{currencyFormat(item.price)}</td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`py-1 px-4 rounded ${
+                          item.is_available
+                            ? "bg-green-200 text-green-800"
+                            : "bg-red-200 text-red-800"
+                        }`}
+                      >
+                        {item.is_available ? "Yes" : "No"}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">{item.food_tag}</td>
+                    <td className="px-6 py-4 space-x-3 flex">
+                      <button className="mr-2 text-blue-600 hover:text-blue-800">
+                        <Link
+                          to={`/restaurant/dashboard/update-food-item/${item.id}/`}
+                        >
+                          <Edit size={18} />
+                        </Link>
+                      </button>
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        {itemId == item.id ? (
+                          <Loader size={18} />
+                        ) : (
+                          <Trash2 size={18} />
+                        )}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
           </tbody>
         </table>
         <div className="py-5">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import { ChevronRight, Minus, Plus } from "lucide-react";
-import { useCartStore } from "../lib/store/zustandStore";
+import { useCartStore, useProfileStore } from "../lib/store/zustandStore";
 import Feedback from "../components/Feedback";
 import FoodDetailsSkeleton from "../components/FoodDetailsSkeleton";
 
@@ -10,6 +10,7 @@ const FoodDetailsPage = () => {
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useProfileStore();
 
   const { isCartOpen, setIsCartOpen } = useCartStore();
 
@@ -23,9 +24,7 @@ const FoodDetailsPage = () => {
 
   const fetchFoodDetails = async () => {
     const res = await fetch(
-      `${
-        import.meta.env.VITE_API_BASE_URL
-      }/api/restaurant/food-details/${slug}/`
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/details/${slug}/`
     );
     const data = await res.json();
     setFoodItem(data);
@@ -63,7 +62,6 @@ const FoodDetailsPage = () => {
         body: JSON.stringify({ quantity }),
       }
     );
-
     setIsCartOpen(!isCartOpen);
   };
 
@@ -134,13 +132,16 @@ const FoodDetailsPage = () => {
                     <Plus size={18} />
                   </div>
                 </div>
-
-                <button
-                  className="px-6 default-btn rounded border h-12 w-full uppercase"
-                  type="submit"
-                >
-                  Add to cart
-                </button>
+                {user.role === "restaurant_owner" || user.role === "admin" ? (
+                  <p className="text-rose-400 text-lg">You can not access</p>
+                ) : (
+                  <button
+                    className="px-6 default-btn rounded border h-12 w-full uppercase"
+                    type="submit"
+                  >
+                    Add to cart
+                  </button>
+                )}
               </form>
             </div>
           </div>
