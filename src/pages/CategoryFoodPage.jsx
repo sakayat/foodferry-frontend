@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 import Pagination from "../components/Pagination";
 import notFoundImg from "../assets/images/not-found.png";
+import FoodItemSkeleton from "../components/FoodItemSkeleton";
 
 const CategoryFoodPage = () => {
   const { slug } = useParams();
@@ -16,15 +17,18 @@ const CategoryFoodPage = () => {
 
   const [foodData, setFoodData] = useState([]);
 
+  console.log(foodData);
+
   const fetchFoodData = async () => {
     const res = await fetch(
       `${
         import.meta.env.VITE_API_BASE_URL
-      }/api/restaurant/category-food-list/${slug}/?page=${currentPage}`
+      }/api/restaurant/category-foods/${slug}/?page=${currentPage}`
     );
     const data = await res.json();
 
-    setFoodData(data);
+    setFoodData(data.results);
+
     setPagination({
       count: data.count,
       next: data.next,
@@ -46,7 +50,7 @@ const CategoryFoodPage = () => {
     }
   };
 
-  const totalPages = Math.ceil(pagination.count / 6);
+  const totalPages = Math.ceil(pagination.count / 10);
   const pageNumbers = [];
 
   for (let i = 1; i <= totalPages; i++) {
@@ -57,13 +61,13 @@ const CategoryFoodPage = () => {
     <div className="py-5">
       <div className="xl:container mx-auto px-8">
         <div className="py-5">
-          {foodData.count > 0 && (
-            <h2 className="text-3xl capitalize">{slug}</h2>
-          )}
+          <h2 className="text-3xl capitalize">{slug}</h2>
         </div>
-        {foodData.count > 0 && (
+        {foodData.length === 0 ? (
+          <FoodItemSkeleton />
+        ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {foodData.results.map((food) => (
+            {foodData.map((food) => (
               <Link
                 to={`/food/${food.slug}`}
                 className="space-y-1"
@@ -80,25 +84,8 @@ const CategoryFoodPage = () => {
             ))}
           </div>
         )}
-        {foodData.count === 0 && (
-          <div className="flex items-center justify-center bg-gray-50 md:py-12">
-            <div className="max-w-lg w-full space-y-8 p-8 bg-white shadow-lg rounded-lg">
-              <img className="mx-auto" src={notFoundImg} alt="" />
-              <h1 className="text-3xl font-extrabold text-gray-900 text-center">
-                Oops! No Data Found
-              </h1>
-              <p className="text-xl text-gray-600 text-center">
-                It seems like there's no data available in this category. Please
-                check back later or explore other categories.
-              </p>
-              <Link
-                to="/"
-                className="block default-btn py-3 px-6 rounded text-center"
-              >
-                Go Back Home
-              </Link>
-            </div>
-          </div>
+        {foodData.length === 0 && (
+          <p className="text-gray-500">Not Found</p>
         )}
         {foodData.length > 0 && (
           <div className="py-5">

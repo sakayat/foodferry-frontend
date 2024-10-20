@@ -16,7 +16,7 @@ const OurMenuPage = () => {
 
   const fetchSelectedMenu = async () => {
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-categories/`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/categories/`,
       {
         method: "GET",
         headers: {
@@ -43,7 +43,7 @@ const OurMenuPage = () => {
 
   const fetchMenuItem = async (slug) => {
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/category-food-list/${
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/category-foods/${
         slug ? slug : "pizza"
       }/`
     );
@@ -75,6 +75,7 @@ const OurMenuPage = () => {
             ))}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {foodItem.length === 0 && <p>Not found</p>}
             {foodItem.map((item) => (
               <div
                 key={item.id}
