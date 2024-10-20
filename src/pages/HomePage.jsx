@@ -11,7 +11,6 @@ import BrandShowcase from "../components/BrandShowcase";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     fetchFoodItems();

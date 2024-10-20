@@ -15,7 +15,7 @@ const FoodItem = () => {
         <div className="py-5">
           <h1 className="text-3xl">{title}</h1>
         </div>
-        <TagFoodItemsPage tag={tag} />
+      
       </div>
     </div>
   );

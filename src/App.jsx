@@ -41,6 +41,7 @@ import RestaurantListPage from "./pages/dashboard/admin/RestaurantListPage";
 import CategoryListPage from "./pages/dashboard/admin/CategoryListPage";
 import FoodTagListPage from "./pages/dashboard/admin/FoodTagListPage";
 import OurMenuPage from "./pages/OurMenuPage";
+import TagFoodItemsPage from "./pages/TagFoodItemsPage";
 
 function App() {
   const token = localStorage.getItem("authToken");
@@ -69,7 +70,7 @@ function App() {
             }
           />
           <Route path="unauthorized/" element={<UnauthorizedPage />} />
-          <Route path="/:tag/" element={<FoodItem />} />
+          <Route path="/:tag/" element={<TagFoodItemsPage />} />
           <Route path="category/:slug/" element={<CategoryFoodPage />} />
           <Route path="restaurant-list/" element={<AllRestaurants />} />
           <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />

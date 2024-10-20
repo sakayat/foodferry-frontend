@@ -10,6 +10,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import FoodItemSkeleton from "./FoodItemSkeleton";
 
 const SliderContent = ({ data, tag_name, sliderId }) => {
+  
   const swiperRef = useRef();
 
   return (
