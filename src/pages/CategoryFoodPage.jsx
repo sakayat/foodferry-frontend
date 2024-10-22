@@ -17,8 +17,6 @@ const CategoryFoodPage = () => {
 
   const [foodData, setFoodData] = useState([]);
 
-  console.log(foodData);
-
   const fetchFoodData = async () => {
     const res = await fetch(
       `${
@@ -84,9 +82,7 @@ const CategoryFoodPage = () => {
             ))}
           </div>
         )}
-        {foodData.length === 0 && (
-          <p className="text-gray-500">Not Found</p>
-        )}
+        {pagination.count === 0 && <p className="text-gray-500">No Data Found</p>}
         {foodData.length > 0 && (
           <div className="py-5">
             <Pagination

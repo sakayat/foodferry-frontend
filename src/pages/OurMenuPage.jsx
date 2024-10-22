@@ -48,8 +48,9 @@ const OurMenuPage = () => {
       }/`
     );
     const data = await res.json();
-    setFoodItem(data.results);
+    setFoodItem(data);
   };
+
 
   return (
     <div className="py-5">
@@ -75,8 +76,8 @@ const OurMenuPage = () => {
             ))}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {foodItem.length === 0 && <p>Not found</p>}
-            {foodItem.map((item) => (
+            {foodItem?.count === 0 && <p>No Data Found</p>}
+            {foodItem?.results?.map((item) => (
               <div
                 key={item.id}
                 className={`${activeTab != item.id ? "block" : "hidden"} `}
