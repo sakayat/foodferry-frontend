@@ -48,7 +48,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">
+      <main className="min-h-screen pt-20">
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />

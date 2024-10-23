@@ -93,7 +93,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-white text-black border-b">
+    <div className="bg-white text-black border-b fixed w-full z-50">
       <div className="xl:container mx-auto px-8">
         <nav className="py-4 flex items-center justify-between relative">
           <div className="logo flex items-center gap-2">
