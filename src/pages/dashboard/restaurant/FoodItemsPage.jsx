@@ -109,7 +109,10 @@ const FoodItemsPage = () => {
             </tr>
           </thead>
           <tbody>
-            {data.length == 0
+            {pagination.count === 0 && (
+              <p className="pt-5 text-xl">No Data Found</p>
+            )}
+            {data.length === 0
               ? Array.from({ length: 10 }).map((_, id) => (
                   <tr
                     key={id}
@@ -135,7 +138,7 @@ const FoodItemsPage = () => {
                     </td>
                   </tr>
                 ))
-              : data?.map((item) => (
+              : data.map((item) => (
                   <tr
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     key={item.id}

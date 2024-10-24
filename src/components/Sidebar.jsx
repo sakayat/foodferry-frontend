@@ -13,7 +13,7 @@ const Sidebar = ({ activeItem, setActiveItem }) => {
       link: "update-restaurant-info/",
     },
     { name: "All Food Items", icon: List, link: "food-items/" },
-    { name: "User Order", icon: ListOrdered, link: "user-order/" },
+    { name: "Food Order", icon: ListOrdered, link: "user-order/" },
   ];
 
   const { ownerInfo } = useRestaurantInfo();

@@ -53,7 +53,7 @@ const UserOrderListPage = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
       <div className="mb-5">
         <h2 className="text-3xl font-semibold text-gray-900 dark:text-white">
-          User Order List
+          All Order
         </h2>
       </div>
       <div className="user-order mb-8">
@@ -63,16 +63,10 @@ const UserOrderListPage = () => {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-300">
                 <tr>
                   <th scope="col" className="px-6 py-3">
-                    Name
+                    Order Menu
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Delivery Address
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Phone Number
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Payment
+                    Total
                   </th>
                   <th scope="col" className="px-6 py-3">
                     Status
@@ -83,13 +77,16 @@ const UserOrderListPage = () => {
                 </tr>
               </thead>
               {orderList?.map((order) => (
-                <tbody key={order.id} className="bg-white dark:bg-gray-800">
+                <tbody
+                  key={order.id}
+                  className={`${
+                    order.status === "pending" ? "bg-rose-100" : "bg-green-100"
+                  }`}
+                >
                   <tr className="border-b dark:border-gray-700">
-                    <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                    <td className="px-6 py-4 font-medium text-gray-900">
                       {order.item_name}
                     </td>
-                    <td className="px-6 py-4">{order.address}</td>
-                    <td className="px-6 py-4">{order.phone_number}</td>
                     <td className="px-6 py-4">
                       {currencyFormat(order.subtotal)}
                     </td>

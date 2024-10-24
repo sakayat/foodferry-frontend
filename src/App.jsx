@@ -13,7 +13,6 @@ import AdminDashboardHome from "./pages/dashboard/admin/AdminDashboardHomePage";
 import UpdateUserRolePage from "./pages/dashboard/admin/UpdateUserRolePage";
 import AddCategoryPage from "./pages/dashboard/admin/AddCategoryPage";
 import AddFoodTagPage from "./pages/dashboard/admin/AddFoodTagPage";
-import FoodItem from "./components/FoodItem";
 import CategoryFoodPage from "./pages/CategoryFoodPage";
 import AllRestaurants from "./pages/AllRestaurants";
 import RestaurantFoodPage from "./pages/RestaurantFoodPage";
