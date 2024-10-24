@@ -6,11 +6,7 @@ import FoodDetailsSkeleton from "../components/FoodDetailsSkeleton";
 import RestaurantFoodSkeleton from "../components/RestaurantFoodSkeleton";
 
 const RestaurantFoodPage = () => {
-
   const { slug } = useParams();
-
-  console.log(slug);
-  
 
   const [data, setData] = useState([]);
   const [info, setInfo] = useState({});
@@ -84,13 +80,15 @@ const RestaurantFoodPage = () => {
   return (
     <div className="py-5">
       <div className="xl:container mx-auto px-8">
-        <div className="my-5 border rounded-xl py-5 px-6 space-y-3">
-          <h2 className="text-4xl capitalize font-bold">{info.name}</h2>
-          <p className="space-x-2">
-            <span className="font-bold">Address:</span>
-            <span>{info.address}</span>
-          </p>
-        </div>
+        {data.length > 0 && (
+          <div className="my-5 border rounded-xl py-5 px-6 space-y-3">
+            <h2 className="text-4xl capitalize font-bold">{info.name}</h2>
+            <p className="space-x-2">
+              <span className="font-bold">Address:</span>
+              <span>{info.address}</span>
+            </p>
+          </div>
+        )}
         {data.length === 0 ? (
           <RestaurantFoodSkeleton />
         ) : (
