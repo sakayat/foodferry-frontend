@@ -1,4 +1,3 @@
-import { MapPin, Mail, Phone, Trash } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useRestaurantListStore } from "../../../lib/store/zustandStore";
 import RestaurantCard from "../restaurant/components/RestaurantCard";
@@ -15,8 +14,6 @@ const RestaurantListPage = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [restaurantInfo, setRestaurantInfo] = useState(null);
-
-  console.log(restaurants);
 
   const handleShowDeleteModal = (restaurant) => {
     setRestaurantInfo(restaurant);
