@@ -6,7 +6,11 @@ import FoodDetailsSkeleton from "../components/FoodDetailsSkeleton";
 import RestaurantFoodSkeleton from "../components/RestaurantFoodSkeleton";
 
 const RestaurantFoodPage = () => {
+
   const { slug } = useParams();
+
+  console.log(slug);
+  
 
   const [data, setData] = useState([]);
   const [info, setInfo] = useState({});

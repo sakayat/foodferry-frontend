@@ -1,7 +1,7 @@
-import { Trash2 } from "lucide-react";
+import { MapPin, Mail, Phone, Trash } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useRestaurantListStore } from "../../../lib/store/zustandStore";
-
+import RestaurantCard from "../restaurant/components/RestaurantCard";
 
 const RestaurantListPage = () => {
   const token = localStorage.getItem("authToken");
@@ -10,10 +10,13 @@ const RestaurantListPage = () => {
     fetchRestaurants();
   }, []);
 
-  const { restaurantData, fetchRestaurants } = useRestaurantListStore();
+  const { restaurantData: restaurants, fetchRestaurants } =
+    useRestaurantListStore();
 
   const [showModal, setShowModal] = useState(false);
   const [restaurantInfo, setRestaurantInfo] = useState(null);
+
+  console.log(restaurants);
 
   const handleShowDeleteModal = (restaurant) => {
     setRestaurantInfo(restaurant);
@@ -44,51 +47,14 @@ const RestaurantListPage = () => {
         <h2 className="text-3xl">Restaurant List</h2>
       </div>
       <div className="restaurant-list">
-        <div className="relative overflow-x-auto">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Address
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Phone Number
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Owner
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {restaurantData.map((restaurant) => (
-                <tr
-                  key={restaurant.id}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                >
-                  <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {restaurant.name}
-                  </td>
-                  <td className="px-6 py-4">{restaurant.address}</td>
-                  <td className="px-6 py-4">{restaurant.phone_number}</td>
-                  <td className="px-6 py-4">{restaurant.owner}</td>
-                  <td className="px-6 py-4 space-x-3">
-                    <button
-                      className="text-red-600 hover:text-red-800"
-                      onClick={() => handleShowDeleteModal(restaurant)}
-                    >
-                      <Trash2 size={18} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="grid gap-5 grid-cols-3 md:grid-cols-2">
+          {restaurants.map((restaurant) => (
+            <RestaurantCard
+              key={restaurant.id}
+              restaurant={restaurant}
+              handleShowDeleteModal={handleShowDeleteModal}
+            />
+          ))}
         </div>
       </div>
       {showModal && (
