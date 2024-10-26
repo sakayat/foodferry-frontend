@@ -7,7 +7,9 @@ import Feedback from "../components/Feedback";
 import FoodDetailsSkeleton from "../components/FoodDetailsSkeleton";
 
 const FoodDetailsPage = () => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = JSON.parse(data);
+  const token = parseData.token;
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useProfileStore();

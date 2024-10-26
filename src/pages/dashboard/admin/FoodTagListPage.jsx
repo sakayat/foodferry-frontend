@@ -3,7 +3,9 @@ import { Edit, Trash2 } from "lucide-react";
 import { useFoodTagStore } from "../../../lib/store/zustandStore";
 
 const FoodTagListPage = () => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = data ? JSON.parse(data) : {};
+  const token = parseData.token;
 
   useEffect(() => {
     fetchTags();

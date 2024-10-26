@@ -3,7 +3,9 @@ import { Edit, Trash2 } from "lucide-react";
 import { useFoodCategoriesStore } from "../../../lib/store/zustandStore";
 
 const CategoryListPage = () => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = data ? JSON.parse(data) : {};
+  const token = parseData.token;
   useEffect(() => {
     fetchCategories();
   }, []);

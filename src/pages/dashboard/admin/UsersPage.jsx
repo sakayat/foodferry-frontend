@@ -5,7 +5,9 @@ import Pagination from "../../../components/Pagination";
 
 
 const UsersPage = () => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = data ? JSON.parse(data) : {};
+  const token = parseData.token;
   const [users, setUsers] = useState([]);
 
   const [pagination, setPagination] = useState({});

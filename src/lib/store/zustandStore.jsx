@@ -1,6 +1,8 @@
 import { create } from "zustand";
 
-const token = localStorage.getItem("authToken");
+const data = localStorage.getItem("user");
+const parseData = data ? JSON.parse(data) : {};
+const token = parseData.token;
 
 export const useCartStore = create((set) => ({
   isCartOpen: false,
@@ -19,10 +21,8 @@ export const useFoodItemsStore = create((set, get) => ({
 }));
 
 export const useCartItemStore = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
   cartItems: [],
-  fetchCartList: async (newToken) => {
-    
+  fetchCartList: async () => {
     if (!token) {
       set({ error: "Token not found." });
       return;
@@ -34,7 +34,7 @@ export const useCartItemStore = create((set, get) => ({
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          Authorization: `Token ${newToken}`,
+          Authorization: `Token ${token}`,
         },
       }
     );
@@ -50,7 +50,6 @@ export const useProfileStore = create((set) => {
       set({ error: "Token not found." });
       return;
     }
-
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
       {
@@ -72,10 +71,8 @@ export const useProfileStore = create((set) => {
 });
 
 export const useOrderStore = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
   orderList: [],
   fetchOrderList: async () => {
-    const { token } = get();
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/order-list/`,
       {
@@ -92,10 +89,8 @@ export const useOrderStore = create((set, get) => ({
 }));
 
 export const useRestaurantInfo = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
   ownerInfo: {},
   fetchRestaurantInfo: async () => {
-    const { token } = get();
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/info/`,
       {
@@ -112,10 +107,8 @@ export const useRestaurantInfo = create((set, get) => ({
 }));
 
 export const useFoodCategories = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
   categories: [],
   fetchFoodCategories: async () => {
-    const { token } = get();
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/categories/`,
       {
@@ -132,7 +125,6 @@ export const useFoodCategories = create((set, get) => ({
 }));
 
 export const useFoodTags = create((set) => ({
-  token: localStorage.getItem("authToken"),
   foodTags: [],
   fetchFoodTags: async () => {
     const res = await fetch(
@@ -151,10 +143,8 @@ export const useFoodTags = create((set) => ({
 }));
 
 export const useUsersStore = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
   users: [],
   fetchUsers: async () => {
-    const { token } = get();
     const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/users/`, {
       method: "GET",
       headers: {
@@ -185,10 +175,8 @@ export const useRestaurantListStore = create((set, get) => ({
 }));
 
 export const useFoodCategoriesStore = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
   categories: [],
   fetchCategories: async () => {
-    const { token } = get();
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/categories/`,
       {
@@ -205,10 +193,8 @@ export const useFoodCategoriesStore = create((set, get) => ({
 }));
 
 export const useFoodTagStore = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
   tags: [],
   fetchTags: async () => {
-    const { token } = get();
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/tag-list/`,
       {
@@ -225,10 +211,8 @@ export const useFoodTagStore = create((set, get) => ({
 }));
 
 export const useRestaurantOrderStore = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
   orderList: [],
   fetchUserOrderList: async () => {
-    const { token } = get();
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/user-order-list/`,
       {
@@ -247,14 +231,14 @@ export const useRestaurantOrderStore = create((set, get) => ({
 
 export const useRenderProfileInfoStore = create((set, get) => ({
   user: {},
-  fetchProfileInfo: async (UserToken) => {
+  fetchProfileInfo: async () => {
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          Authorization: `Token ${UserToken}`,
+          Authorization: `Token ${token}`,
         },
       }
     );
@@ -262,7 +246,6 @@ export const useRenderProfileInfoStore = create((set, get) => ({
     set({ user: data });
   },
   updateProfileInfo: async (data) => {
-    const { token } = get();
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
       {
@@ -280,10 +263,8 @@ export const useRenderProfileInfoStore = create((set, get) => ({
 }));
 
 export const useUserListStore = create((set, get) => ({
-  token: localStorage.getItem("authToken"),
   users: [],
   fetchUsers: async () => {
-    const { token } = get();
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/user-list/`,
       {

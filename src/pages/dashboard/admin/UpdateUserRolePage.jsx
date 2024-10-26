@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { json, useNavigate, useParams } from "react-router-dom";
 
 const UpdateUserRolePage = () => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = data ? JSON.parse(data) : {};
+  const token = parseData.token;
   const navigate = useNavigate()
 
   const { id } = useParams();
@@ -14,9 +16,7 @@ const UpdateUserRolePage = () => {
   ];
 
   const [role, setRole] = useState("");
-
   const [user, setUser] = useState({});
-
   const [error, setError] = useState();
 
   useEffect(() => {

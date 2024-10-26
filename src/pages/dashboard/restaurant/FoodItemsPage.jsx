@@ -5,7 +5,9 @@ import { currencyFormat } from "../../../lib/utils";
 import Pagination from "../../../components/Pagination";
 
 const FoodItemsPage = () => {
-  const token = localStorage.getItem("authToken");
+  const userData = localStorage.getItem("user");
+  const parseData = userData ? JSON.parse(userData) : {};
+  const token = parseData.token;
 
   const [data, setData] = useState([]);
 

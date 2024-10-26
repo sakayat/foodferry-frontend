@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useRestaurantInfo } from "../../../lib/store/zustandStore";
 
 const UpdateRestaurantInfoPage = () => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = data ? JSON.parse(data) : {};
+  const token = parseData.token;
   const navigate = useNavigate();
 
   const [name, setName] = useState("");

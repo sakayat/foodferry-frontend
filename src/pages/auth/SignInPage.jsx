@@ -1,17 +1,13 @@
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useCartItemStore } from "../../lib/store/zustandStore";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignInPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
-  const { fetchCartList } = useCartItemStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,10 +29,15 @@ const SignInPage = () => {
     setError(data);
 
     if (res.ok) {
-      localStorage.setItem("authToken", data.token);
-      fetchCartList(data.token);
-      navigate(location.state?.returnTo || "/profile");
-      window.location.reload()
+      localStorage.setItem("user", JSON.stringify(data));
+      if (data.role === "admin") {
+        navigate("/admin/dashboard");
+      } else if (data.role === "restaurant_owner") {
+        navigate("/restaurant/dashboard");
+      } else {
+        navigate("/profile");
+      }
+      window.location.reload();
     }
   };
 

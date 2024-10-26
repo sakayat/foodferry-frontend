@@ -6,13 +6,14 @@ import { Link } from "react-router-dom";
 import { currencyFormat } from "../lib/utils";
 
 const MenuCartItem = ({ setIsCartOpen, isCartOpen }) => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = JSON.parse(data);
+  const token = parseData.token;
   const { cartItems, fetchCartList } = useCartItemStore();
-
 
   useEffect(() => {
     if (token) {
-      fetchCartList(token);
+      fetchCartList();
     }
   }, []);
 

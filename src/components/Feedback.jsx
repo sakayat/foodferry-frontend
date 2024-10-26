@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Feedback = ({ slug }) => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = JSON.parse(data);
+  const token = parseData.token;
   const navigate = useNavigate();
 
   const [comment, setComment] = useState("");
@@ -27,9 +29,7 @@ const Feedback = ({ slug }) => {
         },
       }
     );
-
     const data = await res.json();
-
     setFeedBacks(data);
   };
 

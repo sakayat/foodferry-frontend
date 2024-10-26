@@ -3,7 +3,9 @@ import { useRestaurantListStore } from "../../../lib/store/zustandStore";
 import RestaurantCard from "../restaurant/components/RestaurantCard";
 
 const RestaurantListPage = () => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = data ? JSON.parse(data) : {};
+  const token = parseData.token;
 
   useEffect(() => {
     fetchRestaurants();

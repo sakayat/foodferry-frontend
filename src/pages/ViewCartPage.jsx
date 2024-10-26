@@ -6,11 +6,10 @@ import ViewCartItem from "../components/ViewCartItem";
 import { currencyFormat } from "../lib/utils";
 
 const ViewCartPage = () => {
-  const token = localStorage.getItem("authToken");
   const { cartItems, fetchCartList } = useCartItemStore();
 
   useEffect(() => {
-    fetchCartList(token);
+    fetchCartList();
   }, []);
 
   return (

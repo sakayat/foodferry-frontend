@@ -4,7 +4,9 @@ import { currencyFormat } from "../../../lib/utils";
 import { useRestaurantOrderStore } from "../../../lib/store/zustandStore";
 
 const UserOrderListPage = () => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = data ? JSON.parse(data) : {};
+  const token = parseData.token;
   const [showModal, setShowModal] = useState(false);
 
   const [orderId, setOrderId] = useState(null);

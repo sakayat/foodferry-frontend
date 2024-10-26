@@ -4,14 +4,11 @@ import BreadCrumbs from "../../components/BreadCrumbs";
 import { useRenderProfileInfoStore } from "../../lib/store/zustandStore";
 
 const ProfilePage = () => {
-  const token = localStorage.getItem("authToken");
-
   const { user, fetchProfileInfo } = useRenderProfileInfoStore();
 
   useEffect(() => {
-    fetchProfileInfo(token);
+    fetchProfileInfo();
   }, []);
-  
 
   return (
     <div className="py-5">
@@ -20,15 +17,13 @@ const ProfilePage = () => {
         <div className="py-5">
           <h2 className="text-3xl">Profile Info</h2>
           {user?.role === "restaurant_owner" && (
-            <button className="py-2">
-              <Link to="/restaurant/dashboard/">
-                Go to Restaurant Dashboard
-              </Link>
+            <button className="py-2 text-rose-500 font-bold">
+              <Link to="/restaurant/dashboard/">Dashboard</Link>
             </button>
           )}
           {user?.role === "admin" && (
             <button className="py-2">
-              <Link to="/admin/dashboard/">Go to Admin Dashboard</Link>
+              <Link to="/admin/dashboard/">Dashboard</Link>
             </button>
           )}
         </div>

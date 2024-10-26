@@ -4,7 +4,9 @@ import QuantityButton from "./QuantityButton";
 import { currencyFormat } from "../lib/utils";
 
 const CartInfo = ({ item, fetchCartList }) => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = JSON.parse(data);
+  const token = parseData.token;
   const [newData, setNewData] = useState(item);
   const [quantity, setQuantity] = useState(item.quantity);
 
@@ -22,7 +24,7 @@ const CartInfo = ({ item, fetchCartList }) => {
     );
     const data = await res.json();
     setNewData(data);
-    fetchCartList(token);
+    fetchCartList();
   };
 
   const handleChangeQuantity = (quantity) => {
@@ -48,17 +50,13 @@ const CartInfo = ({ item, fetchCartList }) => {
         Authorization: `Token ${token}`,
       },
     });
-    fetchCartList(token);
+    fetchCartList();
   };
 
   return (
     <div className="cart-product space-y-5 w-full py-2 px-4">
       <div className="flex items-center gap-5">
-        <img
-          src={newData.food_image}
-          alt=""
-          className="w-14 h-14 rounded"
-        />
+        <img src={newData.food_image} alt="" className="w-14 h-14 rounded" />
         <span>{newData.food_item_name}</span>
       </div>
       <div className="flex items-center justify-between gap-5">

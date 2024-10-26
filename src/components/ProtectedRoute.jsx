@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { useProfileStore } from "../lib/store/zustandStore";
 
 const ProtectedRoute = ({ children, requiredRole }) => {
-  const token = localStorage.getItem("authToken");
-  const { user } = useProfileStore();
+  const data = localStorage.getItem("user");
+
+  const user = JSON.parse(data);
+
+  const token = user.token;
 
   useEffect(() => {}, [token]);
 

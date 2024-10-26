@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useUserListStore } from "../../../lib/store/zustandStore";
 
 const CreateRestaurantPage = () => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = data ? JSON.parse(data) : {};
+  const token = parseData.token;
   const navigate = useNavigate();
 
   const { users, fetchUsers } = useUserListStore();

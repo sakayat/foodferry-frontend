@@ -21,14 +21,17 @@ import {
 import SearchModal from "./SearchModal.jsx";
 
 const Navbar = () => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = data ? JSON.parse(data) : {};
+  const token = parseData.token;
   const navigate = useNavigate();
 
+  
   const { user, fetchProfileInfo } = useRenderProfileInfoStore();
 
   useEffect(() => {
     const getUserProfile = async () => {
-      await fetchProfileInfo(token);
+      await fetchProfileInfo();
     };
     getUserProfile();
   }, []);
@@ -52,7 +55,7 @@ const Navbar = () => {
   const { cartItems, clearCart, fetchCartList } = useCartItemStore();
 
   useEffect(() => {
-    fetchCartList(token);
+    fetchCartList();
     document.addEventListener("click", closeMenu);
     return () => {
       document.removeEventListener("click", closeMenu);
@@ -85,10 +88,9 @@ const Navbar = () => {
     );
 
     if (res.ok) {
-      localStorage.removeItem("authToken");
+      localStorage.setItem("user", JSON.stringify("user"));
       clearCart();
       navigate("/sign-in");
-      window.location.reload();
     }
   };
 
@@ -140,19 +142,20 @@ const Navbar = () => {
                 <span className="px-4">Restaurant</span>
               </Link>
             </li>
-            {user.role !== "admin" && user.role !== "restaurant_owner" && (
-              <div className="relative">
-                <button
-                  className="border border-[#286140] p-2.5 rounded-full"
-                  onClick={() => setIsCartOpen(!isCartOpen)}
-                >
-                  <ShoppingCart size={18} />
-                </button>
-                <span className="absolute top-0 bg-[#286140] font-bold w-6 h-6 flex justify-center left-8 rounded-full text-white">
-                  {cartItems?.total_quantity || 0}
-                </span>
-              </div>
-            )}
+            {parseData.role !== "admin" &&
+              parseData.role !== "restaurant_owner" && (
+                <div className="relative">
+                  <button
+                    className="border border-[#286140] p-2.5 rounded-full"
+                    onClick={() => setIsCartOpen(!isCartOpen)}
+                  >
+                    <ShoppingCart size={18} />
+                  </button>
+                  <span className="absolute top-0 bg-[#286140] font-bold w-6 h-6 flex justify-center left-8 rounded-full text-white">
+                    {cartItems?.total_quantity || 0}
+                  </span>
+                </div>
+              )}
             <div className="" ref={dropdownRef}>
               {token ? (
                 <div>
@@ -185,8 +188,8 @@ const Navbar = () => {
                           <span>Profile</span>
                         </Link>
                       </div>
-                      {user.role !== "admin" &&
-                        user.role !== "restaurant_owner" && (
+                      {parseData.role !== "admin" &&
+                        parseData.role !== "restaurant_owner" && (
                           <div className="py-2 border-b">
                             <Link
                               to="order-history/"
