@@ -46,14 +46,10 @@ export const useCartItemStore = create((set, get) => ({
 
 export const useProfileStore = create((set) => {
   const fetchProfileInfo = async () => {
-    if (!token) {
-      set({ error: "Token not found." });
-      return;
-    }
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/accounts/profile/`,
       {
-        method: "get",
+        method: "GET",
         headers: {
           "Content-type": "application/json",
           Authorization: `Token ${token}`,
@@ -64,7 +60,6 @@ export const useProfileStore = create((set) => {
     set({ user: data });
   };
   fetchProfileInfo();
-
   return {
     user: {},
   };
@@ -94,7 +89,7 @@ export const useRestaurantInfo = create((set, get) => ({
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/info/`,
       {
-        method: "get",
+        method: "GET",
         headers: {
           "Content-type": "application/json",
           Authorization: `Token ${token}`,
@@ -277,5 +272,41 @@ export const useUserListStore = create((set, get) => ({
     );
     const data = await res.json();
     set({ users: data });
+  },
+}));
+
+export const useRestaurantDataStore = create((set, get) => ({
+  restaurantData: {},
+  fetchRestaurantData: async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/data/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    set({ restaurantData: data });
+  },
+}));
+
+export const useRecentProductsStore = create((set, get) => ({
+  recentProducts: [],
+  fetchRecentProducts: async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/recent-products/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    set({ recentProducts: data });
   },
 }));

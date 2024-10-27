@@ -7,7 +7,10 @@ import {
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const CheckoutFrom = () => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = data ? JSON.parse(data) : {};
+  const token = parseData.token;
+  
   const navigate = useNavigate();
   const location = useLocation();
 

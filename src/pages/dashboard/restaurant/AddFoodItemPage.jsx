@@ -16,7 +16,7 @@ const AddFoodItemPage = () => {
 
 
   return (
-    <div className="max-w-6xl mx-auto px-8 py-5">
+    <div className="px-4 py-6">
       <FoodItemForm categories={categories} foodTags={tags} />
     </div>
   );

@@ -41,97 +41,99 @@ import CategoryListPage from "./pages/dashboard/admin/CategoryListPage";
 import FoodTagListPage from "./pages/dashboard/admin/FoodTagListPage";
 import OurMenuPage from "./pages/OurMenuPage";
 import TagFoodItemsPage from "./pages/TagFoodItemsPage";
+import UserLayout from "./components/UserLayout";
 
 function App() {
-  const token = localStorage.getItem("authToken");
   return (
     <>
-      <Navbar />
-      <main className="min-h-screen pt-20">
+      <main className="min-h-screen">
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="food/:slug/" element={<FoodDetailsPage />} />
-          <Route
-            path="sign-up/"
-            element={
-              <PublicRoute>
-                <SignUpPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="sign-in/"
-            element={
-              <PublicRoute>
-                <SignInPage />
-              </PublicRoute>
-            }
-          />
-          <Route path="unauthorized/" element={<UnauthorizedPage />} />
-          <Route path="/:tag/" element={<TagFoodItemsPage />} />
-          <Route path="category/:slug/" element={<CategoryFoodPage />} />
-          <Route path="restaurant-list/" element={<AllRestaurants />} />
-          <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />
-          <Route path="about/" element={<AboutUsPage />} />
-          <Route path="contact/" element={<ContactUsPage />} />
-          <Route path="our-menu/" element={<OurMenuPage />} />
-          <Route
-            path="forget-password/"
-            element={
-              <PublicRoute>
-                <ForgetPasswordPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="reset-password/:uid/:token/"
-            element={
-              <PublicRoute>
-                <ResetPasswordPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="profile/"
-            element={
-              <ProtectedRoute>
-                <ProfilePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="update-profile/"
-            element={
-              <ProtectedRoute>
-                <UpdateProfilePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="view-cart/"
-            element={
-              <ProtectedRoute>
-                <ViewCartPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="checkout/"
-            element={
-              <ProtectedRoute>
-                <CheckoutPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="order-history/"
-            element={
-              <ProtectedRoute>
-                <OrderHistoryPage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/" element={<UserLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="food/:slug/" element={<FoodDetailsPage />} />
+            <Route
+              path="sign-up/"
+              element={
+                <PublicRoute>
+                  <SignUpPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="sign-in/"
+              element={
+                <PublicRoute>
+                  <SignInPage />
+                </PublicRoute>
+              }
+            />
+            <Route path="unauthorized/" element={<UnauthorizedPage />} />
+            <Route path="/:tag/" element={<TagFoodItemsPage />} />
+            <Route path="category/:slug/" element={<CategoryFoodPage />} />
+            <Route path="restaurant-list/" element={<AllRestaurants />} />
+            <Route path="restaurant/:slug/" element={<RestaurantFoodPage />} />
+            <Route path="about/" element={<AboutUsPage />} />
+            <Route path="contact/" element={<ContactUsPage />} />
+            <Route path="our-menu/" element={<OurMenuPage />} />
+            <Route
+              path="forget-password/"
+              element={
+                <PublicRoute>
+                  <ForgetPasswordPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="reset-password/:uid/:token/"
+              element={
+                <PublicRoute>
+                  <ResetPasswordPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="profile/"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="update-profile/"
+              element={
+                <ProtectedRoute>
+                  <UpdateProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="view-cart/"
+              element={
+                <ProtectedRoute>
+                  <ViewCartPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="checkout/"
+              element={
+                <ProtectedRoute>
+                  <CheckoutPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="order-history/"
+              element={
+                <ProtectedRoute>
+                  <OrderHistoryPage />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+
           <Route
             path="restaurant/dashboard/"
             element={
@@ -180,7 +182,6 @@ function App() {
           </Route>
         </Routes>
       </main>
-      <Footer />
     </>
   );
 }

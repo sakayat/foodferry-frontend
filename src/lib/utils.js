@@ -1,7 +1,7 @@
 export const currencyFormat = (price) => {
   const currency = new Intl.NumberFormat("en-BD", {
-    style: "currency",
+    style: "decimal",
     currency: "BDT",
   });
-  return currency.format(price);
+  return `TK ${currency.format(price)}`;
 };

@@ -52,11 +52,9 @@ const UserOrderListPage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+    <div className="px-4 py-5">
       <div className="mb-5">
-        <h2 className="text-3xl font-semibold text-gray-900 dark:text-white">
-          All Order
-        </h2>
+        <h2 className="text-3xl">All Order</h2>
       </div>
       <div className="user-order mb-8">
         {!orderList.error ? (
@@ -112,7 +110,7 @@ const UserOrderListPage = () => {
       </div>
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="bg-white shadow-lg p-6 w-full max-w-lg">
+          <div className="bg-white shadow-lg p-6 w-full max-w-lg rounded">
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
               Update Status
             </h3>
@@ -124,7 +122,7 @@ const UserOrderListPage = () => {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="py-3 px-6 border border-black w-full outline-none"
+                  className="py-3 px-6 border border-black w-full outline-none rounded"
                 >
                   {statusOptions.map((option) => (
                     <option key={option.value} value={option.value}>
