@@ -8,8 +8,9 @@ import FoodDetailsSkeleton from "../components/FoodDetailsSkeleton";
 
 const FoodDetailsPage = () => {
   const data = localStorage.getItem("user");
-  const parseData = JSON.parse(data);
+  const parseData = data ? JSON.parse(data) : {};
   const token = parseData.token;
+
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useProfileStore();
@@ -56,7 +57,7 @@ const FoodDetailsPage = () => {
     await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/cart/add-to-cart/${slug}/`,
       {
-        method: "post",
+        method: "POST",
         headers: {
           "Content-type": "application/json",
           Authorization: `Token ${token}`,

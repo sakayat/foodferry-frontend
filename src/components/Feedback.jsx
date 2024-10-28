@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Feedback = ({ slug }) => {
   const data = localStorage.getItem("user");
-  const parseData = JSON.parse(data);
+  const parseData = data ? JSON.parse(data) : {};
   const token = parseData.token;
   const navigate = useNavigate();
 
