@@ -41,8 +41,8 @@ const RestaurantListPage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-8 py-5">
-      <div className="py-5">
+    <div className="px-4 py-5">
+      <div className="mb-5">
         <h2 className="text-3xl">Restaurant List</h2>
       </div>
       <div className="restaurant-list">

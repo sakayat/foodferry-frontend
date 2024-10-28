@@ -16,7 +16,7 @@ const AddFoodItemPage = () => {
 
 
   return (
-    <div className="px-4 py-6">
+    <div className="px-4 py-5">
       <FoodItemForm categories={categories} foodTags={tags} />
     </div>
   );

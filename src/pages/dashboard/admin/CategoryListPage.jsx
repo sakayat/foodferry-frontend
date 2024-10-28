@@ -6,6 +6,7 @@ const CategoryListPage = () => {
   const data = localStorage.getItem("user");
   const parseData = data ? JSON.parse(data) : {};
   const token = parseData.token;
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -82,7 +83,7 @@ const CategoryListPage = () => {
   };
 
   const handleDeleteCategory = async (id) => {
-    const res = await fetch(
+    await fetch(
       `${
         import.meta.env.VITE_API_BASE_URL
       }/api/restaurant/category/delete/${id}/`,
@@ -97,57 +98,53 @@ const CategoryListPage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-8 py-5">
-      <div className="py-5">
+    <div className="px-4 py-5">
+      <div className="mb-5">
         <h2 className="text-3xl">Category List</h2>
       </div>
       <div className="category-list">
-        <div className="relative overflow-x-auto">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Category Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            {categories?.map((category) => (
-              <tbody key={category.id}>
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    <div className="flex items-center gap-5">
-                      <img
-                        src={category.image}
-                        alt=""
-                        className="w-20 h-20 rounded"
-                      />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categories?.length ? (
+            categories.map((category) => (
+              <div
+                key={category.id}
+                className="bg-white border border-gray-200"
+              >
+                <div className="relative">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="w-full h-40 object-cover rounded"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                    <h2 className="text-lg font-semibold text-white">
                       {category.name}
-                    </div>
-                  </th>
-                  <td className="px-6 py-4 space-x-5">
-                    <button
-                      className="text-green-600 hover:text-green-800"
-                      onClick={() => handleCategoryData(category)}
-                    >
-                      <Edit size={18} />
-                    </button>
-                    <button
-                      className="text-rose-600 hover:text-red-800"
-                      onClick={() => handleDeleteCategory(category.id)}
-                    >
-                      <Trash2 size={18} />
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            ))}
-          </table>
+                    </h2>
+                  </div>
+                </div>
+                <div className="flex justify-between p-4">
+                  <button
+                    className="text-green-600 hover:text-green-800"
+                    onClick={() => handleCategoryData(category)}
+                    aria-label={`Edit ${category.name}`}
+                  >
+                    <Edit size={20} />
+                  </button>
+                  <button
+                    className="text-rose-600 hover:text-red-800"
+                    onClick={() => handleDeleteCategory(category.id)}
+                    aria-label={`Delete ${category.name}`}
+                  >
+                    <Trash2 size={20} />
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-full text-center text-gray-500">
+              No categories available.
+            </div>
+          )}
         </div>
       </div>
       {showModal && (

@@ -1,64 +1,116 @@
-import React, { useEffect } from "react";
-import { Users, FolderTree, Tag, Store } from "lucide-react";
+import { ShoppingCart, Clock, Check, BanIcon } from "lucide-react";
 import {
-  useUserListStore,
-  useRestaurantListStore,
-  useFoodCategoriesStore,
-  useFoodTagStore,
-} from "../../../lib/store/zustandStore";
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import { useAdminDataStore } from "../../../lib/store/zustandStore";
+import { useEffect, useState } from "react";
+import { currencyFormat } from "../../../lib/utils";
 
 const AdminDashboardHomePage = () => {
-  const { users, fetchUsers } = useUserListStore();
-  const { categories, fetchCategories } = useFoodCategoriesStore();
-  const { tags, fetchTags } = useFoodTagStore();
-  const { restaurantData, fetchRestaurants } = useRestaurantListStore();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { adminData, fetchAdminData } = useAdminDataStore();
 
   useEffect(() => {
-    fetchUsers();
-    fetchRestaurants();
-    fetchCategories();
-    fetchTags();
+    const loadAdminData = async () => {
+      await fetchAdminData();
+      setIsLoading(false);
+    };
+    loadAdminData();
   }, []);
 
   const data = [
     {
-      title: "Total users",
-      value: users.length,
-      icon: <Users size={30} />,
+      id: 1,
+      title: "Total Orders",
+      value: `${adminData.total_orders}`,
+      icon: <ShoppingCart className="w-5 h-5 text-white" />,
+      bgColor: "bg-[#FF9F43]",
     },
     {
-      title: "Total Categories",
-      value: categories.length,
-      icon: <FolderTree size={30} />,
+      id: 2,
+      title: "Total Revenue",
+      value: `${currencyFormat(adminData.total_revenue)}`,
+      icon: <Clock className="w-5 h-5 text-white" />,
+      bgColor: "bg-[#28C76F]",
     },
     {
-      title: "Total Tags",
-      value: tags.length,
-      icon: <Tag size={30} />,
+      id: 3,
+      title: "Active Restaurants",
+      value: `${adminData.active_restaurants}`,
+      icon: <Check className="w-5 h-5 text-white" />,
+      bgColor: "bg-[#00CFE8]",
     },
     {
-      title: "Total Restaurants",
-      value: restaurantData.length,
-      icon: <Store size={30} />,
+      id: 4,
+      title: "Active Customers",
+      value: `${adminData.active_customers}`,
+      icon: <BanIcon className="w-5 h-5 text-white" />,
+      bgColor: "bg-[#1B2850]",
     },
   ];
 
+  const chartData = [
+    { name: "Fri", revenue: adminData.daily_revenue?.Fri },
+    { name: "Sat", revenue: adminData.daily_revenue?.Sat },
+    { name: "Sun", revenue: adminData.daily_revenue?.Sun },
+    { name: "Mon", revenue: adminData.daily_revenue?.Mon },
+    { name: "Tue", revenue: adminData.daily_revenue?.Tue },
+    { name: "Wed", revenue: adminData.daily_revenue?.Wed },
+    { name: "Thu", revenue: adminData.daily_revenue?.Thu },
+  ];
+
+  if (isLoading) {
+    return <p className="text-3xl text-center py-5">Loading...</p>;
+  }
+
   return (
-    <div className="max-w-6xl mx-auto px-8">
-      <div className="py-5">
-        <h2 className="text-3xl font-bold">Admin Dashboard</h2>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {data.map((item, i) => (
+    <div className="px-4 py-5">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-4">
+        {data.map((item, id) => (
           <div
-            className="flex flex-col items-center gap-2 rounded py-3 px-6 border border-gray-300"
-            key={i}
+            key={id}
+            className={`${item.bgColor} overflow-hidden shadow rounded-lg`}
           >
-            <span>{item.icon}</span>
-            <div className="text-xl font-medium">{item.title}</div>
-            <div className="text-4xl font-bold">{item.value}</div>
+            <div className="px-4 py-5 sm:p-6">
+              <dt className="text-sm font-medium text-white truncate">
+                {item.title}
+              </dt>
+              <dd className="mt-1 text-3xl font-semibold text-white">
+                {item.value}
+              </dd>
+            </div>
           </div>
         ))}
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="w-full h-[400px] bg-white py-5 rounded">
+          <h2 className="text-xl font-semibold mb-4">Daily Revenue</h2>
+          <div className="mt-4" style={{ height: 300 }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="revenue"
+                  stroke="#8884d8"
+                  activeDot={{ r: 8 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ const AddFoodTagPage = () => {
     };
 
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-tags/`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/tags/`,
       {
         method: "POST",
         headers: {
@@ -39,8 +39,8 @@ const AddFoodTagPage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-8">
-      <div className="py-5">
+    <div className="px-4 py-5">
+      <div className="mb-5">
         <h2 className="text-3xl">Add Food Tag</h2>
       </div>
       <form className="space-y-5" onSubmit={handleSubmit}>

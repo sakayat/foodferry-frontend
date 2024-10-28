@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDropzone } from "react-dropzone";
 
 const AddCategoryPage = () => {
   const data = localStorage.getItem("user");
@@ -9,12 +10,14 @@ const AddCategoryPage = () => {
 
   const [categoryName, setCategoryName] = useState("");
   const [categoryImage, setCategoryImage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState("");
 
-  const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
+  const handleImageUpload = async (files) => {
+    const file = files[0];
     if (!file) return;
+    setLoading(true);
 
     const data = new FormData();
     data.append("file", file);
@@ -31,13 +34,14 @@ const AddCategoryPage = () => {
 
     const imageUrl = await res.json();
     setCategoryImage(imageUrl.url);
-  };
+    setLoading(false);
+  };  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/food-category/`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/category/`,
       {
         method: "POST",
         headers: {
@@ -52,17 +56,20 @@ const AddCategoryPage = () => {
       }
     );
     if (res.ok) {
-      return navigate("/admin/dashboard/category-list");
+      // return navigate("/admin/dashboard/category-list");
     }
     const data = await res.json();
-
     console.log(data);
-
+    
     setError(data);
   };
 
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop: handleImageUpload,
+  });
+
   return (
-    <div className="max-w-6xl mx-auto px-8">
+    <div className="px-4">
       <div className="py-5">
         <h2 className="text-3xl">Add Food Category</h2>
       </div>
@@ -80,15 +87,33 @@ const AddCategoryPage = () => {
           />
         </div>
         <div className="form-control space-y-2">
-          <label htmlFor="" className="text-md font-semibold">
-            Category Image
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            className="py-2.5 px-6 border border-black rounded w-full outline-none placeholder:text-sm placeholder-gray-600 focus:border-gray-300"
-            onChange={handleImageUpload}
-          />
+          <label className="text-md font-semibold">Category Image</label>
+          <div
+            {...getRootProps()}
+            className="flex flex-col items-center justify-center w-full h-48 border-dashed border border-gray-300 rounded-lg cursor-pointer hover:border-gray-400"
+          >
+            <input {...getInputProps()} className="hidden" />
+            <div className="flex flex-col items-center justify-center w-full h-44">
+              {loading ? (
+                <div className="flex items-center justify-center w-full h-full">
+                  <h4 className="text-gray-500">Uploading...</h4>
+                </div>
+              ) : (
+                <>
+                  <img
+                    src={
+                      categoryImage || "https://i.ibb.co.com/YPVDWT9/empty.jpg"
+                    }
+                    alt="Upload Preview"
+                    className="w-32 h-32 mb-2 rounded"
+                  />
+                  <h4 className="text-gray-500">
+                    {categoryImage ? "" : "Click to select a file to upload"}
+                  </h4>
+                </>
+              )}
+            </div>
+          </div>
         </div>
         {error && (
           <p className="py-3 text-rose-500">{error.name || error.slug}</p>

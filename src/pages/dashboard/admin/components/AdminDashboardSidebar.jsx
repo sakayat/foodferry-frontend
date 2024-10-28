@@ -5,7 +5,7 @@ import { useRestaurantInfo } from "../../../../lib/store/zustandStore";
 
 const AdminDashboardSidebar = ({ activeItem, setActiveItem }) => {
   const menuItems = [
-    { name: "Dashboard", icon: Home, link: "/admin/dashboard/" },
+    { name: "Home", icon: Home, link: "/admin/dashboard/" },
     { name: "All User", icon: User2, link: "users/" },
     { name: "Add Food Category", icon: PlusCircle, link: "food-category/" },
     { name: "Add Food Tag", icon: PlusCircle, link: "food-tag/" },

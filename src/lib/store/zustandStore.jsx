@@ -310,3 +310,21 @@ export const useRecentProductsStore = create((set, get) => ({
     set({ recentProducts: data });
   },
 }));
+
+export const useAdminDataStore = create((set, get) => ({
+  adminData: [],
+  fetchAdminData: async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/admin/data/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    set({ adminData: data });
+  },
+}));

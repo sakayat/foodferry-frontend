@@ -35,8 +35,6 @@ const CreateRestaurantPage = () => {
       owner: selectedOwner,
     };
 
-    console.log(obj);
-
     const res = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/create/`,
       {
@@ -57,8 +55,8 @@ const CreateRestaurantPage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-8">
-      <div className="py-5">
+    <div className="px-4 py-5">
+      <div className="mb-5">
         <h2 className="text-3xl">Create Restaurant</h2>
       </div>
       <form className="space-y-5" onSubmit={handleSubmit}>

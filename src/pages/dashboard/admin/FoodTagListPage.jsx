@@ -57,17 +57,14 @@ const FoodTagListPage = () => {
     if (res.ok) {
       setShowModal(!showModal);
     }
-
     const data = await res.json();
-
     setError(data);
-
     fetchTags();
   };
 
   const handleDeleteTag = async (id) => {
-    const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/delete-tag/${id}/`,
+    await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/restaurant/tag/delete/${id}/`,
       {
         method: "DELETE",
         headers: {
@@ -79,8 +76,8 @@ const FoodTagListPage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-8 py-5">
-      <div className="py-5">
+    <div className="px-4 py-5">
+      <div className="mb-5">
         <h2 className="text-3xl">Tag List</h2>
       </div>
       <div className="category-list">
