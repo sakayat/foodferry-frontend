@@ -1,7 +1,6 @@
-import { Home, Info, List, Pen, PlusCircle, User2 } from "lucide-react";
+import { Home, List, Pen, PlusCircle, User2 } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { useRestaurantInfo } from "../../../../lib/store/zustandStore";
 
 const AdminDashboardSidebar = ({ activeItem, setActiveItem }) => {
   const menuItems = [
@@ -15,13 +14,8 @@ const AdminDashboardSidebar = ({ activeItem, setActiveItem }) => {
     { name: "Tag List", icon: List, link: "tag-list/" },
   ];
 
-  const { ownerInfo } = useRestaurantInfo();
-
-  
-
   return (
     <div className="bg-gray-100 lg:h-screen p-4 w-full lg:w-96">
-      <h2 className="text-2xl font-bold mb-4">{ownerInfo.name}</h2>
       <ul className="flex flex-col gap-5 text-sm">
         {menuItems.map((item, i) => (
           <li key={i}>

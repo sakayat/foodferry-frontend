@@ -7,7 +7,7 @@ const DashboardNavbar = ({ user }) => {
   const data = localStorage.getItem("user");
   const parseData = data ? JSON.parse(data) : {};
   const token = parseData.token;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -32,7 +32,10 @@ const DashboardNavbar = ({ user }) => {
   };
 
   return (
-    <header className="bg-white border-b px-4 py-2 flex justify-end">
+    <header className="bg-white border-b px-4 py-2 flex items-center gap-5 justify-end">
+      <Link to="/" className="font-bold">
+        Home
+      </Link>
       <div className="relative">
         <button
           className="border w-12 h-12 rounded-full flex justify-center items-center"
