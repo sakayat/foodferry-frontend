@@ -47,7 +47,6 @@ const UserOrderListPage = () => {
     if (res.ok) {
       setShowModal(false);
     }
-
     fetchUserOrderList();
   };
 
@@ -77,12 +76,7 @@ const UserOrderListPage = () => {
                 </tr>
               </thead>
               {orderList?.map((order) => (
-                <tbody
-                  key={order.id}
-                  className={`${
-                    order.status === "pending" ? "bg-rose-100" : "bg-green-100"
-                  }`}
-                >
+                <tbody key={order.id}>
                   <tr className="border-b dark:border-gray-700">
                     <td className="px-6 py-4 font-medium text-gray-900">
                       {order.item_name}
@@ -90,7 +84,21 @@ const UserOrderListPage = () => {
                     <td className="px-6 py-4">
                       {currencyFormat(order.subtotal)}
                     </td>
-                    <td className="px-6 py-4">{order.status}</td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`py-1 px-6 rounded-full ${
+                          order.status === "Pending"
+                            ? "bg-yellow-500 text-white"
+                            : order.status === "Completed"
+                            ? "bg-green-800 text-white"
+                            : order.status === "Canceled"
+                            ? "bg-red-400 text-white"
+                            : "py-1 px-6 rounded-full"
+                        }`}
+                      >
+                        {order.status}
+                      </span>
+                    </td>
                     <td className="px-6 py-4">
                       <button
                         className="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400"
