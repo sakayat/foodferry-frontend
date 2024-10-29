@@ -42,6 +42,7 @@ import FoodTagListPage from "./pages/dashboard/admin/FoodTagListPage";
 import OurMenuPage from "./pages/OurMenuPage";
 import TagFoodItemsPage from "./pages/TagFoodItemsPage";
 import UserLayout from "./components/UserLayout";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 function App() {
   return (
@@ -180,6 +181,9 @@ function App() {
             <Route path="food-tag/" element={<AddFoodTagPage />} />
             <Route path="tag-list/" element={<FoodTagListPage />} />
           </Route>
+
+
+          <Route path="payment/success/" element={<PaymentSuccess />}/>
         </Routes>
       </main>
     </>

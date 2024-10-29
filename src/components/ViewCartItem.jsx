@@ -3,7 +3,10 @@ import QuantityButton from "./QuantityButton";
 import { currencyFormat } from "../lib/utils";
 
 const ViewCartItem = ({ item, fetchCartList }) => {
-  const token = localStorage.getItem("authToken");
+  const data = localStorage.getItem("user");
+  const parseData = data ? JSON.parse(data) : {};
+  const token = parseData.token;
+  
   const [newData, setNewData] = useState(item);
   const [quantity, setQuantity] = useState(item.quantity);
 

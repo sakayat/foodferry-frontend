@@ -3,9 +3,7 @@ import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const data = localStorage.getItem("user");
-
-  const user = JSON.parse(data);
-
+  const user = data ? JSON.parse(data) : {};
   const token = user.token;
 
   useEffect(() => {}, [token]);

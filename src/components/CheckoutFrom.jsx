@@ -4,13 +4,13 @@ import {
   useRenderProfileInfoStore,
   useOrderStore,
 } from "../lib/store/zustandStore";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const CheckoutFrom = () => {
+const CheckoutFrom = ({ cartItems }) => {
   const data = localStorage.getItem("user");
   const parseData = data ? JSON.parse(data) : {};
   const token = parseData.token;
-  
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -36,32 +36,47 @@ const CheckoutFrom = () => {
         profileError: "first name, last name and phone number is required",
       });
     }
-
     const obj = {
       address: address,
       payment_method: paymentMethod,
     };
 
-    const res = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/orders/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-        body: JSON.stringify(obj),
+    if (paymentMethod === "online_payment") {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/payment/${cartItems.user}/`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            total_amount: cartItems.total_price,
+          }),
+        }
+      );
+      const data = await res.json();
+      if (res.ok) {
+        window.location.href = data.redirect_url;
       }
-    );
-
-    const data = await res.json();
-
-    setErrors({ error: data.error });
-
-    if (user.first_name && user.phone_number && user.last_name) {
-      fetchCartList();
-      fetchOrderList();
-      return navigate("/order-history");
+    } else {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/orders/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+          body: JSON.stringify(obj),
+        }
+      );
+      const data = await res.json();
+      setErrors({ error: data.error });
+      if (user.first_name && user.phone_number && user.last_name) {
+        fetchCartList();
+        fetchOrderList();
+        return navigate("/order-history");
+      }
     }
   };
 
@@ -148,7 +163,8 @@ const CheckoutFrom = () => {
             required
           >
             <option value="">Payment method</option>
-            <option value="cash on delivery">Cash on delivery</option>
+            <option value="cash_on_delivery">Cash On Delivery</option>
+            <option value="online_payment">Online Payment</option>
           </select>
         </div>
       </div>
@@ -160,9 +176,15 @@ const CheckoutFrom = () => {
       {errors?.profileError && (
         <button onClick={() => handleNavigate()}>Update your profile</button>
       )}
-      <button className="default-btn rounded py-3 px-6 w-full">
-        Place order
-      </button>
+      {paymentMethod === "online_payment" ? (
+        <button className="default-btn rounded py-3 px-6 w-full">
+          Make Payment
+        </button>
+      ) : (
+        <button className="default-btn rounded py-3 px-6 w-full">
+          Place order
+        </button>
+      )}
     </form>
   );
 };

@@ -9,7 +9,7 @@ const CheckoutPage = () => {
   const { cartItems } = useCartItemStore();
 
   return (
-    <div className="pt-5">
+    <div className="py-5">
       <div className="xl:container mx-auto px-8">
         <div className="breadcrumbs">
           <ul className="flex items-center gap-1 py-5">
@@ -31,7 +31,7 @@ const CheckoutPage = () => {
         </div>
         <div className="py-5">
           <div className="flex flex-col md:grid grid-cols-1 md:grid-cols-12 gap-8">
-            <CheckoutFrom />
+            <CheckoutFrom cartItems={cartItems}/>
             <div className="order-info order-first md:order-last col-span-12 md:col-span-5">
               <h3 className="text-2xl pb-3">Your order from</h3>
               <div className="space-y-3 border-t py-3">
