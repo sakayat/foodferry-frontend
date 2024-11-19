@@ -32,7 +32,7 @@
 
 ## Credentials
 
-### Django Admin Panel
+### Django Admin
 
 - **Admin Email:** `admin@mail.com`
 - **Admin Password:** `admin`
