@@ -4,10 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 const SignInPage = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("namemiwe@clip.lat");
+  const [password, setPassword] = useState("R6n2wWdLQ2Vw");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  console.log(email, password);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +45,56 @@ const SignInPage = () => {
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleRestaurantLogin = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/accounts/login/`,
+
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: "kaleena944@rustyload.com",
+          password: "R6n2wWdLQ2Vw",
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("user", JSON.stringify(data));
+      navigate("/restaurant/dashboard");
+      window.location.reload();
+    }
+  };
+
+  const handleAdminLogin = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/accounts/login/`,
+
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: "gaemoccasin@rustyload.com",
+          password: "R6n2wWdLQ2Vw",
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("user", JSON.stringify(data));
+      navigate("/admin/dashboard");
+      window.location.reload();
+    }
   };
 
   return (
@@ -106,6 +158,20 @@ const SignInPage = () => {
                   Sign Up
                 </Link>
               </div>
+            </div>
+            <div className="py-5 flex gap-5">
+              <button
+                className="py-3 px-6 border border-black rounded"
+                onClick={(e) => handleRestaurantLogin(e)}
+              >
+                Restaurant Login
+              </button>
+              <button
+                className="py-3 px-6 border border-black rounded"
+                onClick={(e) => handleAdminLogin(e)}
+              >
+                Admin Login
+              </button>
             </div>
           </div>
         </div>
