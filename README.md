@@ -63,13 +63,13 @@
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/sakayat/foodferry-frontend.git
-   cd food-ferry
+   cd foodferry-frontend
    ```
 
 2. **Frontend Setup (React + Vite)**
    - Install frontend dependencies:
      ```bash
-     cd frontend
+     cd foodferry-frontend
      npm install
      ```
    - Run the development server:
