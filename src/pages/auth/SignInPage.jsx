@@ -9,8 +9,6 @@ const SignInPage = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  console.log(email, password);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
